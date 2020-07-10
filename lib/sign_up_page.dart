@@ -2,6 +2,7 @@ import 'package:dev_portal/home_page.dart';
 import 'package:dev_portal/login_page.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:toast/toast.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -33,7 +34,7 @@ class MyRegisterPageState extends State {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -54,7 +55,7 @@ class MyRegisterPageState extends State {
                 shrinkWrap: true,
                 children: [
                   Image.asset('images/dev.jpg',
-                      alignment: Alignment.center, width: 200, height: 200),
+                      alignment: Alignment.center, width: 180, height: 180),
                   SizedBox(height: 15.0),
                   TextFormField(
                       validator: (val) => val.isEmpty ? 'Enter an Email' : null,
@@ -66,11 +67,11 @@ class MyRegisterPageState extends State {
                       decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                               borderSide:
-                                  BorderSide(color: Colors.red, width: 1.0),
+                                  BorderSide(color: Colors.grey, width: 1.0),
                               borderRadius: BorderRadius.circular(32.0)),
                           focusedBorder: OutlineInputBorder(
                               borderSide:
-                                  BorderSide(color: Colors.blue, width: 1.0),
+                                  BorderSide(color: Colors.grey, width: 1.0),
                               borderRadius: BorderRadius.circular(32.0)),
                           hintText: 'Email'),
                       textAlign: TextAlign.left,
@@ -95,11 +96,11 @@ class MyRegisterPageState extends State {
                     decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: Colors.blue, width: 1.0),
+                                BorderSide(color: Colors.grey, width: 1.0),
                             borderRadius: BorderRadius.circular(32.0)),
                         focusedBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: Colors.blue, width: 1.0),
+                                BorderSide(color: Colors.grey, width: 1.0),
                             borderRadius: BorderRadius.circular(32.0)),
                         hintText: 'Password',
                       suffixIcon: IconButton(

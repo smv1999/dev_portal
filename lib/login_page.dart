@@ -1,9 +1,10 @@
+import 'package:dev_portal/forgot_password_page.dart';
 import 'package:dev_portal/home_page.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:dev_portal/sign_up_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:toast/toast.dart';
-
 
 class LoginPage extends StatefulWidget {
   LoginPageState createState() => LoginPageState();
@@ -40,6 +41,7 @@ class MyLoginPageState extends State {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -60,7 +62,7 @@ class MyLoginPageState extends State {
                 shrinkWrap: true,
                 children: [
                   Image.asset('images/dev.jpg',
-                      alignment: Alignment.center, width: 200, height: 200),
+                      alignment: Alignment.center, width: 180, height: 180),
                   SizedBox(height: 15.0),
                   TextFormField(
                       maxLines: 1,
@@ -73,12 +75,14 @@ class MyLoginPageState extends State {
                       decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                               borderSide:
-                              BorderSide(color: Colors.red, width: 1.0),
-                              borderRadius: BorderRadius.circular(20.0)),
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                              borderRadius: BorderRadius.circular(20.0)
+                          ),
                           focusedBorder: OutlineInputBorder(
                               borderSide:
-                              BorderSide(color: Colors.blue, width: 1.0),
-                              borderRadius: BorderRadius.circular(20.0)),
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                              borderRadius: BorderRadius.circular(20.0)
+                          ),
                           hintText: 'Email'),
                       textAlign: TextAlign.left,
                       keyboardType: TextInputType.emailAddress,
@@ -86,28 +90,31 @@ class MyLoginPageState extends State {
                           fontSize: 16.0,
                           height: 1.4,
                           color: Colors.black,
-                          fontFamily: 'Montserrat')),
+                          fontFamily: 'Montserrat')
+                  ),
                   SizedBox(
                     height: 10.0,
                   ),
                   TextFormField(
                     maxLines: 1,
-                    validator: (val) => val.length < 6 ? 'Password must be at least 6 chars long' : null,
+                    validator: (val) => val.length < 6
+                        ? 'Password must be at least 6 chars long'
+                        : null,
                     onChanged: (text) {
                       setState(() {
                         password = text;
                       });
                     },
                     decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide:
-                            BorderSide(color: Colors.blue, width: 1.0),
-                            borderRadius: BorderRadius.circular(20.0)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                            BorderSide(color: Colors.blue, width: 1.0),
-                            borderRadius: BorderRadius.circular(20.0)),
-                        hintText: 'Password',
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 1.0),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 1.0),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      hintText: 'Password',
                       suffixIcon: IconButton(
                         icon: Icon(
                           // Based on passwordVisible state choose the icon
@@ -136,7 +143,6 @@ class MyLoginPageState extends State {
                   SizedBox(
                     height: 15.0,
                   ),
-
                   SizedBox(
                     width: double.infinity,
                     child: RaisedButton(
@@ -157,10 +163,34 @@ class MyLoginPageState extends State {
                   Center(
                     child: GestureDetector(
                       onTap: () {
-                        Route route = MaterialPageRoute(builder: (context) => SignUpPage());
+                        Route route = MaterialPageRoute(
+                            builder: (context) => ForgotPasswordPage());
                         Navigator.pushReplacement(context, route);
                       },
-                      child: Text("Don't have an Account? Sign Up"),
+                      child: Text(
+                        "Forgot Password?",
+                        style: TextStyle(
+                          color: Colors.lightBlue,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 14.0,
+                  ),
+                  Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        Route route = MaterialPageRoute(
+                            builder: (context) => SignUpPage());
+                        Navigator.push(context, route);
+                      },
+                      child: Text(
+                        "Don't have an Account? Sign Up",
+                        style: TextStyle(
+                          color: Colors.lightBlue,
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -173,31 +203,28 @@ class MyLoginPageState extends State {
   }
 
   void _computeResult() async {
-    if(_formKey.currentState.validate())
-    {
-      if((await auth.signIn(email, password))!=null)
-      {
-        if((await auth.getCurrentUser())!=null)
-          {
-            if((await auth.isEmailVerified()) != null) {
-              Toast.show("Login Successful!", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
-              Route route = MaterialPageRoute(builder: (context) => HomePage());
-              Navigator.pushReplacement(context, route);
-            }
+    if (_formKey.currentState.validate()) {
+      if ((await auth.signIn(email, password)) != null) {
+        if ((await auth.getCurrentUser()) != null) {
+          if ((await auth.isEmailVerified()) != null) {
+            Toast.show("Login Successful!", context,
+                duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+            Route route = MaterialPageRoute(builder: (context) => HomePage());
+            Navigator.pushReplacement(context, route);
           }
-      }
-      else{
-        Toast.show("Authentication Failed!", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
+        }
+      } else {
+        Toast.show("Authentication Failed!", context,
+            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       }
     }
   }
-  Future<void> _checkIfUserAlreadyLoggedIn()
-  async {
-    if (await auth.getCurrentUser() != null)
-    {
+
+  Future<void> _checkIfUserAlreadyLoggedIn() async {
+    if (await auth.getCurrentUser() != null) {
       // signed in
-          Route route = MaterialPageRoute(builder: (context) => HomePage());
-          Navigator.pushReplacement(context, route);
-    }
+      Route route = MaterialPageRoute(builder: (context) => HomePage());
+      Navigator.pushReplacement(context, route);
     }
   }
+}

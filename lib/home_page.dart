@@ -1,6 +1,7 @@
 import 'package:dev_portal/login_page.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'coding_tips.dart';
 import 'home_page_content.dart';
 import 'books_page.dart';
@@ -39,6 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Scaffold(
       body:_children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
