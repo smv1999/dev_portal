@@ -36,6 +36,7 @@ class MyRegisterPageState extends State {
     // TODO: implement build
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           'Dev Portal',
@@ -46,7 +47,7 @@ class MyRegisterPageState extends State {
       ),
       body: Center(
         child: Container(
-          color: Colors.white,
+//          color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Form(
@@ -151,11 +152,13 @@ class MyRegisterPageState extends State {
                   Center(
                     child: GestureDetector(
                       onTap: () {
-                        Route route = new MaterialPageRoute(
-                            builder: (context) => MyLoginPage());
-                        Navigator.pushReplacement(context, route);
+                        Navigator.of(context).pushReplacementNamed('/login');
                       },
-                      child: Text("Already have an Account? Log In"),
+                      child: Text("Already have an Account? Log In",
+                        style: TextStyle(
+                          color: Colors.lightBlue,
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -173,8 +176,7 @@ class MyRegisterPageState extends State {
         // show toast of email verification sent
         Toast.show("Email Verification Sent. Check your Inbox", context,
             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-        Route route = MaterialPageRoute(builder: (context) => LoginPage());
-        Navigator.pushReplacement(context, route);
+        Navigator.of(context).pushReplacementNamed('/login');
       }
       else{
         Toast.show("Something went wrong!", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM);
