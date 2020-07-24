@@ -10,24 +10,18 @@ class _HomePageContentState extends State<HomePageContent> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Padding(
+      child:
+      Padding(
         padding: const EdgeInsets.all(20.0),
         child: ListView(
           shrinkWrap: true,
           children: [
             Container(
-              height: 50,
+              height: 45,
+              width: 80,
               decoration: BoxDecoration(
-                color: Colors.black12,
-              ),
-              child: Center(
-                child: Text(
-                  'Top Technologies',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                image: DecorationImage(
+                  image: AssetImage("images/homebackgroundimage.png"),
                 ),
               ),
             ),
@@ -75,5 +69,4 @@ class _HomePageContentState extends State<HomePageContent> {
       ),
     );
   }
-
 }

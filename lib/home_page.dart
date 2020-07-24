@@ -1,12 +1,12 @@
-import 'package:dev_portal/login_page.dart';
+import 'file:///C:/Users/smv1999/dev_portal/lib/screens/login_page.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'coding_tips.dart';
+import 'pages/coding_tips.dart';
 import 'home_page_content.dart';
-import 'books_page.dart';
-import 'forum_page.dart';
-import 'fun_area_page.dart';
+import 'pages/books_page.dart';
+import 'pages/forum_page.dart';
+import 'pages/fun_area_page.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -86,6 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: GestureDetector(
                 onTap: () {
                   // open settings activity
+                  Navigator.of(context).pushNamed('/settings');
                 },
                 child: Icon(Icons.settings),
               )),
@@ -217,5 +218,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _viewProfile() {
     // show profile
+    Navigator.of(context).pushNamed('/profile');
   }
 }

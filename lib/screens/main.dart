@@ -1,11 +1,11 @@
 import 'package:after_layout/after_layout.dart';
-import 'package:dev_portal/login_page.dart';
+import 'file:///C:/Users/smv1999/dev_portal/lib/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../route_generator.dart';
+import '../routes/route_generator.dart';
 
 void main() {
   runApp(MainApplication());
@@ -102,7 +102,9 @@ class _IntroScreenState extends State<IntroScreen> {
 
   Future<void> _saveState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool _seen = (prefs.getBool('seen') ? true : false);
+    bool _seen;
+    _seen = false;
+    _seen = (prefs.getBool('seen') ? true : false);
 
     if (_seen) {
       Navigator.of(context).pushReplacementNamed('/login');
