@@ -33,7 +33,6 @@ class _IntroScreenState extends State<IntroScreen> {
 
   @override
   void initState() {
-    _saveState();
     super.initState();
 
     slides.add(
@@ -100,29 +99,39 @@ class _IntroScreenState extends State<IntroScreen> {
     navigator.pop();
   }
 
-  Future<void> _saveState() async {
+  Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool _seen;
-    _seen = false;
-    _seen = (prefs.getBool('seen') ? true : false);
+    bool _seen = (prefs.getBool('seen') ?? false);
 
     if (_seen) {
-      Navigator.of(context).pushReplacementNamed('/login');
+      Navigator.of(context).pushNamed('/login');
     } else {
-      await prefs.setBool('seen', true);
+       await prefs.setBool('seen', true);
     }
   }
-//  @override
-//  void afterFirstLayout(BuildContext context) => _saveState();
+
 
   @override
   Widget build(BuildContext context) {
-    return  new IntroSlider(
-          slides: this.slides,
-          onDonePress: this.onDonePress,
-          styleNameSkipBtn: TextStyle(color: Colors.black),
-          styleNamePrevBtn: TextStyle(color: Colors.black),
-          styleNameDoneBtn: TextStyle(color: Colors.black),
-        );
+    return  FutureBuilder(
+        future: checkFirstSeen(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child:
+              Container(
+                child: CircularProgressIndicator(),
+              )
+            );
+          } else {
+            return new IntroSlider(
+              slides: this.slides,
+              onDonePress: this.onDonePress,
+              styleNameSkipBtn: TextStyle(color: Colors.black),
+              styleNamePrevBtn: TextStyle(color: Colors.black),
+              styleNameDoneBtn: TextStyle(color: Colors.black),
+            );
+          }
+        });
   }
 }

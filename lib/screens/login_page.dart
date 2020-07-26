@@ -3,6 +3,7 @@ import 'dart:async';
 import 'file:///C:/Users/smv1999/dev_portal/lib/screens/forgot_password_page.dart';
 import 'package:dev_portal/home_page.dart';
 import 'package:dev_portal/services/authentication.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'file:///C:/Users/smv1999/dev_portal/lib/screens/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,164 +31,184 @@ class MyLoginPageState extends State {
     @override
     void initState(){
       super.initState();
-      _checkIfUserAlreadyLoggedIn();
     }
 
-    return isAuth != true ? Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text(
-            'Dev Portal',
-            style: TextStyle(color: Colors.black),
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.white,
-        ),
-        body: Center(
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Form(
-                key: _formKey,
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    Image.asset('images/dev.jpg',
-                        alignment: Alignment.center, width: 180, height: 180),
-                    SizedBox(height: 15.0),
-                    TextFormField(
-                        maxLines: 1,
-                        validator: (val) => val.isEmpty ? 'Enter an Email' : null,
-                        onChanged: (text) {
-                          setState(() {
-                            email = text;
-                          });
-                        },
-                        decoration: InputDecoration(
+    return FutureBuilder<FirebaseUser>(
+        future: FirebaseAuth.instance.currentUser(),
+        builder: (BuildContext context, AsyncSnapshot<FirebaseUser> snapshot) {
+          if (snapshot.hasData) {
+            FirebaseUser user = snapshot.data; // this is your user instance
+            /// is because there is user already logged
+            return MyHomePage();
+          }
+
+          /// other way there is no user logged.
+          return Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              title: Text(
+                'Dev Portal',
+                style: TextStyle(color: Colors.black),
+              ),
+              centerTitle: true,
+              backgroundColor: Colors.white,
+            ),
+            body: Center(
+              child: Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Form(
+                    key: _formKey,
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        Image.asset('images/dev.jpg',
+                            alignment: Alignment.center,
+                            width: 180,
+                            height: 180),
+                        SizedBox(height: 15.0),
+                        TextFormField(
+                            maxLines: 1,
+                            validator: (val) =>
+                            val.isEmpty
+                                ? 'Enter an Email'
+                                : null,
+                            onChanged: (text) {
+                              setState(() {
+                                email = text;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide:
+                                    BorderSide(color: Colors.grey, width: 1.0),
+                                    borderRadius: BorderRadius.circular(20.0)
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                    BorderSide(color: Colors.grey, width: 1.0),
+                                    borderRadius: BorderRadius.circular(20.0)
+                                ),
+                                hintText: 'Email'),
+                            textAlign: TextAlign.left,
+                            keyboardType: TextInputType.emailAddress,
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                height: 1.4,
+                                color: Colors.black,
+                                fontFamily: 'Montserrat')
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        TextFormField(
+                          maxLines: 1,
+                          validator: (val) =>
+                          val.length < 6
+                              ? 'Password must be at least 6 chars long'
+                              : null,
+                          onChanged: (text) {
+                            setState(() {
+                              password = text;
+                            });
+                          },
+                          decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
                                 borderSide:
                                 BorderSide(color: Colors.grey, width: 1.0),
-                                borderRadius: BorderRadius.circular(20.0)
-                            ),
+                                borderRadius: BorderRadius.circular(20.0)),
                             focusedBorder: OutlineInputBorder(
                                 borderSide:
                                 BorderSide(color: Colors.grey, width: 1.0),
-                                borderRadius: BorderRadius.circular(20.0)
+                                borderRadius: BorderRadius.circular(20.0)),
+                            hintText: 'Password',
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                // Based on passwordVisible state choose the icon
+                                _obscureText
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Theme
+                                    .of(context)
+                                    .primaryColorDark,
+                              ),
+                              onPressed: () {
+                                // Update the state i.e. toogle the state of passwordVisible variable
+                                setState(() {
+                                  _obscureText = !_obscureText;
+                                });
+                              },
                             ),
-                            hintText: 'Email'),
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.emailAddress,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            height: 1.4,
+                          ),
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat'),
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: _obscureText,
+                        ),
+                        SizedBox(
+                          height: 15.0,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: RaisedButton(
+                            child: Text('LOGIN'),
+                            onPressed: _computeResult,
                             color: Colors.black,
-                            fontFamily: 'Montserrat')
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    TextFormField(
-                      maxLines: 1,
-                      validator: (val) => val.length < 6
-                          ? 'Password must be at least 6 chars long'
-                          : null,
-                      onChanged: (text) {
-                        setState(() {
-                          password = text;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide:
-                            BorderSide(color: Colors.grey, width: 1.0),
-                            borderRadius: BorderRadius.circular(20.0)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                            BorderSide(color: Colors.grey, width: 1.0),
-                            borderRadius: BorderRadius.circular(20.0)),
-                        hintText: 'Password',
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            // Based on passwordVisible state choose the icon
-                            _obscureText
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: Theme.of(context).primaryColorDark,
-                          ),
-                          onPressed: () {
-                            // Update the state i.e. toogle the state of passwordVisible variable
-                            setState(() {
-                              _obscureText = !_obscureText;
-                            });
-                          },
-                        ),
-                      ),
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontSize: 16.0,
-                          height: 1.4,
-                          color: Colors.black,
-                          fontFamily: 'Montserrat'),
-                      keyboardType: TextInputType.visiblePassword,
-                      obscureText: _obscureText,
-                    ),
-                    SizedBox(
-                      height: 15.0,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: RaisedButton(
-                        child: Text('LOGIN'),
-                        onPressed: _computeResult,
-                        color: Colors.black,
-                        splashColor: Colors.grey,
-                        textColor: Colors.white,
-                        padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
-                        elevation: 5.0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(20.0)),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Center(
-                      child: GestureDetector(
-                        onTap: () {
-                         Navigator.of(context).pushNamed('/forgotpassword');
-                        },
-                        child: Text(
-                          "Forgot Password?",
-                          style: TextStyle(
-                            color: Colors.lightBlue,
+                            splashColor: Colors.grey,
+                            textColor: Colors.white,
+                            padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+                            elevation: 5.0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(20.0)),
                           ),
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 18.0,
-                    ),
-                    Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pushNamed('/signup');
-                        },
-                        child: Text(
-                          "Don't have an Account? Sign Up",
-                          style: TextStyle(
-                            color: Colors.lightBlue,
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        Center(
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pushNamed(
+                                  '/forgotpassword');
+                            },
+                            child: Text(
+                              "Forgot Password?",
+                              style: TextStyle(
+                                color: Colors.lightBlue,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                        SizedBox(
+                          height: 18.0,
+                        ),
+                        Center(
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pushNamed('/signup');
+                            },
+                            child: Text(
+                              "Don't have an Account? Sign Up",
+                              style: TextStyle(
+                                color: Colors.lightBlue,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-      ) : MyHomePage();
+          );
+        }
+    );
   }
 
   void _computeResult() async {
@@ -214,9 +235,11 @@ class MyLoginPageState extends State {
           isAuth = true;
         });
     }
-    setState(() {
-      isAuth = false;
-    });
+    else {
+      setState(() {
+        isAuth = false;
+      });
+    }
   }
 
   void _showProgressDialog() {
