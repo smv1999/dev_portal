@@ -1,24 +1,17 @@
-import 'package:after_layout/after_layout.dart';
-import 'file:///C:/Users/smv1999/dev_portal/lib/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../routes/route_generator.dart';
 
-void main() {
-  runApp(MainApplication());
-}
+//void main() {
+//  runApp(MainApplication());
+//}
 
-class MainApplication extends StatelessWidget {
+class IntroScreenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      onGenerateRoute: RouteGenerator.generateRoute,
-    );
+    return IntroScreen();
   }
 }
 
@@ -106,24 +99,45 @@ class _IntroScreenState extends State<IntroScreen> {
     if (_seen) {
       Navigator.of(context).pushNamed('/login');
     } else {
-       await prefs.setBool('seen', true);
+      await prefs.setBool('seen', true);
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return  FutureBuilder(
+    return FutureBuilder(
         future: checkFirstSeen(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child:
-              Container(
-                child: CircularProgressIndicator(),
-              )
-            );
-          } else {
+            return Scaffold(
+                body: Center(
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    width: 60,
+                    height: 60,
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.black,
+                      valueColor: AlwaysStoppedAnimation(Colors.grey),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    width: 60,
+                    height: 60,
+                    child: Text(
+                      'Loading',
+                      style: TextStyle(
+                        fontSize: 10.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ));
+          }
             return new IntroSlider(
               slides: this.slides,
               onDonePress: this.onDonePress,
@@ -131,7 +145,6 @@ class _IntroScreenState extends State<IntroScreen> {
               styleNamePrevBtn: TextStyle(color: Colors.black),
               styleNameDoneBtn: TextStyle(color: Colors.black),
             );
-          }
         });
   }
 }

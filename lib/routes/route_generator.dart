@@ -3,10 +3,13 @@ import 'package:dev_portal/home_page.dart';
 import 'package:dev_portal/pages/settings_page.dart';
 import 'file:///C:/Users/smv1999/dev_portal/lib/screens/login_page.dart';
 import 'package:dev_portal/screens/main.dart';
+import 'package:dev_portal/screens/edit_user_profile_page.dart';
+import 'package:dev_portal/screens/splash_screen_page.dart';
 import 'package:dev_portal/screens/user_profile_page.dart';
 import 'file:///C:/Users/smv1999/dev_portal/lib/screens/sign_up_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intro_slider/intro_slider.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -14,7 +17,7 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => IntroScreen());
+        return MaterialPageRoute(builder: (_) => SplashScreenPage());
       case '/login':
       // Validation of correct data type
           return MaterialPageRoute(
@@ -31,9 +34,15 @@ class RouteGenerator {
       case '/settings':
         return MaterialPageRoute(
             builder: (_) => SettingsPage());
+      case '/editprofile':
+        return MaterialPageRoute(
+            builder: (_) => EditUserProfile());
       case '/profile':
         return MaterialPageRoute(
             builder: (_) => UserProfile());
+      case '/introslider':
+        return MaterialPageRoute(
+            builder: (_) => IntroScreenPage());
       default:
       // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();
