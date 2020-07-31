@@ -44,9 +44,9 @@ class _UserProfileState extends State<UserProfile> {
             InkWell(
                 child: CircleAvatar(
                   backgroundColor: Colors.black,
-                  radius: 40.0,
+                  radius: 50.0,
                   child: CircleAvatar(
-                    radius: 38.0,
+                    radius: 48.0,
                     child: ClipOval(
                       child: (_image != null)
                           ? Image.file(_image)

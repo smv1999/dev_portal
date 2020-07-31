@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:dev_portal/routes/route_generator.dart';
 import 'package:dev_portal/screens/main.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,9 @@ class SplashScreenPage extends StatelessWidget {
       initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,
       home: new MySplash(),
+//      theme: ThemeData(),
+//      darkTheme: ThemeData.dark(),
+//      themeMode: ThemeMode.dark,
     );
   }
 }

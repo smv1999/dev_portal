@@ -9,6 +9,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,8 +48,19 @@ class _SettingsPageState extends State<SettingsPage> {
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
-                    onTap: _privacyPolicy,
-                    title: Text('Privacy Policy'), leading: Icon(Icons.security)
+                    title: Text('Switch to Dark Mode'),
+                    trailing:  Switch(
+                      value: isSwitched,
+                      onChanged: (value){
+                        setState(() {
+                          isSwitched = value;
+                          print(isSwitched);
+                        });
+                      },
+                      activeTrackColor: Colors.black54,
+                      activeColor: Colors.white70,
+                    ),
+                  leading: Icon(Icons.compare_arrows),
                 ),
               ),
               Card(
@@ -75,6 +87,13 @@ class _SettingsPageState extends State<SettingsPage> {
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
+                    onTap: privacyPolicy,
+                    title: Text('Privacy Policy'), leading: Icon(Icons.security)
+                ),
+              ),
+              Card(
+                margin: const EdgeInsets.all(8.0),
+                child: ListTile(
                     onTap: _sendEmail,
                     title: Text('Contact Us'), leading: Icon(Icons.contact_mail)
                 ),
@@ -92,8 +111,10 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
     );
   }
-
-  void _shareApp() async {
+  privacyPolicy()  {
+    Navigator.of(context).pushNamed('/policy');
+  }
+  void _shareApp()  {
     final RenderBox box = context.findRenderObject();
 
     Share.share('Check out the app here: https://play.google.com/store/apps/details?id=com.programmersgateway.sm1999.dev_portal',
@@ -108,6 +129,7 @@ class _SettingsPageState extends State<SettingsPage> {
       throw 'Could not launch $url';
     }
   }
+
   void _ourOtherApps() async
   {
     const url = 'https://play.google.com/store/apps/developer?id=Programmers+Gateway';
@@ -139,10 +161,9 @@ class _SettingsPageState extends State<SettingsPage> {
     await FlutterEmailSender.send(email);
   }
 
-  void _about() async{
+   _about() {
     Navigator.of(context).pushNamed('/about');
   }
 
-  void _privacyPolicy() {
-  }
+
 }

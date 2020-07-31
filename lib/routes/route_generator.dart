@@ -1,13 +1,14 @@
-import 'file:///C:/Users/smv1999/dev_portal/lib/screens/forgot_password_page.dart';
 import 'package:dev_portal/home_page.dart';
 import 'package:dev_portal/screens/about_page.dart';
-import 'file:///C:/Users/smv1999/dev_portal/lib/screens/settings_page.dart';
-import 'file:///C:/Users/smv1999/dev_portal/lib/screens/login_page.dart';
+import 'package:dev_portal/screens/forgot_password_page.dart';
+import 'package:dev_portal/screens/settings_page.dart';
+import 'package:dev_portal/screens/login_page.dart';
 import 'package:dev_portal/screens/main.dart';
 import 'package:dev_portal/screens/edit_user_profile_page.dart';
+import 'package:dev_portal/screens/privacy_policy_page.dart';
 import 'package:dev_portal/screens/splash_screen_page.dart';
 import 'package:dev_portal/screens/user_profile_page.dart';
-import 'file:///C:/Users/smv1999/dev_portal/lib/screens/sign_up_page.dart';
+import 'package:dev_portal/screens/sign_up_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
@@ -47,6 +48,10 @@ class RouteGenerator {
       case '/about':
         return MaterialPageRoute(
             builder: (_) => AboutPage());
+      case '/policy':
+        return MaterialPageRoute(
+            builder: (_) => PrivacyPolicyPage()
+        );
       default:
       // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();

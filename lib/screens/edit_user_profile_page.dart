@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:dev_portal/services/authentication.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:toast/toast.dart';
@@ -16,13 +18,25 @@ class _EditUserProfileState extends State<EditUserProfile> {
   Auth auth = new Auth();
   File _image;
   final picker = ImagePicker();
+  FirebaseStorage _storage = FirebaseStorage.instance;
 
-  Future getImage() async {
+  Future<String> getImage() async {
+    final FirebaseUser user = await auth.getCurrentUser();
+    final userId = user.uid;
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
-
+    //Create a reference to the location you want to upload to in firebase
+    StorageReference reference = _storage.ref().child(userId).child("Images/");
     setState(() {
       _image = File(pickedFile.path);
     });
+    //Upload the file to firebase
+    StorageUploadTask uploadTask = reference.putFile(_image);
+
+    //Snapshot of the uploading task
+    StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
+    Toast.show("Profile Photo Uploaded Successfully!", context,
+        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+    return taskSnapshot.ref.getDownloadURL().toString();
   }
 
   @override
@@ -42,9 +56,9 @@ class _EditUserProfileState extends State<EditUserProfile> {
           Padding(
               padding: EdgeInsets.only(right: 20.0),
               child: GestureDetector(
-                onTap: () {
+                onTap:
                   // Submit Profile Details
-                },
+                  _computeResult,
                 child: Icon(Icons.check_circle),
               )),
         ],
@@ -59,18 +73,35 @@ class _EditUserProfileState extends State<EditUserProfile> {
                 key: _formKey,
                 child: ListView(
                   children: <Widget>[
+                    (_image!=null) ?
                     InkWell(
                         onTap: getImage,
                         child: CircleAvatar(
                           backgroundColor: Colors.black,
-                          radius: 40.0,
+                          radius: 60.0,
                           child: CircleAvatar(
-                            radius: 38.0,
-                            child: ClipOval(
-                              child: (_image != null)
-                                  ? Image.file(_image)
-                                  : Image.asset('images/newimage.png'),
-                            ),
+                            radius: 58.0,
+//                            child: ClipOval(
+//                              child:
+                               backgroundImage: new FileImage(_image),
+
+//                            ),
+                            backgroundColor: Colors.white,
+                          ),
+                        )
+                    ):
+                    InkWell(
+                        onTap: getImage,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.black,
+                          radius: 50.0,
+                          child: CircleAvatar(
+                            radius: 48.0,
+//                            child: ClipOval(
+//                                child:
+                                backgroundImage:AssetImage('images/newimage.png'),
+//                                Image.asset('images/newimage.png'),
+//                            ),
                             backgroundColor: Colors.white,
                           ),
                         )
@@ -550,20 +581,10 @@ class _EditUserProfileState extends State<EditUserProfile> {
   }
 
   void _computeResult() async {
-//    if (_formKey.currentState.validate()) {
-//      if ((await auth.signIn(email, password)) != null) {
-//  if ((await auth.getCurrentUser()) != null) {
-//  if ((await auth.isEmailVerified()) != null) {
-//  Toast.show("Login Successful!", context,
-//  duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-//  Navigator.of(context).pushNamed('/home');
-//  }
-//  }
-//  } else {
-//  Toast.show("Authentication Failed!", context,
-//  duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-//  }
-//  }
+    if (_formKey.currentState.validate()) {
+      Toast.show("Submitted Successfully!", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+  }
   }
 
 

@@ -1,4 +1,3 @@
-import 'file:///C:/Users/smv1999/dev_portal/lib/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:toast/toast.dart';
