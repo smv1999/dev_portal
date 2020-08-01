@@ -1,7 +1,8 @@
+import 'dart:collection';
 import 'dart:io';
-
 import 'package:dev_portal/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,13 +15,15 @@ class EditUserProfile extends StatefulWidget {
 
 class _EditUserProfileState extends State<EditUserProfile> {
   final _formKey = GlobalKey<FormState>();
-  String firstname, lastname;
+  String firstName, lastName, dob, phoneNumber, summary, email, username, website, employmentTitle, stackoverflow, youtube, skills, linkedin, medium, github;
   Auth auth = new Auth();
   File _image;
   final picker = ImagePicker();
   FirebaseStorage _storage = FirebaseStorage.instance;
+  DatabaseReference myRef;
+  String imagePath;
 
-  Future<String> getImage() async {
+  Future<void> getImage() async {
     final FirebaseUser user = await auth.getCurrentUser();
     final userId = user.uid;
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -36,9 +39,24 @@ class _EditUserProfileState extends State<EditUserProfile> {
     StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
     Toast.show("Profile Photo Uploaded Successfully!", context,
         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-    return taskSnapshot.ref.getDownloadURL().toString();
+    imagePath = await taskSnapshot.ref.getDownloadURL();
+    Toast.show(imagePath, context,
+        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
   }
+  DateTime selectedDate = DateTime.now();
 
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,8 +75,8 @@ class _EditUserProfileState extends State<EditUserProfile> {
               padding: EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap:
-                  // Submit Profile Details
-                  _computeResult,
+                    // Submit Profile Details
+                    _computeResult,
                 child: Icon(Icons.check_circle),
               )),
         ],
@@ -71,41 +89,33 @@ class _EditUserProfileState extends State<EditUserProfile> {
               padding: EdgeInsets.all(20.0),
               child: Form(
                 key: _formKey,
-                child: ListView(
-                  children: <Widget>[
-                    (_image!=null) ?
-                    InkWell(
-                        onTap: getImage,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.black,
-                          radius: 60.0,
-                          child: CircleAvatar(
-                            radius: 58.0,
-//                            child: ClipOval(
-//                              child:
-                               backgroundImage: new FileImage(_image),
-
-//                            ),
-                            backgroundColor: Colors.white,
-                          ),
-                        )
-                    ):
-                    InkWell(
-                        onTap: getImage,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.black,
-                          radius: 50.0,
-                          child: CircleAvatar(
-                            radius: 48.0,
-//                            child: ClipOval(
-//                                child:
-                                backgroundImage:AssetImage('images/newimage.png'),
-//                                Image.asset('images/newimage.png'),
-//                            ),
-                            backgroundColor: Colors.white,
-                          ),
-                        )
-                    ),
+                child: SingleChildScrollView(
+                  child:Column(
+                  children:<Widget>[
+                    (_image != null)
+                        ? InkWell(
+                            onTap: getImage,
+                            child: CircleAvatar(
+                              backgroundColor: Colors.black,
+                              radius: 60.0,
+                              child: CircleAvatar(
+                                radius: 58.0,
+                                backgroundImage: new FileImage(_image),
+                                backgroundColor: Colors.white,
+                              ),
+                            ))
+                        : InkWell(
+                            onTap: getImage,
+                            child: CircleAvatar(
+                              backgroundColor: Colors.black,
+                              radius: 50.0,
+                              child: CircleAvatar(
+                                radius: 48.0,
+                                backgroundImage:
+                                    AssetImage('images/newimage.png'),
+                                backgroundColor: Colors.white,
+                              ),
+                            )),
                     SizedBox(
                       height: 15.0,
                     ),
@@ -115,7 +125,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             val.isEmpty ? 'Enter your First Name' : null,
                         onChanged: (text) {
                           setState(() {
-                            firstname = text;
+                            firstName = text;
                           });
                         },
                         decoration: InputDecoration(
@@ -145,7 +155,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             val.isEmpty ? 'Enter your Last Name' : null,
                         onChanged: (text) {
                           setState(() {
-                            firstname = text;
+                            lastName = text;
                           });
                         },
                         decoration: InputDecoration(
@@ -171,15 +181,17 @@ class _EditUserProfileState extends State<EditUserProfile> {
                     ),
                     TextFormField(
                         maxLines: 1,
+                        maxLength: 10,
                         validator: (val) =>
                             val.isEmpty ? 'Enter your DOB' : null,
+//                        onTap:() => _selectDate(context),
                         onChanged: (text) {
                           setState(() {
-                            firstname = text;
+                            dob = text;
                           });
                         },
                         decoration: InputDecoration(
-                          hintText: 'Date of birth',
+                          hintText: 'Enter Date of birth',
                           enabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.grey, width: 1.0),
@@ -205,7 +217,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             val.isEmpty ? 'Enter your Summary' : null,
                         onChanged: (text) {
                           setState(() {
-                            firstname = text;
+                            summary = text;
                           });
                         },
                         decoration: InputDecoration(
@@ -235,7 +247,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             val.isEmpty ? 'Enter your Email' : null,
                         onChanged: (text) {
                           setState(() {
-                            firstname = text;
+                            email = text;
                           });
                         },
                         decoration: InputDecoration(
@@ -265,7 +277,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             val.isEmpty ? 'Enter your Username' : null,
                         onChanged: (text) {
                           setState(() {
-                            firstname = text;
+                            username = text;
                           });
                         },
                         decoration: InputDecoration(
@@ -295,7 +307,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             val.isEmpty ? 'Enter your Website' : null,
                         onChanged: (text) {
                           setState(() {
-                            firstname = text;
+                            website = text;
                           });
                         },
                         decoration: InputDecoration(
@@ -326,7 +338,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             val.isEmpty ? 'Enter your Phone Number' : null,
                         onChanged: (text) {
                           setState(() {
-                            firstname = text;
+                            phoneNumber = text;
                           });
                         },
                         decoration: InputDecoration(
@@ -356,7 +368,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             val.isEmpty ? 'Enter your Employment Title' : null,
                         onChanged: (text) {
                           setState(() {
-                            firstname = text;
+                            employmentTitle = text;
                           });
                         },
                         decoration: InputDecoration(
@@ -386,7 +398,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             val.isEmpty ? 'Enter your Skills/Languages' : null,
                         onChanged: (text) {
                           setState(() {
-                            firstname = text;
+                            skills = text;
                           });
                         },
                         decoration: InputDecoration(
@@ -426,7 +438,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             : null,
                         onChanged: (text) {
                           setState(() {
-                            firstname = text;
+                            youtube = text;
                           });
                         },
                         decoration: InputDecoration(
@@ -457,7 +469,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             : null,
                         onChanged: (text) {
                           setState(() {
-                            firstname = text;
+                            stackoverflow = text;
                           });
                         },
                         decoration: InputDecoration(
@@ -488,7 +500,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             : null,
                         onChanged: (text) {
                           setState(() {
-                            firstname = text;
+                            linkedin = text;
                           });
                         },
                         decoration: InputDecoration(
@@ -519,7 +531,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             : null,
                         onChanged: (text) {
                           setState(() {
-                            firstname = text;
+                            medium = text;
                           });
                         },
                         decoration: InputDecoration(
@@ -550,7 +562,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             : null,
                         onChanged: (text) {
                           setState(() {
-                            firstname = text;
+                            github = text;
                           });
                         },
                         decoration: InputDecoration(
@@ -574,18 +586,39 @@ class _EditUserProfileState extends State<EditUserProfile> {
                   ],
                 ),
               ),
+            ),
             )
-        ),
+    ),
       ),
     );
   }
 
   void _computeResult() async {
     if (_formKey.currentState.validate()) {
+      final FirebaseUser user = await auth.getCurrentUser();
+      final userId = user.uid;
+      myRef = FirebaseDatabase.instance.reference().child('Users').child(userId);
+      HashMap<String,String> profileMap = new HashMap();
+      profileMap.putIfAbsent('firstname', () => firstName);
+      profileMap.putIfAbsent('lastname', () => lastName);
+      profileMap.putIfAbsent('dob', () => dob);
+      profileMap.putIfAbsent('summary', () => summary);
+      profileMap.putIfAbsent('email', () => email);
+      profileMap.putIfAbsent('username', () => username);
+      profileMap.putIfAbsent('website', () => website);
+      profileMap.putIfAbsent('phonenumber', () => phoneNumber);
+      profileMap.putIfAbsent('employmenttitle', () => employmentTitle);
+      profileMap.putIfAbsent('skills', () => skills);
+      profileMap.putIfAbsent('imagepath', () => imagePath);
+      profileMap.putIfAbsent('youtube', () => youtube);
+      profileMap.putIfAbsent('stackoverflow', () => stackoverflow);
+      profileMap.putIfAbsent('linkedin', () => linkedin);
+      profileMap.putIfAbsent('medium', () => medium);
+      profileMap.putIfAbsent('github', () => github);
+      myRef.set(profileMap);
       Toast.show("Submitted Successfully!", context,
           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      Navigator.of(context).pushNamed('/profile');
+    }
   }
-  }
-
-
 }
