@@ -1,5 +1,7 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -38,11 +40,21 @@ class _SettingsPageState extends State<SettingsPage> {
                   width: 180,
                   height: 180),
               SizedBox(height: 8.0,),
+              Text('Made in India',textAlign: TextAlign.center,style: GoogleFonts.ptSansNarrow(
+                textStyle: TextStyle(fontSize: 20.0)
+              ),
+              ),
+              SizedBox(height: 8.0,),
+              Text('Version 1.0.0',textAlign: TextAlign.center,style: GoogleFonts.ptSansNarrow(
+                textStyle: TextStyle(fontSize: 12.0)
+              ),
+              ),
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                     onTap: _about,
-                    title: Text('About Dev Portal'), leading: Icon(Icons.info)
+                    title: Text('About Dev Portal'), leading: Icon(Icons.info, color: Colors.black,),
+                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
                 ),
               ),
               Card(
@@ -60,51 +72,79 @@ class _SettingsPageState extends State<SettingsPage> {
                       activeTrackColor: Colors.black54,
                       activeColor: Colors.white70,
                     ),
-                  leading: Icon(Icons.compare_arrows),
+                  leading: Icon(Icons.compare_arrows, color: Colors.black),
                 ),
               ),
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                     onTap: _shareApp,
-                    title: Text('Share Our App'), leading: Icon(Icons.share)
+                    title: Text('Share Our App'), leading: Icon(Icons.share, color: Colors.black,),
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
                 ),
               ),
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                     onTap: _rateOurApp,
-                    title: Text('Rate Our App'), leading: Icon(Icons.star)
+                    title: Text('Rate Our App'), leading: Icon(Icons.star, color: Colors.black,),
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
                 ),
               ),
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                     onTap: _ourOtherApps,
-                    title: Text('Our Other Apps'), leading: Icon(Icons.apps),
+                    title: Text('Our Other Apps'), leading: Icon(Icons.apps, color: Colors.black,),
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
                 ),
               ),
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                     onTap: privacyPolicy,
-                    title: Text('Privacy Policy'), leading: Icon(Icons.security)
+                    title: Text('Privacy Policy'), leading: Icon(Icons.security, color: Colors.black,),
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
                 ),
               ),
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                     onTap: _sendEmail,
-                    title: Text('Contact Us'), leading: Icon(Icons.contact_mail)
+                    title: Text('Contact Us'), leading: Icon(Icons.contact_mail, color: Colors.black,),
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
                 ),
               ),
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                     onTap: _reportIssue,
-                    title: Text('Report an issue'), leading: Icon(Icons.bug_report)
+                    title: Text('Report an issue'), leading: Icon(Icons.bug_report, color: Colors.black,),
+                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
                 ),
-              )
+              ),
+          SizedBox(height: 15.0,),
+          Center(
+            child:Text('from', style: GoogleFonts.ptSansNarrow(),)
+          ),
+          Center(
+          child: ColorizeAnimatedTextKit(
+              text: [
+                "Programmers Gateway",
+              ],
+              textStyle: TextStyle(
+                  fontSize: 25.0,
+                  fontFamily: "MyFont"
+              ),
+              colors: [
+                Colors.purple,
+                Colors.blue,
+                Colors.yellow,
+                Colors.red,
+              ],
+          ),
+        ),
+              SizedBox(height: 10.0,)
             ],
           ),
         ),
@@ -164,6 +204,5 @@ class _SettingsPageState extends State<SettingsPage> {
    _about() {
     Navigator.of(context).pushNamed('/about');
   }
-
 
 }

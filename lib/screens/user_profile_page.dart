@@ -190,18 +190,19 @@ class _UserProfileState extends State<UserProfile> {
                 Text(
                   'Website',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
                 GestureDetector(
                   onTap: () => _launchURL(website),
-                child:Text(website ?? 'Website',
-                    style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                    color: Colors.lightBlueAccent)),
+                  child: Text(website ?? 'Website',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                          color: Colors.lightBlueAccent)),
                 ),
                 SizedBox(
                   height: 8.0,
@@ -242,95 +243,100 @@ class _UserProfileState extends State<UserProfile> {
                 Text(
                   'YouTube Channel URL',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
                 GestureDetector(
-                onTap: () => _launchURL(youtube),
-                child:Text(youtube ?? 'YouTube',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
-                        color: Colors.lightBlueAccent)
-                ),),
+                  onTap: () => _launchURL(youtube),
+                  child: Text(youtube ?? 'YouTube',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                          color: Colors.lightBlueAccent)),
+                ),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Stack Overflow Profile URL',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
                 GestureDetector(
                   onTap: () => _launchURL(stackoverflow),
-                child:Text(stackoverflow ?? 'Stack Overflow',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
-                        color: Colors.lightBlueAccent)
-                ),),
+                  child: Text(stackoverflow ?? 'Stack Overflow',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                          color: Colors.lightBlueAccent)),
+                ),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'LinkedIn profile URL',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
                 GestureDetector(
                   onTap: () => _launchURL(linkedin),
-                child:Text(linkedin ?? 'LinkedIn',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
-                        color: Colors.lightBlueAccent)
-                ),),
+                  child: Text(linkedin ?? 'LinkedIn',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                          color: Colors.lightBlueAccent)),
+                ),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Medium profile URL',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
                 GestureDetector(
                   onTap: () => _launchURL(medium),
-                child:Text(medium ?? 'Medium',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
-                        color: Colors.lightBlueAccent)
-                ),),
+                  child: Text(medium ?? 'Medium',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                          color: Colors.lightBlueAccent)),
+                ),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'GitHub profile URL',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
                 GestureDetector(
                   onTap: () => _launchURL(github),
-                child:Text(github ?? 'GitHub',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
-                        color: Colors.lightBlueAccent)
-                ),),
+                  child: Text(github ?? 'GitHub',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                          color: Colors.lightBlueAccent)),
+                ),
                 SizedBox(
                   height: 8.0,
                 ),
@@ -369,8 +375,9 @@ class _UserProfileState extends State<UserProfile> {
       });
     });
   }
-  void _launchURL(website) async{
-    var url = 'https://'+website;
+
+  void _launchURL(website) async {
+    var url = 'https://' + website;
     if (await canLaunch(url)) {
       await launch(url);
     } else {

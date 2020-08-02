@@ -174,9 +174,9 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               Padding(
                   padding: EdgeInsets.all(15.0),
-                  child: Image.asset('images/dev.jpg',
-                  height: 100,
-                  width: 100,
+                  child: Image.asset('images/dev_animated.gif',
+                  height: 105,
+                  width: 105,
                   )
               ),
               Padding(
