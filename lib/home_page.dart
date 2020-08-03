@@ -1,6 +1,8 @@
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'pages/coding_tips.dart';
 import 'home_page_content.dart';
 import 'pages/books_page.dart';
@@ -28,32 +30,46 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex:
+      bottomNavigationBar: BottomNavyBar(
+        selectedIndex:
             _currentIndex, // this will be set when a new tab is tapped
-        selectedItemColor: Colors.black54,
-        unselectedItemColor: Colors.black,
-        onTap: onTabTapped, // new
+//        selectedItemColor: Colors.black54,
+//        unselectedItemColor: Colors.black,
+        onItemSelected: onTabTapped, // new
         items: [
-          BottomNavigationBarItem(
+          BottomNavyBarItem(
+            activeColor: Color.fromRGBO(0, 168, 255, 1.0),
+            inactiveColor: Color.fromRGBO(0, 168, 255, 1.0),
             icon: new Icon(Icons.home),
-            title: new Text('Home'),
+            title: new Text('Home', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),),
           ),
-          BottomNavigationBarItem(
+          BottomNavyBarItem(
+            activeColor: Colors.lightBlue,
+            inactiveColor: Colors.lightBlue,
             icon: new Icon(Icons.lightbulb_outline),
-            title: new Text('Coding Tips'),
+            title: new Text('Coding Tips', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),),
           ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.library_books), title: Text('Books')),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), title: Text('Forum')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.image), title: Text('Fun Area'))
+          BottomNavyBarItem(
+              activeColor: Colors.lightBlue,
+              inactiveColor: Colors.lightBlue,
+              icon: Icon(Icons.library_books),
+              title: Text('Books', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),)),
+          BottomNavyBarItem(
+              activeColor: Colors.lightBlue,
+              inactiveColor: Colors.lightBlue,
+              icon: Icon(Icons.chat),
+              title: Text('Forum', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),)),
+          BottomNavyBarItem(
+              activeColor: Colors.lightBlue,
+              inactiveColor: Colors.lightBlue,
+              icon: Icon(Icons.image),
+              title: Text('Fun Area', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),))
         ],
       ),
       appBar: AppBar(
         title: Text(
-          'Home',
-          style: TextStyle(color: Colors.black),
+          'Dev Portal',
+          style: TextStyle(color: Colors.black, fontFamily: 'MyFont', fontWeight: FontWeight.bold),
         ),
         leading: GestureDetector(
           onTap: () {
@@ -66,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         centerTitle: true,
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(color: Colors.lightBlue),
         actions: <Widget>[
           Padding(
               padding: EdgeInsets.only(right: 20.0),
@@ -77,8 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 child: Icon(
                   Icons.power_settings_new,
-                  size: 26.0,
-                ),
+                  size: 26.0,),
               )),
           Padding(
               padding: EdgeInsets.only(right: 20.0),
@@ -87,10 +102,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   // open settings activity
                   Navigator.of(context).pushNamed('/settings');
                 },
-                child: Icon(Icons.settings),
+                child: Icon(Icons.settings,),
               )),
+
         ],
-        actionsIconTheme: IconThemeData(color: Colors.black),
+        actionsIconTheme: IconThemeData(color: Colors.lightBlue),
       ),
     );
   }
@@ -100,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (auth.getCurrentUser() != null) {
       auth.signOut();
       // return to login page
-      Navigator.of(context).pushNamed('/login');
+      Navigator.of(context).pushNamedAndRemoveUntil('/login', (r) => false);
     }
   }
 
@@ -109,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget cancelButton = FlatButton(
       child: Text(
         "Cancel",
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(color: Colors.black, fontFamily: 'MyFont', fontSize: 16),
       ),
       onPressed: () {
         Navigator.of(context, rootNavigator: true).pop();
@@ -118,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget continueButton = FlatButton(
       child: Text(
         "Continue",
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(color: Colors.black, fontFamily: 'MyFont', fontSize: 16),
       ),
       onPressed: () {
         Navigator.of(context, rootNavigator: true).pop();
@@ -128,8 +144,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Confirmation"),
-      content: Text("Are you sure to Logout?"),
+      title: Text("Confirmation", style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16)),),
+      content: Text("Are you sure to Logout?", style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16)),),
       actions: [
         cancelButton,
         continueButton,
@@ -175,20 +191,20 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                   padding: EdgeInsets.all(15.0),
                   child: Image.asset('images/dev_animated.gif',
-                  height: 105,
-                  width: 105,
+                  height: 100,
+                  width: 100,
                   )
               ),
               Padding(
                 padding: EdgeInsets.all(10.0),
                 child: RaisedButton(
-                  child: Text('My Profile'),
+                  child: Text('My Profile', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold)),),
                   onPressed: _viewProfile,
                   textColor: Colors.white,
                   padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
                   elevation: 5.0,
-                  color: Colors.black,
-                  splashColor: Colors.grey,
+                  color: Colors.lightBlue,
+                  splashColor: Colors.lightBlueAccent,
                 ),
               ),
               SizedBox(
@@ -197,13 +213,13 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: EdgeInsets.all(10.0),
                 child: RaisedButton(
-                  child: Text('Explore Learning Resources'),
-                  onPressed: _viewProfile,
+                  child: Text('Explore Learning Resources', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold)),),
+                  onPressed: _exploreLearningResources,
                   textColor: Colors.white,
                   padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
                   elevation: 5.0,
-                  color: Colors.black,
-                  splashColor: Colors.grey,
+                  color: Colors.lightBlue,
+                  splashColor: Colors.lightBlueAccent,
                 ),
               ),
             ],
@@ -218,5 +234,9 @@ class _MyHomePageState extends State<MyHomePage> {
   void _viewProfile() {
     // show profile
     Navigator.of(context).pushNamed('/profile');
+  }
+  void _exploreLearningResources()
+  {
+
   }
 }

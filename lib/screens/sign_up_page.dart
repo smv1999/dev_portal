@@ -1,22 +1,8 @@
 import 'package:dev_portal/services/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:toast/toast.dart';
-
-class SignUpPage extends StatefulWidget {
-  SignUpPageState createState() => SignUpPageState();
-}
-
-class SignUpPageState extends State {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MyRegisterPage(),
-    );
-  }
-}
 
 // Main Register Page
 class MyRegisterPage extends StatefulWidget {
@@ -36,16 +22,19 @@ class MyRegisterPageState extends State {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           'Dev Portal',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black,
+          fontFamily: 'MyFont',
+          fontWeight: FontWeight.bold
+          ),
         ),
         centerTitle: true,
         backgroundColor: Colors.white,
       ),
       body: Center(
         child: Container(
-//          color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Form(
@@ -72,14 +61,14 @@ class MyRegisterPageState extends State {
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
                               borderRadius: BorderRadius.circular(32.0)),
-                          hintText: 'Email'),
+                          hintText: 'Email', hintStyle: GoogleFonts.ptSansNarrow()),
                       textAlign: TextAlign.left,
                       keyboardType: TextInputType.emailAddress,
                       style: TextStyle(
                           fontSize: 16.0,
                           height: 1.2,
                           color: Colors.black,
-                          fontFamily: 'Montserrat')),
+                          fontFamily: 'MyFont')),
                   SizedBox(
                     height: 10.0,
                   ),
@@ -101,7 +90,7 @@ class MyRegisterPageState extends State {
                             borderSide:
                                 BorderSide(color: Colors.grey, width: 1.0),
                             borderRadius: BorderRadius.circular(32.0)),
-                        hintText: 'Password',
+                        hintText: 'Password', hintStyle: GoogleFonts.ptSansNarrow(),
                       suffixIcon: IconButton(
                     icon: Icon(
                     // Based on passwordVisible state choose the icon
@@ -123,7 +112,7 @@ class MyRegisterPageState extends State {
                         fontSize: 16.0,
                         height: 1.2,
                         color: Colors.black,
-                        fontFamily: 'Montserrat'),
+                        fontFamily: 'MyFont'),
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: _obscureText,
                   ),
@@ -133,10 +122,10 @@ class MyRegisterPageState extends State {
                   SizedBox(
                     width: double.infinity,
                     child: RaisedButton(
-                      child: Text('REGISTER'),
+                      child: Text('REGISTER', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18)),),
                       onPressed: _computeResult,
-                      color: Colors.black,
-                      splashColor: Colors.grey,
+                      color: Colors.lightBlue,
+                      splashColor: Colors.lightBlueAccent,
                       textColor: Colors.white,
                       padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
                       elevation: 5.0,
@@ -154,7 +143,9 @@ class MyRegisterPageState extends State {
                       },
                       child: Text("Already have an Account? Log In",
                         style: TextStyle(
+                          fontSize: 18,
                           color: Colors.lightBlue,
+                          fontFamily: 'MyFont'
                         ),
                       ),
                     ),

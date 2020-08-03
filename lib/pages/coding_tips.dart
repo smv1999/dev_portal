@@ -31,13 +31,6 @@ class _CodingTipsPageState extends State<CodingTipsPage> with TickerProviderStat
   void initState() {
     super.initState();
     checkTipSeen();
-//    WidgetsBinding.instance.addPostFrameCallback((_) {
-//      // Add Your Code here.
-//      setState(() {
-////        if(_seen==false)
-//
-//      });
-//    });
   }
 
   @override

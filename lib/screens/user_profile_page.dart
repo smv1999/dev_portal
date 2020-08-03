@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -75,6 +76,8 @@ class _UserProfileState extends State<UserProfile> {
             'Profile',
             style: TextStyle(
               color: Colors.black,
+              fontFamily: 'MyFont',
+              fontWeight: FontWeight.bold
             ),
           ),
           centerTitle: true,
@@ -89,7 +92,7 @@ class _UserProfileState extends State<UserProfile> {
                   child: Icon(Icons.edit),
                 )),
           ],
-          actionsIconTheme: IconThemeData(color: Colors.black),
+          actionsIconTheme: IconThemeData(color: Colors.lightBlue),
         ),
         body: Container(
           color: Colors.white,
@@ -123,67 +126,67 @@ class _UserProfileState extends State<UserProfile> {
                 ),
                 Text(
                   'First Name',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(firstName ?? 'First Name'),
+                Text(firstName ?? 'First Name',style: GoogleFonts.ptSansNarrow(),),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Last Name',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(lastName ?? 'Last Name'),
+                Text(lastName ?? 'Last Name', style: GoogleFonts.ptSansNarrow(),),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Date of birth',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(dob ?? 'DOB'),
+                Text(dob ?? 'DOB', style: GoogleFonts.ptSansNarrow(),),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Summary',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(summary ?? 'Summary'),
+                Text(summary ?? 'Summary', style: GoogleFonts.ptSansNarrow(),),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Email',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(email ?? 'Email'),
+                Text(email ?? 'Email', style: GoogleFonts.ptSansNarrow(),),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Username',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(username ?? 'Username'),
+                Text(username ?? 'Username', style: GoogleFonts.ptSansNarrow(),),
                 SizedBox(
                   height: 8.0,
                 ),
@@ -191,6 +194,7 @@ class _UserProfileState extends State<UserProfile> {
                   'Website',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'MyFont'
                   ),
                 ),
                 SizedBox(
@@ -200,6 +204,7 @@ class _UserProfileState extends State<UserProfile> {
                   onTap: () => _launchURL(website),
                   child: Text(website ?? 'Website',
                       style: TextStyle(
+                          fontFamily: 'MyFont',
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.underline,
                           color: Colors.lightBlueAccent)),
@@ -209,34 +214,34 @@ class _UserProfileState extends State<UserProfile> {
                 ),
                 Text(
                   'Phone Number',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(phoneNumber ?? 'Phone Number'),
+                Text(phoneNumber ?? 'Phone Number', style: GoogleFonts.ptSansNarrow(),),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Employment Title',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(employmentTitle ?? 'Employment Title'),
+                Text(employmentTitle ?? 'Employment Title', style: GoogleFonts.ptSansNarrow(),),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Skills/Languages',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(skills ?? 'Skills'),
+                Text(skills ?? 'Skills', style: GoogleFonts.ptSansNarrow(),),
                 SizedBox(
                   height: 8.0,
                 ),
@@ -244,6 +249,7 @@ class _UserProfileState extends State<UserProfile> {
                   'YouTube Channel URL',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'MyFont'
                   ),
                 ),
                 SizedBox(
@@ -253,6 +259,7 @@ class _UserProfileState extends State<UserProfile> {
                   onTap: () => _launchURL(youtube),
                   child: Text(youtube ?? 'YouTube',
                       style: TextStyle(
+                          fontFamily: 'MyFont',
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.underline,
                           color: Colors.lightBlueAccent)),
@@ -263,6 +270,7 @@ class _UserProfileState extends State<UserProfile> {
                 Text(
                   'Stack Overflow Profile URL',
                   style: TextStyle(
+                    fontFamily: 'MyFont',
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -273,6 +281,7 @@ class _UserProfileState extends State<UserProfile> {
                   onTap: () => _launchURL(stackoverflow),
                   child: Text(stackoverflow ?? 'Stack Overflow',
                       style: TextStyle(
+                          fontFamily: 'MyFont',
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.underline,
                           color: Colors.lightBlueAccent)),
@@ -283,6 +292,7 @@ class _UserProfileState extends State<UserProfile> {
                 Text(
                   'LinkedIn profile URL',
                   style: TextStyle(
+                    fontFamily: 'MyFont',
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -293,6 +303,7 @@ class _UserProfileState extends State<UserProfile> {
                   onTap: () => _launchURL(linkedin),
                   child: Text(linkedin ?? 'LinkedIn',
                       style: TextStyle(
+                          fontFamily: 'MyFont',
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.underline,
                           color: Colors.lightBlueAccent)),
@@ -303,6 +314,7 @@ class _UserProfileState extends State<UserProfile> {
                 Text(
                   'Medium profile URL',
                   style: TextStyle(
+                    fontFamily: 'MyFont',
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -313,6 +325,7 @@ class _UserProfileState extends State<UserProfile> {
                   onTap: () => _launchURL(medium),
                   child: Text(medium ?? 'Medium',
                       style: TextStyle(
+                          fontFamily: 'MyFont',
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.underline,
                           color: Colors.lightBlueAccent)),
@@ -323,6 +336,7 @@ class _UserProfileState extends State<UserProfile> {
                 Text(
                   'GitHub profile URL',
                   style: TextStyle(
+                    fontFamily: 'MyFont',
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -333,6 +347,7 @@ class _UserProfileState extends State<UserProfile> {
                   onTap: () => _launchURL(github),
                   child: Text(github ?? 'GitHub',
                       style: TextStyle(
+                          fontFamily: 'MyFont',
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.underline,
                           color: Colors.lightBlueAccent)),

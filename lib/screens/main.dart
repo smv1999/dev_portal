@@ -1,6 +1,7 @@
 import 'package:dev_portal/routes/route_generator.dart';
 import 'package:dev_portal/screens/intro_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 void main() => runApp(SplashScreenPage());
@@ -14,9 +15,10 @@ class SplashScreenPage extends StatelessWidget {
       initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,
       home: new MySplash(),
-//      theme: ThemeData(),
-//      darkTheme: ThemeData.dark(),
-//      themeMode: ThemeMode.dark,
+      theme: ThemeData(
+       fontFamily: 'MyFont',
+        primaryColor: Colors.white
+      ),
     );
   }
 }
@@ -33,7 +35,7 @@ class _MySplashState extends State<MySplash> {
       body: SplashScreen(
         title: new Text(
           'Dev Portal',
-          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, fontFamily: 'MyFont'),
         ),
         seconds: 3,
         navigateAfterSeconds: new IntroScreenPage(),
@@ -42,7 +44,7 @@ class _MySplashState extends State<MySplash> {
         styleTextUnderTheLoader: new TextStyle(),
         photoSize: 100.0,
         loaderColor: Colors.black,
-        loadingText: Text('Community Portal for Developers'),
+        loadingText: Text('Community Portal for Developers', style: GoogleFonts.ptSansNarrow(),),
       ),
 
     ) ;

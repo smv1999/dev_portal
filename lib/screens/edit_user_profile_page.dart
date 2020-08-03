@@ -66,7 +66,9 @@ class _EditUserProfileState extends State<EditUserProfile> {
         title: Text(
           'Edit Profile',
           style: TextStyle(
+            fontFamily: 'MyFont',
             color: Colors.black,
+            fontWeight: FontWeight.bold
           ),
         ),
         centerTitle: true,
@@ -80,7 +82,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                 child: Icon(Icons.check_circle),
               )),
         ],
-        actionsIconTheme: IconThemeData(color: Colors.black),
+        actionsIconTheme: IconThemeData(color: Colors.lightBlue),
       ),
       body: Center(
         child: Container(
@@ -425,7 +427,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                     Center(
                       child: Text(
                         'Social Links',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont', fontSize: 18),
                       ),
                     ),
                     SizedBox(

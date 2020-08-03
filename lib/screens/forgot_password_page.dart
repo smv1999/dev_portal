@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:toast/toast.dart';
 import '../services/authentication.dart';
 
@@ -18,10 +19,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: Text(
               'Dev Portal',
               style: TextStyle(
+                fontFamily: 'MyFont',
                 color: Colors.black,
+                fontWeight: FontWeight.bold
               ),
             ),
             backgroundColor: Colors.white,
@@ -62,24 +66,26 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 borderSide:
                                     BorderSide(color: Colors.grey, width: 1.0),
                                 borderRadius: BorderRadius.circular(20.0)),
-                            hintText: 'Email'),
+                            hintText: 'Email', hintStyle: GoogleFonts.ptSansNarrow()),
                         textAlign: TextAlign.left,
                         keyboardType: TextInputType.emailAddress,
                         style: TextStyle(
                             fontSize: 16.0,
                             height: 1.4,
                             color: Colors.black,
-                            fontFamily: 'Montserrat')),
+                            fontFamily: 'MyFont')),
                     SizedBox(
                       height: 15.0,
                     ),
                     SizedBox(
                       width: double.infinity,
                       child: RaisedButton(
-                        child: Text('Send Password Reset Email'),
+                        child: Text('Send Password Reset Email',
+                        style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18)),
+                        ),
                         onPressed: _sendPasswordResetEmail,
-                        color: Colors.black,
-                        splashColor: Colors.grey,
+                        color: Colors.lightBlue,
+                        splashColor: Colors.lightBlueAccent,
                         textColor: Colors.white,
                         padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
                         elevation: 5.0,

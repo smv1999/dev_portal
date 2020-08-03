@@ -10,7 +10,9 @@ class PrivacyPolicyPage extends StatelessWidget {
         title: Text(
           'Privacy Policy',
           style: TextStyle(
-              color: Colors.black
+              color: Colors.black,
+              fontFamily: 'MyFont',
+              fontWeight: FontWeight.bold
           ),
         ),
         iconTheme: IconThemeData(color: Colors.black),

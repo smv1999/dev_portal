@@ -11,7 +11,9 @@ class AboutPage extends StatelessWidget {
         title: Text(
           'About Dev Portal',
           style: TextStyle(
-            color: Colors.black
+            fontFamily: 'MyFont',
+            color: Colors.black,
+            fontWeight: FontWeight.bold
           ),
         ),
         iconTheme: IconThemeData(color: Colors.black),

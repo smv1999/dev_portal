@@ -25,6 +25,8 @@ class _SettingsPageState extends State<SettingsPage> {
           'Settings',
           style: TextStyle(
             color: Colors.black,
+            fontFamily: 'MyFont',
+            fontWeight: FontWeight.bold
           ),
         ),
       ),
@@ -53,14 +55,18 @@ class _SettingsPageState extends State<SettingsPage> {
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                     onTap: _about,
-                    title: Text('About Dev Portal'), leading: Icon(Icons.info, color: Colors.black,),
-                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
+                    title: Text('About Dev Portal',
+                    style: GoogleFonts.ptSansNarrow(),
+                    ), leading: Icon(Icons.info, color: Colors.lightBlue,),
+                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue,),
                 ),
               ),
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
-                    title: Text('Switch to Dark Mode'),
+                    title: Text('Switch to Dark Mode',
+                    style: GoogleFonts.ptSansNarrow(),
+                    ),
                     trailing:  Switch(
                       value: isSwitched,
                       onChanged: (value){
@@ -69,58 +75,70 @@ class _SettingsPageState extends State<SettingsPage> {
                           print(isSwitched);
                         });
                       },
-                      activeTrackColor: Colors.black54,
+                      activeTrackColor: Colors.lightBlueAccent, // black54
                       activeColor: Colors.white70,
                     ),
-                  leading: Icon(Icons.compare_arrows, color: Colors.black),
+                  leading: Icon(Icons.compare_arrows, color: Colors.lightBlue),
                 ),
               ),
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                     onTap: _shareApp,
-                    title: Text('Share Our App'), leading: Icon(Icons.share, color: Colors.black,),
-                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
+                    title: Text('Share Our App',
+                      style: GoogleFonts.ptSansNarrow(),
+                    ), leading: Icon(Icons.share, color: Colors.lightBlue,),
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue,),
                 ),
               ),
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                     onTap: _rateOurApp,
-                    title: Text('Rate Our App'), leading: Icon(Icons.star, color: Colors.black,),
-                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
+                    title: Text('Rate Our App',
+                      style: GoogleFonts.ptSansNarrow(),
+                    ), leading: Icon(Icons.star, color: Colors.lightBlue,),
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue,),
                 ),
               ),
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                     onTap: _ourOtherApps,
-                    title: Text('Our Other Apps'), leading: Icon(Icons.apps, color: Colors.black,),
-                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
+                    title: Text('Our Other Apps',
+                      style: GoogleFonts.ptSansNarrow(),
+                    ), leading: Icon(Icons.apps, color: Colors.lightBlue,),
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue,),
                 ),
               ),
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                     onTap: privacyPolicy,
-                    title: Text('Privacy Policy'), leading: Icon(Icons.security, color: Colors.black,),
-                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
+                    title: Text('Privacy Policy',
+                      style: GoogleFonts.ptSansNarrow(),
+                    ), leading: Icon(Icons.security, color: Colors.lightBlue,),
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue,),
                 ),
               ),
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                     onTap: _sendEmail,
-                    title: Text('Contact Us'), leading: Icon(Icons.contact_mail, color: Colors.black,),
-                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
+                    title: Text('Contact Us',
+                      style: GoogleFonts.ptSansNarrow(),
+                    ), leading: Icon(Icons.contact_mail, color: Colors.lightBlue,),
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue,),
                 ),
               ),
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                     onTap: _reportIssue,
-                    title: Text('Report an issue'), leading: Icon(Icons.bug_report, color: Colors.black,),
-                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
+                    title: Text('Report an issue',
+                      style: GoogleFonts.ptSansNarrow(),
+                    ), leading: Icon(Icons.bug_report, color: Colors.lightBlue,),
+                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue,),
                 ),
               ),
           SizedBox(height: 15.0,),

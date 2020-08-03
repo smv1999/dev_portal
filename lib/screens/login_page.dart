@@ -4,6 +4,7 @@ import 'package:dev_portal/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:toast/toast.dart';
 
@@ -43,9 +44,10 @@ class MyLoginPageState extends State {
           return Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               title: Text(
                 'Dev Portal',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
               ),
               centerTitle: true,
               backgroundColor: Colors.white,
@@ -87,14 +89,14 @@ class MyLoginPageState extends State {
                                     BorderSide(color: Colors.grey, width: 1.0),
                                     borderRadius: BorderRadius.circular(20.0)
                                 ),
-                                hintText: 'Email'),
+                                hintText: 'Email',hintStyle: GoogleFonts.ptSansNarrow()),
                             textAlign: TextAlign.left,
                             keyboardType: TextInputType.emailAddress,
                             style: TextStyle(
                                 fontSize: 16.0,
                                 height: 1.4,
                                 color: Colors.black,
-                                fontFamily: 'Montserrat')
+                                fontFamily: 'MyFont')
                         ),
                         SizedBox(
                           height: 10.0,
@@ -120,6 +122,7 @@ class MyLoginPageState extends State {
                                 BorderSide(color: Colors.grey, width: 1.0),
                                 borderRadius: BorderRadius.circular(20.0)),
                             hintText: 'Password',
+                            hintStyle: GoogleFonts.ptSansNarrow(),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 // Based on passwordVisible state choose the icon
@@ -143,7 +146,7 @@ class MyLoginPageState extends State {
                               fontSize: 16.0,
                               height: 1.4,
                               color: Colors.black,
-                              fontFamily: 'Montserrat'),
+                              fontFamily: 'MyFont'),
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: _obscureText,
                         ),
@@ -153,10 +156,10 @@ class MyLoginPageState extends State {
                         SizedBox(
                           width: double.infinity,
                           child: RaisedButton(
-                            child: Text('LOGIN'),
+                            child: Text('LOGIN', style: TextStyle(fontSize: 18),),
                             onPressed: _computeResult,
-                            color: Colors.black,
-                            splashColor: Colors.grey,
+                            color: Colors.lightBlue,
+                            splashColor: Colors.lightBlueAccent,
                             textColor: Colors.white,
                             padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
                             elevation: 5.0,
@@ -176,6 +179,7 @@ class MyLoginPageState extends State {
                             child: Text(
                               "Forgot Password?",
                               style: TextStyle(
+                                fontSize: 18,
                                 color: Colors.lightBlue,
                               ),
                             ),
@@ -192,7 +196,9 @@ class MyLoginPageState extends State {
                             child: Text(
                               "Don't have an Account? Sign Up",
                               style: TextStyle(
+                                fontSize: 18,
                                 color: Colors.lightBlue,
+                                fontFamily: 'MyFont'
                               ),
                             ),
                           ),
@@ -215,7 +221,7 @@ class MyLoginPageState extends State {
           if ((await auth.isEmailVerified()) != null) {
             Toast.show("Login Successful!", context,
                 duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-            Navigator.of(context).pushNamed('/home');
+            Navigator.of(context).pushNamedAndRemoveUntil('/home',(r) => false);
           }
         }
       } else {

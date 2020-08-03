@@ -32,6 +32,7 @@ dependencies:
   google_fonts: 1.1.0
   flutter_tindercard: ^0.1.9
   highlighter_coachmark: 0.0.3
+  bottom_navy_bar: 5.5.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

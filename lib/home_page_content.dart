@@ -88,7 +88,7 @@ class _HomePageContentState extends State<HomePageContent> {
                   '• IT Project Manager\n • Application Developer\n • Computer Support Specialist\n • Business Analyst',
               style: GoogleFonts.ptSansNarrow(
                 textStyle:TextStyle(
-                    fontSize: 17
+                    fontSize: 18
                 ),
               )
               ),

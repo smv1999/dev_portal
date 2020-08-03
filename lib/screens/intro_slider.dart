@@ -42,7 +42,8 @@ class _IntroScreenState extends State<IntroScreen> {
         progressTextStyle: TextStyle(
             color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
         messageTextStyle: TextStyle(
-            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600));
+            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600)
+    );
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // Add Your Code here.
       await pr.show();
@@ -56,8 +57,12 @@ class _IntroScreenState extends State<IntroScreen> {
         description: "Best Coding Practices and tips for writing cleaner code",
         pathImage: "images/intro1.png",
         styleTitle: TextStyle(
-            color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),
-        styleDescription: TextStyle(color: Colors.black, fontSize: 18),
+            color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30,
+            fontFamily: 'MyFont'
+        ),
+        styleDescription: TextStyle(color: Colors.black, fontSize: 18,
+        fontFamily: 'MyFont'
+        ),
         backgroundColor: Colors.white,
       ),
     );
@@ -67,8 +72,12 @@ class _IntroScreenState extends State<IntroScreen> {
         description: "Best books for improving coding skills",
         pathImage: "images/intro2.png",
         styleTitle: TextStyle(
-            color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),
-        styleDescription: TextStyle(color: Colors.black, fontSize: 18),
+            color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30,
+            fontFamily: 'MyFont'
+        ),
+        styleDescription: TextStyle(color: Colors.black, fontSize: 18,
+        fontFamily: 'MyFont'
+        ),
         backgroundColor: Colors.white,
       ),
     );
@@ -78,8 +87,12 @@ class _IntroScreenState extends State<IntroScreen> {
         description: "Have fun and get inspired through Memes and Quotes",
         pathImage: "images/intro3.png",
         styleTitle: TextStyle(
-            color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),
-        styleDescription: TextStyle(color: Colors.black, fontSize: 18),
+            color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30,
+            fontFamily: 'MyFont'
+        ),
+        styleDescription: TextStyle(color: Colors.black, fontSize: 18,
+        fontFamily: 'MyFont'
+        ),
         backgroundColor: Colors.white,
       ),
     );
@@ -89,8 +102,12 @@ class _IntroScreenState extends State<IntroScreen> {
         description: "Best Learning resources and YouTube Channels",
         pathImage: "images/intro4.png",
         styleTitle: TextStyle(
-            color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),
-        styleDescription: TextStyle(color: Colors.black, fontSize: 18),
+            color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30,
+            fontFamily: 'MyFont'
+        ),
+        styleDescription: TextStyle(color: Colors.black, fontSize: 18,
+        fontFamily: 'MyFont'
+        ),
         backgroundColor: Colors.white,
       ),
     );
@@ -100,8 +117,12 @@ class _IntroScreenState extends State<IntroScreen> {
         description: "Make use of the discussion forums and learn together",
         pathImage: "images/intro5.png",
         styleTitle: TextStyle(
-            color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),
-        styleDescription: TextStyle(color: Colors.black, fontSize: 18),
+            color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30,
+            fontFamily: 'MyFont'
+        ),
+        styleDescription: TextStyle(color: Colors.black, fontSize: 18,
+        fontFamily: 'MyFont'
+        ),
         backgroundColor: Colors.white,
       ),
     );
@@ -110,7 +131,7 @@ class _IntroScreenState extends State<IntroScreen> {
   Future<void> onDonePress() async {
     // Do what you want
     final navigator = Navigator.of(context);
-    await navigator.pushNamed('/login');
+    await navigator.pushNamedAndRemoveUntil('/login', (r) => false);
     navigator.pop();
   }
 
@@ -120,7 +141,7 @@ class _IntroScreenState extends State<IntroScreen> {
 
     if (_seen) {
       pr.hide();
-      Navigator.of(context).pushNamed('/login');
+      Navigator.of(context).pushNamedAndRemoveUntil('/login', (r) => false);
     } else {
       pr.hide();
       await prefs.setBool('seen', true);
@@ -132,9 +153,9 @@ class _IntroScreenState extends State<IntroScreen> {
     return new IntroSlider(
       slides: this.slides,
       onDonePress: this.onDonePress,
-      styleNameSkipBtn: TextStyle(color: Colors.black),
-      styleNamePrevBtn: TextStyle(color: Colors.black),
-      styleNameDoneBtn: TextStyle(color: Colors.black),
+      styleNameSkipBtn: TextStyle(color: Colors.black, fontFamily: 'MyFont'),
+      styleNamePrevBtn: TextStyle(color: Colors.black, fontFamily: 'MyFont'),
+      styleNameDoneBtn: TextStyle(color: Colors.black, fontFamily: 'MyFont'),
     );
   }
 }
