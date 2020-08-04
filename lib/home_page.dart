@@ -3,6 +3,7 @@ import 'package:dev_portal/services/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'misc_helpers/Constants.dart';
 import 'pages/coding_tips.dart';
 import 'home_page_content.dart';
 import 'pages/books_page.dart';
@@ -71,42 +72,32 @@ class _MyHomePageState extends State<MyHomePage> {
           'Dev Portal',
           style: TextStyle(color: Colors.black, fontFamily: 'MyFont', fontWeight: FontWeight.bold),
         ),
-        leading: GestureDetector(
-          onTap: () {
-            // open dialog
-            showCustomDialog(context);
-          },
-          child: Icon(
-            Icons.menu,
-          ),
-        ),
+//        leading: GestureDetector(
+//          onTap: () {
+//            // open dialog
+//            showCustomDialog(context);
+//          },
+//          child: Icon(
+//            Icons.menu,
+//          ),
+//        ),
         centerTitle: true,
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.lightBlue),
+        iconTheme: IconThemeData(color: Colors.black),
         actions: <Widget>[
-          Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {
-                  // open alert dialog
-                  showAlertDialog(context);
-                },
-                child: Icon(
-                  Icons.power_settings_new,
-                  size: 26.0,),
-              )),
-          Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {
-                  // open settings activity
-                  Navigator.of(context).pushNamed('/settings');
-                },
-                child: Icon(Icons.settings,),
-              )),
-
+          PopupMenuButton(
+            onSelected: choiceAction,
+            itemBuilder: (BuildContext context){
+                return Constants.choices.map((String choice){
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice, style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16)),),
+                  );
+                }).toList();
+            },
+          )
         ],
-        actionsIconTheme: IconThemeData(color: Colors.lightBlue),
+        actionsIconTheme: IconThemeData(color: Colors.black),
       ),
     );
   }
@@ -175,61 +166,61 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  showCustomDialog(BuildContext context) {
-    Dialog errorDialog = Dialog(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0)
-      ),
-      child: Container(
-        height: 300.0,
-        width: 300.0,
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              Padding(
-                  padding: EdgeInsets.all(15.0),
-                  child: Image.asset('images/dev_animated.gif',
-                  height: 100,
-                  width: 100,
-                  )
-              ),
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: RaisedButton(
-                  child: Text('My Profile', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold)),),
-                  onPressed: _viewProfile,
-                  textColor: Colors.white,
-                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
-                  elevation: 5.0,
-                  color: Colors.lightBlue,
-                  splashColor: Colors.lightBlueAccent,
-                ),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: RaisedButton(
-                  child: Text('Explore Learning Resources', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold)),),
-                  onPressed: _exploreLearningResources,
-                  textColor: Colors.white,
-                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
-                  elevation: 5.0,
-                  color: Colors.lightBlue,
-                  splashColor: Colors.lightBlueAccent,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-    showDialog(
-        context: context, builder: (BuildContext context) => errorDialog);
-  }
+//  showCustomDialog(BuildContext context) {
+//    Dialog errorDialog = Dialog(
+//      shape: RoundedRectangleBorder(
+//          borderRadius: BorderRadius.circular(12.0)
+//      ),
+//      child: Container(
+//        height: 300.0,
+//        width: 300.0,
+//        child: Padding(
+//          padding: const EdgeInsets.all(15.0),
+//          child: ListView(
+//            shrinkWrap: true,
+//            children: [
+//              Padding(
+//                  padding: EdgeInsets.all(15.0),
+//                  child: Image.asset('images/dev_animated.gif',
+//                  height: 100,
+//                  width: 100,
+//                  )
+//              ),
+//              Padding(
+//                padding: EdgeInsets.all(10.0),
+//                child: RaisedButton(
+//                  child: Text('My Profile', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold)),),
+//                  onPressed: _viewProfile,
+//                  textColor: Colors.white,
+//                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+//                  elevation: 5.0,
+//                  color: Colors.lightBlue,
+//                  splashColor: Colors.lightBlueAccent,
+//                ),
+//              ),
+//              SizedBox(
+//                height: 5.0,
+//              ),
+//              Padding(
+//                padding: EdgeInsets.all(10.0),
+//                child: RaisedButton(
+//                  child: Text('Explore Learning Resources', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold)),),
+//                  onPressed: _exploreLearningResources,
+//                  textColor: Colors.white,
+//                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+//                  elevation: 5.0,
+//                  color: Colors.lightBlue,
+//                  splashColor: Colors.lightBlueAccent,
+//                ),
+//              ),
+//            ],
+//          ),
+//        ),
+//      ),
+//    );
+//    showDialog(
+//        context: context, builder: (BuildContext context) => errorDialog);
+//  }
 
   void _viewProfile() {
     // show profile
@@ -238,5 +229,16 @@ class _MyHomePageState extends State<MyHomePage> {
   void _exploreLearningResources()
   {
 
+  }
+  void choiceAction(String choice)
+  {
+    if(choice == Constants.Settings)
+      {
+        Navigator.of(context).pushNamed('/settings');
+      }
+    else if(choice == Constants.Logout)
+      {
+        showAlertDialog(context);
+      }
   }
 }

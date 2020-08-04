@@ -13,7 +13,6 @@ class _HomePageContentState extends State<HomePageContent> {
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(5.0),
-        child: Scrollbar(
         child:ListView(
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
@@ -143,7 +142,6 @@ class _HomePageContentState extends State<HomePageContent> {
               }).toList(),
             ),
           ],
-        ),
         ),
       ),
     );

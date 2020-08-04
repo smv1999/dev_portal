@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_html/style.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
   @override
@@ -16,6 +17,7 @@ class PrivacyPolicyPage extends StatelessWidget {
           ),
         ),
         iconTheme: IconThemeData(color: Colors.black),
+        centerTitle: true,
       ),
       body: Padding(
         padding: EdgeInsets.all(20.0),
@@ -135,6 +137,11 @@ class PrivacyPolicyPage extends StatelessWidget {
     </body>
     </html>
       """,
+         style: {
+           "body": Style(
+             fontSize: FontSize(17.0),
+           )
+         },
         )
           ],
         ),

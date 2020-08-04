@@ -17,6 +17,7 @@ class AboutPage extends StatelessWidget {
           ),
         ),
         iconTheme: IconThemeData(color: Colors.black),
+        centerTitle: true,
       ),
       body:Padding(
         padding: EdgeInsets.all(20.0),
