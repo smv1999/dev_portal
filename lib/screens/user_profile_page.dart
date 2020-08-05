@@ -92,7 +92,7 @@ class _UserProfileState extends State<UserProfile> {
                   child: Icon(Icons.edit),
                 )),
           ],
-          actionsIconTheme: IconThemeData(color: Colors.lightBlue),
+          actionsIconTheme: IconThemeData(color: Colors.black),
         ),
         body: Container(
           color: Colors.white,

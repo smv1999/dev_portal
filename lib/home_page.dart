@@ -240,5 +240,13 @@ class _MyHomePageState extends State<MyHomePage> {
       {
         showAlertDialog(context);
       }
+    else if(choice == Constants.Profile)
+      {
+        _viewProfile();
+      }
+    else if(choice == Constants.Resources)
+      {
+        _exploreLearningResources();
+      }
   }
 }

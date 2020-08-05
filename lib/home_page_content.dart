@@ -82,16 +82,93 @@ class _HomePageContentState extends State<HomePageContent> {
             ),
             Padding(
               padding: EdgeInsets.all(20.0),
-              child: Text(
-                  ' • Software Developer\n • Network Engineer\n • Systems Engineer\n • Java Developer\n • Software QA Engineer\n '
-                  '• IT Project Manager\n • Application Developer\n • Computer Support Specialist\n • Business Analyst',
-              style: GoogleFonts.ptSansNarrow(
-                textStyle:TextStyle(
-                    fontSize: 18
-                ),
-              )
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  RichText(
+                    text: TextSpan(
+                      text: '• ',
+                      style: TextStyle(color: Colors.lightBlue, fontSize: 19),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Software Developer',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18, color: Colors.black))),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: '• ',
+                      style: TextStyle(color: Colors.lightBlue, fontSize: 19),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Network Engineer',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18),color: Colors.black)),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: '• ',
+                      style: TextStyle(color: Colors.lightBlue, fontSize: 19),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Systems Engineer',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18),color: Colors.black)),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: '• ',
+                      style: TextStyle(color: Colors.lightBlue, fontSize: 19),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Java Developer',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18),color: Colors.black)),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: '• ',
+                      style: TextStyle(color: Colors.lightBlue, fontSize: 19),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Software QA Engineer',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18),color: Colors.black)),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: '• ',
+                      style: TextStyle(color: Colors.lightBlue, fontSize: 19),
+                      children: <TextSpan>[
+                        TextSpan(text: 'IT Project Manager',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18),color: Colors.black)),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: '• ',
+                      style: TextStyle(color: Colors.lightBlue, fontSize: 19),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Application Developer',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18),color: Colors.black)),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: '• ',
+                      style: TextStyle(color: Colors.lightBlue, fontSize: 19),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Computer Support Specialist',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18),color: Colors.black)),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: '• ',
+                      style: TextStyle(color: Colors.lightBlue, fontSize: 19),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Business Analyst',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18),color: Colors.black)),
+                      ],
+                    ),
+                  )
+                ],
               ),
-            ),
+      ),
             SizedBox(
               height: 10.0,
             ),

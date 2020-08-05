@@ -82,7 +82,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                 child: Icon(Icons.check_circle),
               )),
         ],
-        actionsIconTheme: IconThemeData(color: Colors.lightBlue),
+        actionsIconTheme: IconThemeData(color: Colors.black),
       ),
       body: Center(
         child: Container(
