@@ -6,7 +6,7 @@ import 'package:dev_portal/screens/login_page.dart';
 import 'package:dev_portal/screens/intro_slider.dart';
 import 'package:dev_portal/screens/edit_user_profile_page.dart';
 import 'package:dev_portal/screens/privacy_policy_page.dart';
-import 'package:dev_portal/screens/main.dart';
+import 'file:///C:/Users/smv1999/dev_portal/lib/main.dart';
 import 'package:dev_portal/screens/user_profile_page.dart';
 import 'package:dev_portal/screens/sign_up_page.dart';
 import 'package:flutter/cupertino.dart';

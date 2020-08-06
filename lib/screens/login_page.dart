@@ -218,7 +218,7 @@ class MyLoginPageState extends State {
     if (_formKey.currentState.validate()) {
       if ((await auth.signIn(email, password)) != null) {
         if ((await auth.getCurrentUser()) != null) {
-          if ((await auth.isEmailVerified()) != null) {
+          if ((await auth.isEmailVerified())) {
             Toast.show("Login Successful!", context,
                 duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
             Navigator.of(context).pushNamedAndRemoveUntil('/home',(r) => false);

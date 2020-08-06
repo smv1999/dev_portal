@@ -68,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           'Dev Portal',
           style: TextStyle(color: Colors.black, fontFamily: 'MyFont', fontWeight: FontWeight.bold),
