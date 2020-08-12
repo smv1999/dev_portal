@@ -1,6 +1,3 @@
-import 'dart:collection';
-import 'dart:io';
-
 import 'package:dev_portal/services/ProgressBar.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +5,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UserProfile extends StatefulWidget {
@@ -75,10 +71,9 @@ class _UserProfileState extends State<UserProfile> {
           title: Text(
             'Profile',
             style: TextStyle(
-              color: Colors.black,
-              fontFamily: 'MyFont',
-              fontWeight: FontWeight.bold
-            ),
+                color: Colors.black,
+                fontFamily: 'MyFont',
+                fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
           actions: <Widget>[
@@ -126,76 +121,98 @@ class _UserProfileState extends State<UserProfile> {
                 ),
                 Text(
                   'First Name',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(firstName ?? 'First Name',style: GoogleFonts.ptSansNarrow(),),
+                Text(
+                  firstName ?? 'First Name',
+                  style: GoogleFonts.ptSansNarrow(),
+                ),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Last Name',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(lastName ?? 'Last Name', style: GoogleFonts.ptSansNarrow(),),
+                Text(
+                  lastName ?? 'Last Name',
+                  style: GoogleFonts.ptSansNarrow(),
+                ),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Date of birth',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(dob ?? 'DOB', style: GoogleFonts.ptSansNarrow(),),
+                Text(
+                  dob ?? 'DOB',
+                  style: GoogleFonts.ptSansNarrow(),
+                ),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Summary',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(summary ?? 'Summary', style: GoogleFonts.ptSansNarrow(),),
+                Text(
+                  summary ?? 'Summary',
+                  style: GoogleFonts.ptSansNarrow(),
+                ),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Email',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(email ?? 'Email', style: GoogleFonts.ptSansNarrow(),),
+                Text(
+                  email ?? 'Email',
+                  style: GoogleFonts.ptSansNarrow(),
+                ),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Username',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(username ?? 'Username', style: GoogleFonts.ptSansNarrow(),),
+                Text(
+                  username ?? 'Username',
+                  style: GoogleFonts.ptSansNarrow(),
+                ),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Website',
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'MyFont'
-                  ),
+                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
@@ -214,43 +231,53 @@ class _UserProfileState extends State<UserProfile> {
                 ),
                 Text(
                   'Phone Number',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(phoneNumber ?? 'Phone Number', style: GoogleFonts.ptSansNarrow(),),
+                Text(
+                  phoneNumber ?? 'Phone Number',
+                  style: GoogleFonts.ptSansNarrow(),
+                ),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Employment Title',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(employmentTitle ?? 'Employment Title', style: GoogleFonts.ptSansNarrow(),),
+                Text(
+                  employmentTitle ?? 'Employment Title',
+                  style: GoogleFonts.ptSansNarrow(),
+                ),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'Skills/Languages',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
                 ),
-                Text(skills ?? 'Skills', style: GoogleFonts.ptSansNarrow(),),
+                Text(
+                  skills ?? 'Skills',
+                  style: GoogleFonts.ptSansNarrow(),
+                ),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   'YouTube Channel URL',
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'MyFont'
-                  ),
+                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
                 ),
                 SizedBox(
                   height: 6.0,
@@ -366,27 +393,33 @@ class _UserProfileState extends State<UserProfile> {
     final FirebaseUser user = await auth.getCurrentUser();
     final userId = user.uid;
     StorageReference reference = _storage.ref().child(userId).child("Images/");
-    myRef = FirebaseDatabase.instance.reference().child('Users').child(userId);
+    myRef =
+        FirebaseDatabase.instance.reference().child('Profile').child(userId);
     myRef.once().then((DataSnapshot dataSnapshot) {
       setState(() {
-        _profile_image = dataSnapshot.value["imagepath"];
-        firstName = dataSnapshot.value["firstname"];
-        lastName = dataSnapshot.value["lastname"];
-        dob = dataSnapshot.value["dob"];
-        summary = dataSnapshot.value["summary"];
-        email = dataSnapshot.value["email"];
-        username = dataSnapshot.value["username"];
-        website = dataSnapshot.value["website"];
-        phoneNumber = dataSnapshot.value["phonenumber"];
-        employmentTitle = dataSnapshot.value["employmenttitle"];
-        skills = dataSnapshot.value["skills"];
-        youtube = dataSnapshot.value["youtube"];
-        stackoverflow = dataSnapshot.value["stackoverflow"];
-        linkedin = dataSnapshot.value["linkedin"];
-        medium = dataSnapshot.value["medium"];
-        github = dataSnapshot.value["github"];
-
-        hideSendingProgressBar();
+        if (dataSnapshot.value != null) {
+          _profile_image = dataSnapshot.value["imagepath"];
+          firstName = dataSnapshot.value["firstname"];
+          lastName = dataSnapshot.value["lastname"];
+          dob = dataSnapshot.value["dob"];
+          summary = dataSnapshot.value["summary"];
+          email = dataSnapshot.value["email"];
+          username = dataSnapshot.value["username"];
+          website = dataSnapshot.value["website"];
+          phoneNumber = dataSnapshot.value["phonenumber"];
+          employmentTitle = dataSnapshot.value["employmenttitle"];
+          skills = dataSnapshot.value["skills"];
+          youtube = dataSnapshot.value["youtube"];
+          stackoverflow = dataSnapshot.value["stackoverflow"];
+          linkedin = dataSnapshot.value["linkedin"];
+          medium = dataSnapshot.value["medium"];
+          github = dataSnapshot.value["github"];
+          hideSendingProgressBar();
+        } else {
+          setState(() {
+            hideSendingProgressBar();
+          });
+        }
       });
     });
   }

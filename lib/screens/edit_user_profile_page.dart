@@ -20,8 +20,9 @@ class _EditUserProfileState extends State<EditUserProfile> {
   File _image;
   final picker = ImagePicker();
   FirebaseStorage _storage = FirebaseStorage.instance;
-  DatabaseReference myRef;
+  DatabaseReference myRef, userNameRef;
   String imagePath;
+  bool imageFlag = false;
 
   Future<void> getImage() async {
     final FirebaseUser user = await auth.getCurrentUser();
@@ -40,12 +41,11 @@ class _EditUserProfileState extends State<EditUserProfile> {
     Toast.show("Profile Photo Uploaded Successfully!", context,
         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     imagePath = await taskSnapshot.ref.getDownloadURL();
-    Toast.show(imagePath, context,
-        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+    imageFlag = true;
   }
   DateTime selectedDate = DateTime.now();
 
-  Future<void> _selectDate(BuildContext context) async {
+  Future<void> selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
@@ -435,9 +435,6 @@ class _EditUserProfileState extends State<EditUserProfile> {
                     ),
                     TextFormField(
                         maxLines: 1,
-                        validator: (val) => val.isEmpty
-                            ? 'Enter your YouTube Channel URL'
-                            : null,
                         onChanged: (text) {
                           setState(() {
                             youtube = text;
@@ -466,9 +463,6 @@ class _EditUserProfileState extends State<EditUserProfile> {
                     ),
                     TextFormField(
                         maxLines: 1,
-                        validator: (val) => val.isEmpty
-                            ? 'Enter your Stack Overflow profile URL'
-                            : null,
                         onChanged: (text) {
                           setState(() {
                             stackoverflow = text;
@@ -497,9 +491,6 @@ class _EditUserProfileState extends State<EditUserProfile> {
                     ),
                     TextFormField(
                         maxLines: 1,
-                        validator: (val) => val.isEmpty
-                            ? 'Enter your LinkedIn profile URL'
-                            : null,
                         onChanged: (text) {
                           setState(() {
                             linkedin = text;
@@ -528,9 +519,6 @@ class _EditUserProfileState extends State<EditUserProfile> {
                     ),
                     TextFormField(
                         maxLines: 1,
-                        validator: (val) => val.isEmpty
-                            ? 'Enter your Medium profile URL'
-                            : null,
                         onChanged: (text) {
                           setState(() {
                             medium = text;
@@ -559,9 +547,6 @@ class _EditUserProfileState extends State<EditUserProfile> {
                     ),
                     TextFormField(
                         maxLines: 1,
-                        validator: (val) => val.isEmpty
-                            ? 'Enter your GitHub profile URL'
-                            : null,
                         onChanged: (text) {
                           setState(() {
                             github = text;
@@ -599,28 +584,43 @@ class _EditUserProfileState extends State<EditUserProfile> {
     if (_formKey.currentState.validate()) {
       final FirebaseUser user = await auth.getCurrentUser();
       final userId = user.uid;
-      myRef = FirebaseDatabase.instance.reference().child('Users').child(userId);
-      HashMap<String,String> profileMap = new HashMap();
-      profileMap.putIfAbsent('firstname', () => firstName);
-      profileMap.putIfAbsent('lastname', () => lastName);
-      profileMap.putIfAbsent('dob', () => dob);
-      profileMap.putIfAbsent('summary', () => summary);
-      profileMap.putIfAbsent('email', () => email);
-      profileMap.putIfAbsent('username', () => username);
-      profileMap.putIfAbsent('website', () => website);
-      profileMap.putIfAbsent('phonenumber', () => phoneNumber);
-      profileMap.putIfAbsent('employmenttitle', () => employmentTitle);
-      profileMap.putIfAbsent('skills', () => skills);
-      profileMap.putIfAbsent('imagepath', () => imagePath);
-      profileMap.putIfAbsent('youtube', () => youtube);
-      profileMap.putIfAbsent('stackoverflow', () => stackoverflow);
-      profileMap.putIfAbsent('linkedin', () => linkedin);
-      profileMap.putIfAbsent('medium', () => medium);
-      profileMap.putIfAbsent('github', () => github);
-      myRef.set(profileMap);
-      Toast.show("Submitted Successfully!", context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-      Navigator.of(context).pushNamed('/profile');
+      myRef = FirebaseDatabase.instance.reference().child('Profile').child(userId);
+      userNameRef = FirebaseDatabase.instance.reference().child('Usernames').child(userId);
+       
+      if(imageFlag) 
+      {
+        HashMap<String,String> profileMap = new HashMap();
+        profileMap.putIfAbsent('firstname', () => firstName);
+        profileMap.putIfAbsent('lastname', () => lastName);
+        profileMap.putIfAbsent('dob', () => dob);
+        profileMap.putIfAbsent('summary', () => summary);
+        profileMap.putIfAbsent('email', () => email);
+        profileMap.putIfAbsent('username', () => username);
+        profileMap.putIfAbsent('website', () => website);
+        profileMap.putIfAbsent('phonenumber', () => phoneNumber);
+        profileMap.putIfAbsent('employmenttitle', () => employmentTitle);
+        profileMap.putIfAbsent('skills', () => skills);
+        profileMap.putIfAbsent('imagepath', () => imagePath);
+        profileMap.putIfAbsent('youtube', () => youtube);
+        profileMap.putIfAbsent('stackoverflow', () => stackoverflow);
+        profileMap.putIfAbsent('linkedin', () => linkedin);
+        profileMap.putIfAbsent('medium', () => medium);
+        profileMap.putIfAbsent('github', () => github);
+        myRef.set(profileMap);
+
+        HashMap<String,String> userMap = new HashMap();
+        userMap.putIfAbsent('username', ()=> username);
+        userNameRef.set(userMap);
+        
+        Toast.show("Submitted Successfully!", context,
+            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+        Navigator.of(context).pushReplacementNamed('/profile'); // change this
+      }
+      else{
+         Toast.show("Please select your profile image", context,
+            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      }
+      
     }
   }
 }
