@@ -52,12 +52,10 @@ class _UserProfileState extends State<UserProfile> {
     super.dispose();
   }
 
-  @override
   void showSendingProgressBar() {
     _sendingMsgProgressBar.show(context);
   }
 
-  @override
   void hideSendingProgressBar() {
     _sendingMsgProgressBar.hide();
   }

@@ -22,7 +22,7 @@ class ProgressBar {
               Stack(
                 children: <Widget>[
                   Container(
-                    color: Colors.white70.withOpacity(0.5),
+                    color: Colors.white70.withOpacity(0.4),
                   ),
                   Center(
                     child: CircularProgressIndicator(),

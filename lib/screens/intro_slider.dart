@@ -1,12 +1,9 @@
+import 'package:dev_portal/services/ProgressBar.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
-import 'package:progress_dialog/progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-//void main() {
-//  runApp(MainApplication());
-//}
 
 class IntroScreenPage extends StatelessWidget {
   @override
@@ -23,30 +20,15 @@ class IntroScreen extends StatefulWidget {
 class _IntroScreenState extends State<IntroScreen> {
 //  with AfterLayoutMixin<IntroScreen>
   List<Slide> slides = new List();
-  ProgressDialog pr;
+  ProgressBar _sendingMsgProgressBar;
 
   @override
   void initState() {
     super.initState();
-    pr = ProgressDialog(context,
-        type: ProgressDialogType.Normal, isDismissible: false, showLogs: true);
-    pr.style(
-        message: 'Syncing Please Wait...',
-        borderRadius: 10.0,
-        backgroundColor: Colors.white,
-        progressWidget: CircularProgressIndicator(),
-        elevation: 10.0,
-        insetAnimCurve: Curves.easeInOut,
-        progress: 0.0,
-        maxProgress: 100.0,
-        progressTextStyle: TextStyle(
-            color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
-        messageTextStyle: TextStyle(
-            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600)
-    );
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
+    _sendingMsgProgressBar = ProgressBar();
+    WidgetsBinding.instance.addPostFrameCallback((_) async{
       // Add Your Code here.
-      await pr.show();
+      await showSendingProgressBar();
       setState(() {
         checkFirstSeen();
       });
@@ -127,6 +109,19 @@ class _IntroScreenState extends State<IntroScreen> {
       ),
     );
   }
+  @override
+  void dispose() {
+    _sendingMsgProgressBar.hide();
+    super.dispose();
+  }
+
+  Future<void> showSendingProgressBar() async{
+    _sendingMsgProgressBar.show(context);
+  }
+
+  void hideSendingProgressBar() {
+    _sendingMsgProgressBar.hide();
+  }
 
   Future<void> onDonePress() async {
     // Do what you want
@@ -140,10 +135,10 @@ class _IntroScreenState extends State<IntroScreen> {
     bool _seen = (prefs.getBool('seen') ?? false);
 
     if (_seen) {
-      pr.hide();
+            hideSendingProgressBar();
       Navigator.of(context).pushNamedAndRemoveUntil('/login', (r) => false);
     } else {
-      pr.hide();
+            hideSendingProgressBar();
       await prefs.setBool('seen', true);
     }
   }
