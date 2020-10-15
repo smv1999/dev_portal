@@ -8,7 +8,7 @@ import 'pages/coding_tips.dart';
 import 'home_page_content.dart';
 import 'pages/books_page.dart';
 import 'pages/forum_page.dart';
-import 'pages/fun_area_page.dart';
+import 'pages/posts_page.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -23,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
     CodingTipsPage(),
     BooksPage(),
     ForumPage(),
-    FunAreaPage()
+    PostsPage()
   ];
   @override
   Widget build(BuildContext context) {
@@ -39,32 +39,32 @@ class _MyHomePageState extends State<MyHomePage> {
         onItemSelected: onTabTapped, // new
         items: [
           BottomNavyBarItem(
-            activeColor: Color.fromRGBO(0, 168, 255, 1.0),
-            inactiveColor: Color.fromRGBO(0, 168, 255, 1.0),
+            activeColor: Colors.black,
+            inactiveColor: Colors.grey,
             icon: new Icon(Icons.home),
             title: new Text('Home', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),),
           ),
           BottomNavyBarItem(
-            activeColor: Colors.lightBlue,
-            inactiveColor: Colors.lightBlue,
+            activeColor: Colors.black,
+            inactiveColor: Colors.grey,
             icon: new Icon(Icons.lightbulb_outline),
             title: new Text('Coding Tips', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),),
           ),
           BottomNavyBarItem(
-              activeColor: Colors.lightBlue,
-              inactiveColor: Colors.lightBlue,
+              activeColor: Colors.black,
+              inactiveColor: Colors.grey,
               icon: Icon(Icons.library_books),
               title: Text('Books', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),)),
           BottomNavyBarItem(
-              activeColor: Colors.lightBlue,
-              inactiveColor: Colors.lightBlue,
+              activeColor: Colors.black,
+              inactiveColor: Colors.grey,
               icon: Icon(Icons.chat),
               title: Text('Forum', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),)),
           BottomNavyBarItem(
-              activeColor: Colors.lightBlue,
-              inactiveColor: Colors.lightBlue,
-              icon: Icon(Icons.image),
-              title: Text('Fun Area', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),))
+              activeColor: Colors.black,
+              inactiveColor: Colors.grey,
+              icon: Icon(Icons.post_add),
+              title: Text('Feed', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),))
         ],
       ),
       appBar: AppBar(

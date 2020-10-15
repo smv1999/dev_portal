@@ -1,6 +1,8 @@
 import 'package:dev_portal/home_page.dart';
+import 'package:dev_portal/pages/posts_page.dart';
 import 'package:dev_portal/screens/about_page.dart';
 import 'package:dev_portal/screens/forgot_password_page.dart';
+import 'package:dev_portal/screens/new_post.dart';
 import 'package:dev_portal/screens/settings_page.dart';
 import 'package:dev_portal/screens/login_page.dart';
 import 'package:dev_portal/screens/intro_slider.dart';
@@ -51,6 +53,14 @@ class RouteGenerator {
       case '/policy':
         return MaterialPageRoute(
             builder: (_) => PrivacyPolicyPage()
+        );
+      case '/newpost':
+        return MaterialPageRoute(
+            builder: (_) => NewPost()
+        );
+      case '/posts':
+        return MaterialPageRoute(
+            builder: (_) => PostsPage()
         );
       default:
       // If there is no such named route in the switch statement, e.g. /third

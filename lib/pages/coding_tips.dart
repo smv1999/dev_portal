@@ -272,7 +272,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
             Card(
               margin: const EdgeInsets.all(8.0),
               child: ListTile(
-                onTap: () => openArticle(8),
+                onTap: () => openArticle(9),
                 title: Text(
                   'Projects Vs Competitive Programming',
                   style: GoogleFonts.ptSansNarrow(),
@@ -289,7 +289,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
             Card(
               margin: const EdgeInsets.all(8.0),
               child: ListTile(
-                onTap: () => openArticle(8),
+                onTap: () => openArticle(10),
                 title: Text(
                   'All you need to know about Pointers - Part-1',
                   style: GoogleFonts.ptSansNarrow(),
@@ -306,9 +306,9 @@ class _CodingTipsPageState extends State<CodingTipsPage>
             Card(
               margin: const EdgeInsets.all(8.0),
               child: ListTile(
-                onTap: () => openArticle(8),
+                onTap: () => openArticle(11),
                 title: Text(
-                  'All you need to know about Pointers - Part-1',
+                  'All you need to know about Pointers - Part-2',
                   style: GoogleFonts.ptSansNarrow(),
                 ),
                 leading: Container(width: 80.0,

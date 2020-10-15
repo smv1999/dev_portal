@@ -57,8 +57,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     onTap: _about,
                     title: Text('About Dev Portal',
                     style: GoogleFonts.ptSansNarrow(),
-                    ), leading: Icon(Icons.info, color: Colors.lightBlue,),
-                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue,),
+                    ), leading: Icon(Icons.info, color: Colors.black,),
+                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
                 ),
               ),
               Card(
@@ -75,10 +75,10 @@ class _SettingsPageState extends State<SettingsPage> {
                           print(isSwitched);
                         });
                       },
-                      activeTrackColor: Colors.lightBlueAccent, // black54
-                      activeColor: Colors.white70,
+                      activeTrackColor: Colors.black, // black54
+                      activeColor: Colors.grey,
                     ),
-                  leading: Icon(Icons.compare_arrows, color: Colors.lightBlue),
+                  leading: Icon(Icons.compare_arrows, color: Colors.black),
                 ),
               ),
               Card(
@@ -87,8 +87,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     onTap: _shareApp,
                     title: Text('Share Our App',
                       style: GoogleFonts.ptSansNarrow(),
-                    ), leading: Icon(Icons.share, color: Colors.lightBlue,),
-                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue,),
+                    ), leading: Icon(Icons.share, color: Colors.black,),
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
                 ),
               ),
               Card(
@@ -97,8 +97,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     onTap: _rateOurApp,
                     title: Text('Rate Our App',
                       style: GoogleFonts.ptSansNarrow(),
-                    ), leading: Icon(Icons.star, color: Colors.lightBlue,),
-                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue,),
+                    ), leading: Icon(Icons.star, color: Colors.black,),
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
                 ),
               ),
               Card(
@@ -107,8 +107,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     onTap: _ourOtherApps,
                     title: Text('Our Other Apps',
                       style: GoogleFonts.ptSansNarrow(),
-                    ), leading: Icon(Icons.apps, color: Colors.lightBlue,),
-                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue,),
+                    ), leading: Icon(Icons.apps, color: Colors.black,),
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
                 ),
               ),
               Card(
@@ -117,8 +117,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     onTap: privacyPolicy,
                     title: Text('Privacy Policy',
                       style: GoogleFonts.ptSansNarrow(),
-                    ), leading: Icon(Icons.security, color: Colors.lightBlue,),
-                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue,),
+                    ), leading: Icon(Icons.security, color: Colors.black,),
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
                 ),
               ),
               Card(
@@ -127,8 +127,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     onTap: _sendEmail,
                     title: Text('Contact Us',
                       style: GoogleFonts.ptSansNarrow(),
-                    ), leading: Icon(Icons.contact_mail, color: Colors.lightBlue,),
-                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue,),
+                    ), leading: Icon(Icons.contact_mail, color: Colors.black,),
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
                 ),
               ),
               Card(
@@ -137,8 +137,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     onTap: _reportIssue,
                     title: Text('Report an issue',
                       style: GoogleFonts.ptSansNarrow(),
-                    ), leading: Icon(Icons.bug_report, color: Colors.lightBlue,),
-                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.lightBlue,),
+                    ), leading: Icon(Icons.bug_report, color: Colors.black,),
+                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
                 ),
               ),
           SizedBox(height: 15.0,),
