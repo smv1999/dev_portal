@@ -129,9 +129,7 @@ class MyLoginPageState extends State {
                                 _obscureText
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: Theme
-                                    .of(context)
-                                    .primaryColorDark,
+                                color: Colors.black,
                               ),
                               onPressed: () {
                                 // Update the state i.e. toogle the state of passwordVisible variable
@@ -158,8 +156,8 @@ class MyLoginPageState extends State {
                           child: RaisedButton(
                             child: Text('LOGIN', style: TextStyle(fontSize: 18),),
                             onPressed: _computeResult,
-                            color: Colors.lightBlue,
-                            splashColor: Colors.lightBlueAccent,
+                            color: Colors.black,
+                            splashColor: Colors.grey,
                             textColor: Colors.white,
                             padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
                             elevation: 5.0,
@@ -180,7 +178,7 @@ class MyLoginPageState extends State {
                               "Forgot Password?",
                               style: TextStyle(
                                 fontSize: 18,
-                                color: Colors.lightBlue,
+                                color: Colors.black54,
                               ),
                             ),
                           ),
@@ -197,7 +195,7 @@ class MyLoginPageState extends State {
                               "Don't have an Account? Sign Up",
                               style: TextStyle(
                                 fontSize: 18,
-                                color: Colors.lightBlue,
+                                color: Colors.black54,
                                 fontFamily: 'MyFont'
                               ),
                             ),
