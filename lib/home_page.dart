@@ -227,10 +227,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // show profile
     Navigator.of(context).pushNamed('/profile');
   }
-  void _exploreLearningResources()
-  {
 
-  }
   void choiceAction(String choice)
   {
     if(choice == Constants.Settings)
@@ -244,10 +241,6 @@ class _MyHomePageState extends State<MyHomePage> {
     else if(choice == Constants.Profile)
       {
         _viewProfile();
-      }
-    else if(choice == Constants.Resources)
-      {
-        _exploreLearningResources();
       }
   }
 }

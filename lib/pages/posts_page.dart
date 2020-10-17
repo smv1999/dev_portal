@@ -34,7 +34,7 @@ class _PostsPageState extends State<PostsPage> {
         foregroundColor: Colors.black,
         onPressed: () {
           // Respond to button press
-          Navigator.of(context).pushReplacementNamed('/newpost');
+          Navigator.of(context).pushNamed('/newpost');
         },
         child: Icon(Icons.add),
       ),

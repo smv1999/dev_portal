@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 class HomePageContent extends StatefulWidget {
   @override
@@ -9,11 +10,27 @@ class HomePageContent extends StatefulWidget {
 
 class _HomePageContentState extends State<HomePageContent> {
   @override
+  Map<String, double> dataMap = {
+    "Python": 40,
+    "Java": 25,
+    "JavaScript": 15,
+    "C#": 10,
+    "PHP": 5,
+    "C/C++": 5
+  };
+  List<Color> colorList = [
+    Colors.red,
+    Colors.blue,
+    Colors.green,
+    Colors.purple,
+    Colors.orange,
+    Colors.yellow
+  ];
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(5.0),
-        child:ListView(
+        child: ListView(
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           children: [
@@ -90,7 +107,11 @@ class _HomePageContentState extends State<HomePageContent> {
                       text: '• ',
                       style: TextStyle(color: Colors.lightBlue, fontSize: 19),
                       children: <TextSpan>[
-                        TextSpan(text: 'Software Developer',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18, color: Colors.black))),
+                        TextSpan(
+                            text: 'Software Developer',
+                            style: GoogleFonts.ptSansNarrow(
+                                textStyle: TextStyle(
+                                    fontSize: 18, color: Colors.black))),
                       ],
                     ),
                   ),
@@ -99,7 +120,11 @@ class _HomePageContentState extends State<HomePageContent> {
                       text: '• ',
                       style: TextStyle(color: Colors.lightBlue, fontSize: 19),
                       children: <TextSpan>[
-                        TextSpan(text: 'Network Engineer',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18),color: Colors.black)),
+                        TextSpan(
+                            text: 'Network Engineer',
+                            style: GoogleFonts.ptSansNarrow(
+                                textStyle: TextStyle(fontSize: 18),
+                                color: Colors.black)),
                       ],
                     ),
                   ),
@@ -108,7 +133,11 @@ class _HomePageContentState extends State<HomePageContent> {
                       text: '• ',
                       style: TextStyle(color: Colors.lightBlue, fontSize: 19),
                       children: <TextSpan>[
-                        TextSpan(text: 'Systems Engineer',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18),color: Colors.black)),
+                        TextSpan(
+                            text: 'Systems Engineer',
+                            style: GoogleFonts.ptSansNarrow(
+                                textStyle: TextStyle(fontSize: 18),
+                                color: Colors.black)),
                       ],
                     ),
                   ),
@@ -117,7 +146,11 @@ class _HomePageContentState extends State<HomePageContent> {
                       text: '• ',
                       style: TextStyle(color: Colors.lightBlue, fontSize: 19),
                       children: <TextSpan>[
-                        TextSpan(text: 'Java Developer',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18),color: Colors.black)),
+                        TextSpan(
+                            text: 'Java Developer',
+                            style: GoogleFonts.ptSansNarrow(
+                                textStyle: TextStyle(fontSize: 18),
+                                color: Colors.black)),
                       ],
                     ),
                   ),
@@ -126,7 +159,11 @@ class _HomePageContentState extends State<HomePageContent> {
                       text: '• ',
                       style: TextStyle(color: Colors.lightBlue, fontSize: 19),
                       children: <TextSpan>[
-                        TextSpan(text: 'Software QA Engineer',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18),color: Colors.black)),
+                        TextSpan(
+                            text: 'Software QA Engineer',
+                            style: GoogleFonts.ptSansNarrow(
+                                textStyle: TextStyle(fontSize: 18),
+                                color: Colors.black)),
                       ],
                     ),
                   ),
@@ -135,7 +172,11 @@ class _HomePageContentState extends State<HomePageContent> {
                       text: '• ',
                       style: TextStyle(color: Colors.lightBlue, fontSize: 19),
                       children: <TextSpan>[
-                        TextSpan(text: 'IT Project Manager',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18),color: Colors.black)),
+                        TextSpan(
+                            text: 'IT Project Manager',
+                            style: GoogleFonts.ptSansNarrow(
+                                textStyle: TextStyle(fontSize: 18),
+                                color: Colors.black)),
                       ],
                     ),
                   ),
@@ -144,7 +185,11 @@ class _HomePageContentState extends State<HomePageContent> {
                       text: '• ',
                       style: TextStyle(color: Colors.lightBlue, fontSize: 19),
                       children: <TextSpan>[
-                        TextSpan(text: 'Application Developer',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18),color: Colors.black)),
+                        TextSpan(
+                            text: 'Application Developer',
+                            style: GoogleFonts.ptSansNarrow(
+                                textStyle: TextStyle(fontSize: 18),
+                                color: Colors.black)),
                       ],
                     ),
                   ),
@@ -153,7 +198,11 @@ class _HomePageContentState extends State<HomePageContent> {
                       text: '• ',
                       style: TextStyle(color: Colors.lightBlue, fontSize: 19),
                       children: <TextSpan>[
-                        TextSpan(text: 'Computer Support Specialist',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18),color: Colors.black)),
+                        TextSpan(
+                            text: 'Computer Support Specialist',
+                            style: GoogleFonts.ptSansNarrow(
+                                textStyle: TextStyle(fontSize: 18),
+                                color: Colors.black)),
                       ],
                     ),
                   ),
@@ -162,61 +211,74 @@ class _HomePageContentState extends State<HomePageContent> {
                       text: '• ',
                       style: TextStyle(color: Colors.lightBlue, fontSize: 19),
                       children: <TextSpan>[
-                        TextSpan(text: 'Business Analyst',style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18),color: Colors.black)),
+                        TextSpan(
+                            text: 'Business Analyst',
+                            style: GoogleFonts.ptSansNarrow(
+                                textStyle: TextStyle(fontSize: 18),
+                                color: Colors.black)),
                       ],
                     ),
                   )
                 ],
               ),
-      ),
+            ),
             SizedBox(
               height: 10.0,
             ),
-            Container(
-              height: 45,
-              width: 80,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("images/top_programming_languages.png"),
-                ),
-              ),
+            Text(
+              'Popularity of Programming Languages',
+              style: GoogleFonts.ptSansNarrow(
+                  textStyle:
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              textAlign: TextAlign.center,
             ),
             SizedBox(
-              height: 15.0,
+              height: 8,
             ),
-            CarouselSlider(
-              options: CarouselOptions(
-                height: 190.0,
-                aspectRatio: 16 / 9,
-                viewportFraction: 0.8,
-                initialPage: 0,
-                enableInfiniteScroll: true,
-                reverse: false,
-                autoPlay: true,
-                autoPlayInterval: Duration(seconds: 2),
-                autoPlayAnimationDuration: Duration(milliseconds: 800),
-                autoPlayCurve: Curves.fastOutSlowIn,
-                scrollDirection: Axis.horizontal,
+            PieChart(
+              dataMap: dataMap,
+              animationDuration: Duration(milliseconds: 800),
+              chartLegendSpacing: 45,
+              chartRadius: MediaQuery.of(context).size.width / 3.2,
+              colorList: colorList,
+              initialAngleInDegree: 0,
+              legendOptions: LegendOptions(
+                showLegendsInRow: false,
+                legendPosition: LegendPosition.right,
+                showLegends: true,
+                legendShape: BoxShape.circle,
+                legendTextStyle: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              items: [
-                'images/python.png',
-                'images/js.png',
-                'images/java.png',
-                'images/cplusplus.png',
-                'images/csharp.png',
-              ].map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.grey)),
-                        child: Image.asset(i));
-                  },
-                );
-              }).toList(),
+              chartValuesOptions: ChartValuesOptions(
+                showChartValueBackground: false,
+                showChartValues: true,
+                showChartValuesInPercentage: true,
+                showChartValuesOutside: true,
+              ),
+            ),
+            SizedBox(height: 10,),
+            SizedBox(
+              width: double.infinity,
+              child: RaisedButton(
+                child: Text(
+                  'Placement / Interview Preparation Module',
+                  style: GoogleFonts.ptSansNarrow(
+                      textStyle: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+                onPressed: () => {
+                  //
+                  Navigator.of(context).pushNamed('/interviewpage')
+                },
+                textColor: Colors.white,
+                padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+                elevation: 5.0,
+                color: Colors.black,
+                splashColor: Colors.grey,
+                shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(20.0)),
+              ),
             ),
           ],
         ),

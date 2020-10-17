@@ -6,6 +6,7 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:highlighter_coachmark/highlighter_coachmark.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CodingTipsPage extends StatefulWidget {
@@ -117,7 +118,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article1.jpg?token=AKHIZQNFJJWTTWO6YHXHWMC7G7J3O'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.lightBlue,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -137,7 +138,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article2.png?token=AKHIZQNIX5T5J5MCI2TWAE27G7LK2'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.lightBlue,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -157,7 +158,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article3.png?token=AKHIZQJF2CPMPK7X7RZIMSS7G7LOA'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.lightBlue,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -177,7 +178,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article4.jpg?token=AKHIZQJDZSO3TPNNLDIPQWC7G7LTW'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.lightBlue,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -205,7 +206,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article4.jpg?token=AKHIZQJDZSO3TPNNLDIPQWC7G7LTW'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.lightBlue,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -225,7 +226,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article4.jpg?token=AKHIZQJDZSO3TPNNLDIPQWC7G7LTW'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.lightBlue,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -245,7 +246,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article4.jpg?token=AKHIZQJDZSO3TPNNLDIPQWC7G7LTW'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.lightBlue,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -265,7 +266,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article4.jpg?token=AKHIZQJDZSO3TPNNLDIPQWC7G7LTW'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.lightBlue,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -282,7 +283,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article9.jpeg?token=AKHIZQILQBJZSTFZTHR2FFK7G735U'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.lightBlue,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -299,7 +300,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article10.png?token=AKHIZQNHUHXNYUN6VFSALES7G74I4'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.lightBlue,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -316,16 +317,41 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article10.png?token=AKHIZQNHUHXNYUN6VFSALES7G74I4'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.lightBlue,
+                  color: Colors.black,
                 ),
               ),
             ),
+            SizedBox(height: 10),
+            // button for bytes
+            SizedBox(
+              width: 150.0,
+              child: RaisedButton(
+                child: Text(
+                  'Have a Byte!',
+                  style: GoogleFonts.ptSansNarrow(
+                      textStyle: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+                onPressed: () => {
+                  // 
+                  Navigator.of(context).pushNamed('/bytepage')
+                },
+                textColor: Colors.white,
+                padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+                elevation: 5.0,
+                color: Colors.black,
+                splashColor: Colors.grey,
+                shape: RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(20.0)),
+              ),
+            ),
+            SizedBox(height:10),
           ],
         ),
       ),
     );
   }
 
+  
   Future checkTipSeen() async {
     prefs = await SharedPreferences.getInstance();
     _seen = (prefs.getBool('tipseen') ?? false);

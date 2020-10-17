@@ -1,7 +1,9 @@
 import 'package:dev_portal/home_page.dart';
 import 'package:dev_portal/pages/posts_page.dart';
 import 'package:dev_portal/screens/about_page.dart';
+import 'package:dev_portal/screens/byte_page.dart';
 import 'package:dev_portal/screens/forgot_password_page.dart';
+import 'package:dev_portal/screens/interview_page.dart';
 import 'package:dev_portal/screens/new_post.dart';
 import 'package:dev_portal/screens/settings_page.dart';
 import 'package:dev_portal/screens/login_page.dart';
@@ -23,47 +25,36 @@ class RouteGenerator {
       case '/':
         return MaterialPageRoute(builder: (_) => SplashScreenPage());
       case '/login':
-      // Validation of correct data type
-          return MaterialPageRoute(
-            builder: (_) => MyLoginPage());
+        // Validation of correct data type
+        return MaterialPageRoute(builder: (_) => MyLoginPage());
       case '/signup':
-        return MaterialPageRoute(
-            builder: (_) => MyRegisterPage());
+        return MaterialPageRoute(builder: (_) => MyRegisterPage());
       case '/home':
-        return MaterialPageRoute(
-            builder: (_) => MyHomePage());
+        return MaterialPageRoute(builder: (_) => MyHomePage());
       case '/forgotpassword':
-        return MaterialPageRoute(
-            builder: (_) => ForgotPasswordPage());
+        return MaterialPageRoute(builder: (_) => ForgotPasswordPage());
       case '/settings':
-        return MaterialPageRoute(
-            builder: (_) => SettingsPage());
+        return MaterialPageRoute(builder: (_) => SettingsPage());
       case '/editprofile':
-        return MaterialPageRoute(
-            builder: (_) => EditUserProfile());
+        return MaterialPageRoute(builder: (_) => EditUserProfile());
       case '/profile':
-        return MaterialPageRoute(
-            builder: (_) => UserProfile());
+        return MaterialPageRoute(builder: (_) => UserProfile());
       case '/introslider':
-        return MaterialPageRoute(
-            builder: (_) => IntroScreenPage());
+        return MaterialPageRoute(builder: (_) => IntroScreenPage());
       case '/about':
-        return MaterialPageRoute(
-            builder: (_) => AboutPage());
+        return MaterialPageRoute(builder: (_) => AboutPage());
       case '/policy':
-        return MaterialPageRoute(
-            builder: (_) => PrivacyPolicyPage()
-        );
+        return MaterialPageRoute(builder: (_) => PrivacyPolicyPage());
       case '/newpost':
-        return MaterialPageRoute(
-            builder: (_) => NewPost()
-        );
+        return MaterialPageRoute(builder: (_) => NewPost());
       case '/posts':
-        return MaterialPageRoute(
-            builder: (_) => PostsPage()
-        );
+        return MaterialPageRoute(builder: (_) => PostsPage());
+      case '/bytepage':
+        return MaterialPageRoute(builder: (_) => BytePage());
+      case '/interviewpage':
+        return MaterialPageRoute(builder: (_) => InterviewPage());
       default:
-      // If there is no such named route in the switch statement, e.g. /third
+        // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();
     }
   }
