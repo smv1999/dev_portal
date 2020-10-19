@@ -22,8 +22,8 @@ class _NewPostState extends State<NewPost> {
   File _image;
   final picker = ImagePicker();
   FirebaseStorage _storage = FirebaseStorage.instance;
-  DatabaseReference myRef, userNameRef;
-  String imagePath;
+  DatabaseReference myPostRef, userNameRef;
+  String imagePath, firstName, lastName, fullName;
   bool imageFlag = false;
   static int post_no = 0;
   Future<void> getImage() async {
@@ -31,7 +31,8 @@ class _NewPostState extends State<NewPost> {
     final userId = user.uid;
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     //Create a reference to the location you want to upload to in firebase
-    StorageReference reference = _storage.ref().child(userId).child("Images/");
+    StorageReference reference =
+        _storage.ref().child(userId).child("PostImages/" + post_no.toString());
     setState(() {
       _image = File(pickedFile.path);
     });
@@ -47,7 +48,37 @@ class _NewPostState extends State<NewPost> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    getInitialData();
+  }
+
+  getInitialData() async {
+    final FirebaseUser user = await auth.getCurrentUser();
+    final userId = user.uid;
+    StorageReference reference = _storage.ref().child(userId).child("Images/");
+    DatabaseReference myRef =
+        FirebaseDatabase.instance.reference().child('Profile').child(userId);
+    myRef.once().then((DataSnapshot dataSnapshot) {
+      setState(() {
+        if (dataSnapshot.value != null) {
+          firstName = dataSnapshot.value["firstname"];
+          lastName = dataSnapshot.value["lastname"];
+          fullName = firstName + lastName;
+        } else {
+          setState(() {
+            // warning: fill your profile details before creating a post
+            showCustomDialog(
+                context, "Fill your profile details before creating a post!");
+          });
+        }
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    ++post_no;
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -147,28 +178,78 @@ class _NewPostState extends State<NewPost> {
     if (_formKey.currentState.validate()) {
       final FirebaseUser user = await auth.getCurrentUser();
       final userId = user.uid;
-      myRef = FirebaseDatabase.instance.reference().child('Posts').child(userId).child('post'+(++post_no).toString());
+      myPostRef = FirebaseDatabase.instance.reference().child("Posts");
       dynamic currentTime = DateFormat.jm().format(DateTime.now());
       dynamic date = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
-      if(imageFlag)
-      {
-        HashMap<String,String> profileMap = new HashMap();
+      if (imageFlag) {
+        HashMap<String, String> profileMap = new HashMap();
         profileMap.putIfAbsent('description', () => post_description);
         profileMap.putIfAbsent('postpath', () => imagePath);
-        profileMap.putIfAbsent('datetime', () => date + " "+ currentTime);
-        myRef.set(profileMap);
-
+        profileMap.putIfAbsent('name', () => fullName);
+        profileMap.putIfAbsent('publisher', () => userId);
+        profileMap.putIfAbsent('datetime', () => date + " " + currentTime);
+        myPostRef.push().set(profileMap);
 
         Toast.show("Your Post is successful", context,
             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
         Navigator.of(context).pushNamed('/home');
-      }
-      else{
+      } else {
         Toast.show("Uploading Please Wait...", context,
             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       }
-
     }
+  }
+
+  showCustomDialog(BuildContext context, String text) {
+    Dialog errorDialog = Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+      child: Container(
+        height: 300.0,
+        width: 300.0,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              SizedBox(
+                height: 100,
+                width: 100,
+                child: Icon(Icons.warning_sharp,),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  text,
+                  textAlign: TextAlign.justify,
+                  style: GoogleFonts.ptSansNarrow(
+                      textStyle: TextStyle(fontSize: 17)),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: RaisedButton(
+                  child: Text(
+                    'Go to Profile',
+                    style: GoogleFonts.ptSansNarrow(
+                        textStyle: TextStyle(fontWeight: FontWeight.bold)),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(context, "/profile", ModalRoute.withName('/profile'));
+                  },
+                  textColor: Colors.white,
+                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+                  elevation: 5.0,
+                  color: Colors.black,
+                  splashColor: Colors.grey,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+    showDialog(
+        context: context, builder: (BuildContext context) => errorDialog, barrierDismissible: false);
   }
 }

@@ -229,7 +229,7 @@ class _HomePageContentState extends State<HomePageContent> {
               'Popularity of Programming Languages',
               style: GoogleFonts.ptSansNarrow(
                   textStyle:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                      TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
               textAlign: TextAlign.center,
             ),
             SizedBox(
@@ -258,9 +258,9 @@ class _HomePageContentState extends State<HomePageContent> {
                 showChartValuesOutside: true,
               ),
             ),
-            SizedBox(height: 10,),
-            SizedBox(
-              width: double.infinity,
+            SizedBox(height: 20,),
+            Padding(
+              padding: EdgeInsets.all(10.0),
               child: RaisedButton(
                 child: Text(
                   'Placement / Interview Preparation Module',
@@ -268,7 +268,6 @@ class _HomePageContentState extends State<HomePageContent> {
                       textStyle: TextStyle(fontWeight: FontWeight.bold)),
                 ),
                 onPressed: () => {
-                  //
                   Navigator.of(context).pushNamed('/interviewpage')
                 },
                 textColor: Colors.white,
