@@ -34,67 +34,99 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavyBar(
         selectedIndex:
             _currentIndex, // this will be set when a new tab is tapped
-//        selectedItemColor: Colors.black54,
-//        unselectedItemColor: Colors.black,
+        //        selectedItemColor: Colors.black54,
+        //        unselectedItemColor: Colors.black,
         onItemSelected: onTabTapped, // new
         items: [
           BottomNavyBarItem(
             activeColor: Colors.black,
             inactiveColor: Colors.grey,
             icon: new Icon(Icons.home),
-            title: new Text('Home', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),),
+            title: new Text(
+              'Home',
+              style: GoogleFonts.ptSansNarrow(
+                  textStyle:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            ),
           ),
           BottomNavyBarItem(
             activeColor: Colors.black,
             inactiveColor: Colors.grey,
             icon: new Icon(Icons.lightbulb_outline),
-            title: new Text('Coding Tips', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),),
+            title: new Text(
+              'Coding Tips',
+              style: GoogleFonts.ptSansNarrow(
+                  textStyle:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            ),
           ),
           BottomNavyBarItem(
               activeColor: Colors.black,
               inactiveColor: Colors.grey,
               icon: Icon(Icons.library_books),
-              title: Text('Books', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),)),
+              title: Text(
+                'Books',
+                style: GoogleFonts.ptSansNarrow(
+                    textStyle:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+              )),
           BottomNavyBarItem(
               activeColor: Colors.black,
               inactiveColor: Colors.grey,
               icon: Icon(Icons.chat),
-              title: Text('Forum', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),)),
+              title: Text(
+                'Forum',
+                style: GoogleFonts.ptSansNarrow(
+                    textStyle:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+              )),
           BottomNavyBarItem(
               activeColor: Colors.black,
               inactiveColor: Colors.grey,
               icon: Icon(Icons.post_add),
-              title: Text('Feed', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),))
+              title: Text(
+                'Feed',
+                style: GoogleFonts.ptSansNarrow(
+                    textStyle:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+              ))
         ],
       ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
           'Dev Portal',
-          style: TextStyle(color: Colors.black, fontFamily: 'MyFont', fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'MyFont',
+              fontWeight: FontWeight.bold),
         ),
-//        leading: GestureDetector(
-//          onTap: () {
-//            // open dialog
-//            showCustomDialog(context);
-//          },
-//          child: Icon(
-//            Icons.menu,
-//          ),
-//        ),
+        //        leading: GestureDetector(
+        //          onTap: () {
+        //            // open dialog
+        //            showCustomDialog(context);
+        //          },
+        //          child: Icon(
+        //            Icons.menu,
+        //          ),
+        //        ),
         centerTitle: true,
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.black),
         actions: <Widget>[
           PopupMenuButton(
             onSelected: choiceAction,
-            itemBuilder: (BuildContext context){
-                return Constants.choices.map((String choice){
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice, style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16)),),
-                  );
-                }).toList();
+            itemBuilder: (BuildContext context) {
+              return Constants.choices.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(
+                    choice,
+                    style: GoogleFonts.ptSansNarrow(
+                        textStyle: TextStyle(fontSize: 16)),
+                  ),
+                );
+              }).toList();
             },
           )
         ],
@@ -117,7 +149,8 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget cancelButton = FlatButton(
       child: Text(
         "Cancel",
-        style: TextStyle(color: Colors.black, fontFamily: 'MyFont', fontSize: 16),
+        style:
+            TextStyle(color: Colors.black, fontFamily: 'MyFont', fontSize: 16),
       ),
       onPressed: () {
         Navigator.of(context, rootNavigator: true).pop();
@@ -126,7 +159,8 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget continueButton = FlatButton(
       child: Text(
         "Continue",
-        style: TextStyle(color: Colors.black, fontFamily: 'MyFont', fontSize: 16),
+        style:
+            TextStyle(color: Colors.black, fontFamily: 'MyFont', fontSize: 16),
       ),
       onPressed: () {
         Navigator.of(context, rootNavigator: true).pop();
@@ -136,8 +170,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Confirmation", style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16)),),
-      content: Text("Are you sure to Logout?", style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16)),),
+      title: Text(
+        "Confirmation",
+        style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16)),
+      ),
+      content: Text(
+        "Are you sure to Logout?",
+        style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16)),
+      ),
       actions: [
         cancelButton,
         continueButton,
@@ -167,80 +207,75 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-//  showCustomDialog(BuildContext context) {
-//    Dialog errorDialog = Dialog(
-//      shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(12.0)
-//      ),
-//      child: Container(
-//        height: 300.0,
-//        width: 300.0,
-//        child: Padding(
-//          padding: const EdgeInsets.all(15.0),
-//          child: ListView(
-//            shrinkWrap: true,
-//            children: [
-//              Padding(
-//                  padding: EdgeInsets.all(15.0),
-//                  child: Image.asset('images/dev_animated.gif',
-//                  height: 100,
-//                  width: 100,
-//                  )
-//              ),
-//              Padding(
-//                padding: EdgeInsets.all(10.0),
-//                child: RaisedButton(
-//                  child: Text('My Profile', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold)),),
-//                  onPressed: _viewProfile,
-//                  textColor: Colors.white,
-//                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
-//                  elevation: 5.0,
-//                  color: Colors.lightBlue,
-//                  splashColor: Colors.lightBlueAccent,
-//                ),
-//              ),
-//              SizedBox(
-//                height: 5.0,
-//              ),
-//              Padding(
-//                padding: EdgeInsets.all(10.0),
-//                child: RaisedButton(
-//                  child: Text('Explore Learning Resources', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold)),),
-//                  onPressed: _exploreLearningResources,
-//                  textColor: Colors.white,
-//                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
-//                  elevation: 5.0,
-//                  color: Colors.lightBlue,
-//                  splashColor: Colors.lightBlueAccent,
-//                ),
-//              ),
-//            ],
-//          ),
-//        ),
-//      ),
-//    );
-//    showDialog(
-//        context: context, builder: (BuildContext context) => errorDialog);
-//  }
+  //  showCustomDialog(BuildContext context) {
+  //    Dialog errorDialog = Dialog(
+  //      shape: RoundedRectangleBorder(
+  //          borderRadius: BorderRadius.circular(12.0)
+  //      ),
+  //      child: Container(
+  //        height: 300.0,
+  //        width: 300.0,
+  //        child: Padding(
+  //          padding: const EdgeInsets.all(15.0),
+  //          child: ListView(
+  //            shrinkWrap: true,
+  //            children: [
+  //              Padding(
+  //                  padding: EdgeInsets.all(15.0),
+  //                  child: Image.asset('images/dev_animated.gif',
+  //                  height: 100,
+  //                  width: 100,
+  //                  )
+  //              ),
+  //              Padding(
+  //                padding: EdgeInsets.all(10.0),
+  //                child: RaisedButton(
+  //                  child: Text('My Profile', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold)),),
+  //                  onPressed: _viewProfile,
+  //                  textColor: Colors.white,
+  //                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+  //                  elevation: 5.0,
+  //                  color: Colors.lightBlue,
+  //                  splashColor: Colors.lightBlueAccent,
+  //                ),
+  //              ),
+  //              SizedBox(
+  //                height: 5.0,
+  //              ),
+  //              Padding(
+  //                padding: EdgeInsets.all(10.0),
+  //                child: RaisedButton(
+  //                  child: Text('Explore Learning Resources', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold)),),
+  //                  onPressed: _exploreLearningResources,
+  //                  textColor: Colors.white,
+  //                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+  //                  elevation: 5.0,
+  //                  color: Colors.lightBlue,
+  //                  splashColor: Colors.lightBlueAccent,
+  //                ),
+  //              ),
+  //            ],
+  //          ),
+  //        ),
+  //      ),
+  //    );
+  //    showDialog(
+  //        context: context, builder: (BuildContext context) => errorDialog);
+  //  }
 
   void _viewProfile() {
     // show profile
     Navigator.of(context).pushNamed('/profile');
   }
 
-  void choiceAction(String choice)
-  {
-    if(choice == Constants.Settings)
-      {
-        Navigator.of(context).pushNamed('/settings');
-      }
-    else if(choice == Constants.Logout)
-      {
-        showAlertDialog(context);
-      }
-    else if(choice == Constants.Profile)
-      {
-        _viewProfile();
-      }
+  void choiceAction(String choice) {
+    if (choice == Constants.Settings) {
+      Navigator.of(context).pushNamed('/settings');
+    } else if (choice == Constants.Logout) {
+      showAlertDialog(context);
+    } else if (choice == Constants.Profile) {
+      _viewProfile();
+    }
   }
+
 }

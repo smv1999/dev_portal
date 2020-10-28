@@ -162,8 +162,7 @@ class MyRegisterPageState extends State {
   void _computeResult() {
     if (_formKey.currentState.validate()) {
       if (auth.signUp(email, password) != null) {
-        // show toast of email verification sent
-        Toast.show("Email Verification Sent. Check your Inbox", context,
+        Toast.show("Sign Up Successful!", context,
             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
         Navigator.of(context).pushReplacementNamed('/login');
       }

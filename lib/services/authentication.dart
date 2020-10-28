@@ -9,11 +9,9 @@ abstract class BaseAuth {
 
   Future<FirebaseUser> getCurrentUser();
 
-  Future<void> sendEmailVerification();
 
   Future<void> signOut();
 
-  Future<bool> isEmailVerified();
 }
 class Auth implements BaseAuth {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -37,7 +35,6 @@ class Auth implements BaseAuth {
       AuthResult result = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      sendEmailVerification();
       return user.uid;
     }
     on PlatformException catch (e)
@@ -56,29 +53,6 @@ class Auth implements BaseAuth {
     return _firebaseAuth.signOut();
   }
 
-  Future<void> sendEmailVerification() async {
-    try{
-      FirebaseUser user = await _firebaseAuth.currentUser();
-      user.sendEmailVerification();
-    }
-    on PlatformException catch (e)
-    {
-      print(e.toString());
-      return e.code;
-    }
-  }
-
-  Future<bool> isEmailVerified() async {
-    try{
-      FirebaseUser user = await _firebaseAuth.currentUser();
-      return user.isEmailVerified;
-    }
-    on PlatformException catch (e)
-    {
-      print(e.toString());
-      return false;
-    }
-  }
   Future<void> sendPasswordResetEmail(String email) async {
     return _firebaseAuth.sendPasswordResetEmail(email: email);
   }
