@@ -19,7 +19,7 @@ class IntroScreen extends StatefulWidget {
 class _IntroScreenState extends State<IntroScreen> {
 //  with AfterLayoutMixin<IntroScreen>
   List<Slide> slides = new List();
-  bool is_Introseen = false;
+  bool _seen = false;
   @override
   void initState() {
     super.initState();
@@ -61,8 +61,8 @@ class _IntroScreenState extends State<IntroScreen> {
     );
     slides.add(
       new Slide(
-        title: "Make learning Fun",
-        description: "Have fun and get inspired through Memes and Quotes",
+        title: "Have a Byte",
+        description: "Get information in byte sized high-quality content",
         pathImage: "images/intro3.png",
         styleTitle: TextStyle(
             color: Colors.black,
@@ -76,8 +76,8 @@ class _IntroScreenState extends State<IntroScreen> {
     );
     slides.add(
       new Slide(
-        title: "Learn the right way",
-        description: "Best Learning resources and YouTube Channels",
+        title: "Interview Preparation Module",
+        description: "Quality content to help you prepare for interviews",
         pathImage: "images/intro4.png",
         styleTitle: TextStyle(
             color: Colors.black,
@@ -115,21 +115,19 @@ class _IntroScreenState extends State<IntroScreen> {
 
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool _seen = (prefs.getBool('seen') ?? false);
+    _seen = (prefs.getBool('seen') ?? false);
 
     if (_seen) {
-      is_Introseen = true;
       Navigator.of(context).pushNamedAndRemoveUntil('/login', (r) => false);
     } else {
-      is_Introseen = false;
       await prefs.setBool('seen', true);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return is_Introseen
-        ? new IntroSlider(
+    return !_seen ?
+    new IntroSlider(
             slides: this.slides,
             onDonePress: this.onDonePress,
             styleNameSkipBtn:
