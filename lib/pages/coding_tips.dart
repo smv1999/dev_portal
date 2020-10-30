@@ -321,30 +321,6 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                 ),
               ),
             ),
-            SizedBox(height: 10),
-            // button for bytes
-            SizedBox(
-              width: 150.0,
-              child: RaisedButton(
-                child: Text(
-                  'Have a Byte!',
-                  style: GoogleFonts.ptSansNarrow(
-                      textStyle: TextStyle(fontWeight: FontWeight.bold)),
-                ),
-                onPressed: () => {
-                  // 
-                  Navigator.of(context).pushNamed('/bytepage')
-                },
-                textColor: Colors.white,
-                padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
-                elevation: 5.0,
-                color: Colors.black,
-                splashColor: Colors.grey,
-                shape: RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(20.0)),
-              ),
-            ),
-            SizedBox(height:10),
           ],
         ),
       ),

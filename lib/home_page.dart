@@ -7,7 +7,6 @@ import 'misc_helpers/Constants.dart';
 import 'pages/coding_tips.dart';
 import 'home_page_content.dart';
 import 'pages/books_page.dart';
-import 'pages/forum_page.dart';
 import 'pages/posts_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -22,14 +21,71 @@ class _MyHomePageState extends State<MyHomePage> {
     HomePageContent(),
     CodingTipsPage(),
     BooksPage(),
-    ForumPage(),
     PostsPage()
   ];
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Scaffold(
-      backgroundColor: Colors.white,
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text('Vaidhyanathan S M'),
+              accountEmail: Text('vaidhyanathan.sm@gmail.com'),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor:
+                    Theme.of(context).platform == TargetPlatform.iOS
+                        ? Colors.black
+                        : Colors.white,
+                child: Text(
+                  "V",
+                  style: TextStyle(fontSize: 40.0, color: Colors.black),
+                ),
+              ),
+            ),
+            ListTile(
+              title: Text("Dashboard"),
+              leading: Icon(Icons.dashboard),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed('/dashboard');
+              },
+            ),
+            ListTile(
+              title: Text("My Profile"),
+              leading: Icon(Icons.person),
+              onTap: () {
+                _viewProfile();
+              },
+            ),
+            ListTile(
+              title: Text("Interview Preparation Module"),
+              leading: Icon(Icons.corporate_fare),
+              onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pushNamed('/interviewpage');
+              },
+            ),
+            ListTile(
+              title: Text("Mini Bytes"),
+              leading: Icon(Icons.donut_small),
+              onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pushNamed('/bytepage');
+              },
+            ),
+            ListTile(
+              title: Text("Settings"),
+              leading: Icon(Icons.settings),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed('/settings');
+              },
+            ),
+          ],
+        ),
+      ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavyBar(
         selectedIndex:
@@ -73,16 +129,6 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavyBarItem(
               activeColor: Colors.black,
               inactiveColor: Colors.grey,
-              icon: Icon(Icons.chat),
-              title: Text(
-                'Forum',
-                style: GoogleFonts.ptSansNarrow(
-                    textStyle:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-              )),
-          BottomNavyBarItem(
-              activeColor: Colors.black,
-              inactiveColor: Colors.grey,
               icon: Icon(Icons.post_add),
               title: Text(
                 'Feed',
@@ -93,7 +139,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         title: Text(
           'Dev Portal',
           style: TextStyle(
@@ -111,7 +156,6 @@ class _MyHomePageState extends State<MyHomePage> {
         //          ),
         //        ),
         centerTitle: true,
-        backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.black),
         actions: <Widget>[
           PopupMenuButton(
@@ -207,75 +251,122 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  //  showCustomDialog(BuildContext context) {
-  //    Dialog errorDialog = Dialog(
-  //      shape: RoundedRectangleBorder(
-  //          borderRadius: BorderRadius.circular(12.0)
-  //      ),
-  //      child: Container(
-  //        height: 300.0,
-  //        width: 300.0,
-  //        child: Padding(
-  //          padding: const EdgeInsets.all(15.0),
-  //          child: ListView(
-  //            shrinkWrap: true,
-  //            children: [
-  //              Padding(
-  //                  padding: EdgeInsets.all(15.0),
-  //                  child: Image.asset('images/dev_animated.gif',
-  //                  height: 100,
-  //                  width: 100,
-  //                  )
-  //              ),
-  //              Padding(
-  //                padding: EdgeInsets.all(10.0),
-  //                child: RaisedButton(
-  //                  child: Text('My Profile', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold)),),
-  //                  onPressed: _viewProfile,
-  //                  textColor: Colors.white,
-  //                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
-  //                  elevation: 5.0,
-  //                  color: Colors.lightBlue,
-  //                  splashColor: Colors.lightBlueAccent,
-  //                ),
-  //              ),
-  //              SizedBox(
-  //                height: 5.0,
-  //              ),
-  //              Padding(
-  //                padding: EdgeInsets.all(10.0),
-  //                child: RaisedButton(
-  //                  child: Text('Explore Learning Resources', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontWeight: FontWeight.bold)),),
-  //                  onPressed: _exploreLearningResources,
-  //                  textColor: Colors.white,
-  //                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
-  //                  elevation: 5.0,
-  //                  color: Colors.lightBlue,
-  //                  splashColor: Colors.lightBlueAccent,
-  //                ),
-  //              ),
-  //            ],
-  //          ),
-  //        ),
-  //      ),
-  //    );
-  //    showDialog(
-  //        context: context, builder: (BuildContext context) => errorDialog);
-  //  }
+  showCustomDialog(BuildContext context) {
+    Dialog errorDialog = Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+      child: Container(
+        height: 400.0,
+        width: 300.0,
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              Center(
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.dashboard,
+                      size: 40,
+                    ),
+                    Text('Dashboard',
+                        style: GoogleFonts.ptSansNarrow(
+                            textStyle: TextStyle(fontWeight: FontWeight.bold)))
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: RaisedButton(
+                  child: Text(
+                    'New Post',
+                    style: GoogleFonts.ptSansNarrow(
+                        textStyle: TextStyle(fontWeight: FontWeight.bold)),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/newpost');
+                  },
+                  textColor: Colors.white,
+                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+                  elevation: 5.0,
+                  color: Colors.black,
+                  splashColor: Colors.grey,
+                ),
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: RaisedButton(
+                  child: Text(
+                    'Share Snippets',
+                    style: GoogleFonts.ptSansNarrow(
+                        textStyle: TextStyle(fontWeight: FontWeight.bold)),
+                  ),
+                  onPressed: () {},
+                  textColor: Colors.white,
+                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+                  elevation: 5.0,
+                  color: Colors.black,
+                  splashColor: Colors.grey,
+                ),
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: RaisedButton(
+                  child: Text(
+                    'Career Guidance',
+                    style: GoogleFonts.ptSansNarrow(
+                        textStyle: TextStyle(fontWeight: FontWeight.bold)),
+                  ),
+                  onPressed: () {
+                    // Contains Resume Tips
+                  },
+                  textColor: Colors.white,
+                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+                  elevation: 5.0,
+                  color: Colors.black,
+                  splashColor: Colors.grey,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: RaisedButton(
+                  child: Text(
+                    'Productivity Meter',
+                    style: GoogleFonts.ptSansNarrow(
+                        textStyle: TextStyle(fontWeight: FontWeight.bold)),
+                  ),
+                  onPressed: () {},
+                  textColor: Colors.white,
+                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+                  elevation: 5.0,
+                  color: Colors.black,
+                  splashColor: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    showDialog(
+        context: context, builder: (BuildContext context) => errorDialog);
+  }
 
   void _viewProfile() {
     // show profile
+    Navigator.of(context).pop();
     Navigator.of(context).pushNamed('/profile');
   }
 
   void choiceAction(String choice) {
-    if (choice == Constants.Settings) {
-      Navigator.of(context).pushNamed('/settings');
-    } else if (choice == Constants.Logout) {
+    if (choice == Constants.Logout) {
       showAlertDialog(context);
-    } else if (choice == Constants.Profile) {
-      _viewProfile();
     }
   }
-
 }

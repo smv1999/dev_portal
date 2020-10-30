@@ -258,27 +258,6 @@ class _HomePageContentState extends State<HomePageContent> {
                 showChartValuesOutside: true,
               ),
             ),
-            SizedBox(height: 20,),
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: RaisedButton(
-                child: Text(
-                  'Placement / Interview Preparation Module',
-                  style: GoogleFonts.ptSansNarrow(
-                      textStyle: TextStyle(fontWeight: FontWeight.bold)),
-                ),
-                onPressed: () => {
-                  Navigator.of(context).pushNamed('/interviewpage')
-                },
-                textColor: Colors.white,
-                padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
-                elevation: 5.0,
-                color: Colors.black,
-                splashColor: Colors.grey,
-                shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(20.0)),
-              ),
-            ),
           ],
         ),
       ),

@@ -30,6 +30,18 @@ class _InterviewPageState extends State<InterviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: Icon(Icons.info),
+          ),
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          onPressed: () {
+            // Respond to button press
+            // show info dialog
+          },
+        ),
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(
@@ -67,7 +79,8 @@ class _InterviewPageState extends State<InterviewPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => PDFScreen(pathPDF, "Subject Wise Topics for Interview")),
+                              builder: (context) => PDFScreen(pathPDF,
+                                  "Subject Wise Topics for Interview")),
                         );
                       })
                     },
@@ -97,7 +110,8 @@ class _InterviewPageState extends State<InterviewPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => PDFScreen(pathPDF, "Non Technical HR Questions")),
+                              builder: (context) => PDFScreen(
+                                  pathPDF, "Non Technical HR Questions")),
                         );
                       })
                     },
@@ -127,7 +141,8 @@ class _InterviewPageState extends State<InterviewPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => PDFScreen(pathPDF, "Time Complexity Cheatsheet")),
+                              builder: (context) => PDFScreen(
+                                  pathPDF, "Time Complexity Cheatsheet")),
                         );
                       })
                     },
@@ -157,7 +172,8 @@ class _InterviewPageState extends State<InterviewPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => PDFScreen(pathPDF, "OOPs Concepts in Java")),
+                              builder: (context) =>
+                                  PDFScreen(pathPDF, "OOPs Concepts in Java")),
                         );
                       })
                     },

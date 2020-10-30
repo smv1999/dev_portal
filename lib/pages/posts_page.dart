@@ -28,16 +28,8 @@ class _PostsPageState extends State<PostsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        onPressed: () {
-          // Respond to button press
-          Navigator.of(context).pushNamed('/newpost');
-        },
-        child: Icon(Icons.add),
-      ),
+    return Container(
+      // retrieve all followings' posts
     );
   }
 

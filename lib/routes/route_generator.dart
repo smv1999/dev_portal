@@ -2,6 +2,7 @@ import 'package:dev_portal/home_page.dart';
 import 'package:dev_portal/pages/posts_page.dart';
 import 'package:dev_portal/screens/about_page.dart';
 import 'package:dev_portal/screens/byte_page.dart';
+import 'package:dev_portal/screens/dashboard.dart';
 import 'package:dev_portal/screens/forgot_password_page.dart';
 import 'package:dev_portal/screens/interview_page.dart';
 import 'package:dev_portal/screens/new_post.dart';
@@ -53,6 +54,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => BytePage());
       case '/interviewpage':
         return MaterialPageRoute(builder: (_) => InterviewPage());
+      case '/dashboard':
+        return MaterialPageRoute(builder: (_) => Dashboard());
+
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();
