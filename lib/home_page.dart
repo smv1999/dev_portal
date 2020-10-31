@@ -1,9 +1,12 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:dev_portal/screens/new_post.dart';
 import 'package:dev_portal/services/authentication.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'misc_helpers/Constants.dart';
 import 'pages/coding_tips.dart';
 import 'home_page_content.dart';
 import 'pages/books_page.dart';
@@ -17,9 +20,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
   Auth auth = new Auth();
+  DatabaseReference myRef;
+  String fullName = "Developer",
+      email = "developer@gmail.com",
+      profileImageUrl =
+          "https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png";
   final List<Widget> _children = [
     HomePageContent(),
     CodingTipsPage(),
+    NewPost(),
     BooksPage(),
     PostsPage()
   ];
@@ -27,63 +36,64 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text('Vaidhyanathan S M'),
-              accountEmail: Text('vaidhyanathan.sm@gmail.com'),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor:
-                    Theme.of(context).platform == TargetPlatform.iOS
-                        ? Colors.black
-                        : Colors.white,
-                child: Text(
-                  "V",
-                  style: TextStyle(fontSize: 40.0, color: Colors.black),
-                ),
+      drawer: Container(
+        width: 245.0,
+        child: Drawer(
+          child: ListView(
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                accountName: Text(fullName),
+                accountEmail: Text(email),
+                currentAccountPicture: CircleAvatar(
+                    backgroundColor:
+                        Theme.of(context).platform == TargetPlatform.iOS
+                            ? Colors.black
+                            : Colors.white,
+                    child: Image.network(profileImageUrl)
+                    // Later to be changed as profile image
+                    ),
               ),
-            ),
-            ListTile(
-              title: Text("Dashboard"),
-              leading: Icon(Icons.dashboard),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pushNamed('/dashboard');
-              },
-            ),
-            ListTile(
-              title: Text("My Profile"),
-              leading: Icon(Icons.person),
-              onTap: () {
-                _viewProfile();
-              },
-            ),
-            ListTile(
-              title: Text("Interview Preparation Module"),
-              leading: Icon(Icons.corporate_fare),
-              onTap: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pushNamed('/interviewpage');
-              },
-            ),
-            ListTile(
-              title: Text("Mini Bytes"),
-              leading: Icon(Icons.donut_small),
-              onTap: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pushNamed('/bytepage');
-              },
-            ),
-            ListTile(
-              title: Text("Settings"),
-              leading: Icon(Icons.settings),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pushNamed('/settings');
-              },
-            ),
-          ],
+              ListTile(
+                title: Text("Dashboard"),
+                leading: Icon(Icons.dashboard),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed('/dashboard');
+                },
+              ),
+              ListTile(
+                title: Text("My Profile"),
+                leading: Icon(Icons.person),
+                onTap: () {
+                  _viewProfile();
+                },
+              ),
+              ListTile(
+                title: Text("Interview Preparation Module"),
+                leading: Icon(Icons.corporate_fare),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed('/interviewpage');
+                },
+              ),
+              ListTile(
+                title: Text("Mini Bytes"),
+                leading: Icon(Icons.donut_small),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed('/bytepage');
+                },
+              ),
+              ListTile(
+                title: Text("Settings"),
+                leading: Icon(Icons.settings),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed('/settings');
+                },
+              ),
+            ],
+          ),
         ),
       ),
       body: _children[_currentIndex],
@@ -116,6 +126,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             ),
           ),
+          BottomNavyBarItem(
+              activeColor: Colors.black,
+              inactiveColor: Colors.grey,
+              icon: Icon(Icons.add),
+              title: Text(
+                'New Post',
+                style: GoogleFonts.ptSansNarrow(
+                    textStyle:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+              )),
           BottomNavyBarItem(
               activeColor: Colors.black,
               inactiveColor: Colors.grey,
@@ -158,20 +178,13 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.black),
         actions: <Widget>[
-          PopupMenuButton(
-            onSelected: choiceAction,
-            itemBuilder: (BuildContext context) {
-              return Constants.choices.map((String choice) {
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(
-                    choice,
-                    style: GoogleFonts.ptSansNarrow(
-                        textStyle: TextStyle(fontSize: 16)),
-                  ),
-                );
-              }).toList();
+          GestureDetector(
+            onTap: () {
+              showAlertDialog(context);
             },
+            child: Icon(
+              Icons.logout,
+            ),
           )
         ],
         actionsIconTheme: IconThemeData(color: Colors.black),
@@ -249,6 +262,8 @@ class _MyHomePageState extends State<MyHomePage> {
     if (auth.getCurrentUser() == null) {
       Navigator.of(context).pushNamed('/login');
     }
+    // retrieve fullname and email from the DB
+    retrieveData();
   }
 
   showCustomDialog(BuildContext context) {
@@ -364,9 +379,21 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.of(context).pushNamed('/profile');
   }
 
-  void choiceAction(String choice) {
-    if (choice == Constants.Logout) {
-      showAlertDialog(context);
-    }
+  void retrieveData() async {
+    final FirebaseUser user = await auth.getCurrentUser();
+    final userId = user.uid;
+    myRef =
+        FirebaseDatabase.instance.reference().child('Profile').child(userId);
+    myRef.once().then((DataSnapshot dataSnapshot) {
+      setState(() {
+        if (dataSnapshot.value != null) {
+          profileImageUrl = dataSnapshot.value["imagepath"];
+          fullName = dataSnapshot.value["firstname"] +
+              " " +
+              dataSnapshot.value["lastname"];
+          email = dataSnapshot.value["email"];
+        }
+      });
+    });
   }
 }

@@ -9,7 +9,6 @@ class HomePageContent extends StatefulWidget {
 }
 
 class _HomePageContentState extends State<HomePageContent> {
-  @override
   Map<String, double> dataMap = {
     "Python": 40,
     "Java": 25,
@@ -26,6 +25,7 @@ class _HomePageContentState extends State<HomePageContent> {
     Colors.orange,
     Colors.yellow
   ];
+  @override
   Widget build(BuildContext context) {
     return Container(
       child: Padding(

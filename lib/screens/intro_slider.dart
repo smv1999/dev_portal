@@ -138,6 +138,7 @@ class _IntroScreenState extends State<IntroScreen> {
                 TextStyle(color: Colors.black, fontFamily: 'MyFont'),
           )
         : new Container(
+          color: Colors.white,
             child: Center(
               child: CircularProgressIndicator(
                 backgroundColor: Colors.black,

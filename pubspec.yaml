@@ -35,7 +35,9 @@ dependencies:
   bottom_navy_bar: ^5.5.0
   pie_chart: ^4.0.1
   flutter_full_pdf_viewer: ^1.0.6
-  share_extend: "^1.1.9"
+  share_extend: ^1.1.9
+  font_awesome_flutter: ^8.10.0
+  flushbar: ^1.10.4
 dev_dependencies:
   flutter_test:
     sdk: flutter

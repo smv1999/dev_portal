@@ -79,20 +79,7 @@ class _NewPostState extends State<NewPost> {
   @override
   Widget build(BuildContext context) {
     ++post_no;
-    return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(
-            'New Post',
-            style: TextStyle(
-                color: Colors.black,
-                fontFamily: 'MyFont',
-                fontWeight: FontWeight.bold),
-          ),
-          centerTitle: true,
-        ),
-        body: Center(
+    return Center(
           child: Container(
             height: 500.0,
             width: 300.0,
@@ -170,7 +157,6 @@ class _NewPostState extends State<NewPost> {
                     ),
                   )),
             ),
-          ),
         ));
   }
 
