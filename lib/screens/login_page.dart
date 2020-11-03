@@ -217,10 +217,10 @@ class MyLoginPageState extends State {
               duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
           Navigator.of(context).pushNamedAndRemoveUntil('/home', (r) => false);
         }
-      } else {
-        Toast.show("Authentication Failed!", context,
-            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+        else {
+        Navigator.of(context).pushNamed('/connectionerror');
       }
+      } 
     }
   }
 }

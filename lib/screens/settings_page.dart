@@ -61,26 +61,26 @@ class _SettingsPageState extends State<SettingsPage> {
                     trailing: Icon(Icons.arrow_forward_ios, color: Colors.black,),
                 ),
               ),
-              Card(
-                margin: const EdgeInsets.all(8.0),
-                child: ListTile(
-                    title: Text('Switch to Dark Mode',
-                    style: GoogleFonts.ptSansNarrow(),
-                    ),
-                    trailing:  Switch(
-                      value: isSwitched,
-                      onChanged: (value){
-                        setState(() {
-                          isSwitched = value;
-                          print(isSwitched);
-                        });
-                      },
-                      activeTrackColor: Colors.black, // black54
-                      activeColor: Colors.grey,
-                    ),
-                  leading: Icon(Icons.compare_arrows, color: Colors.black),
-                ),
-              ),
+              // Card(
+              //   margin: const EdgeInsets.all(8.0),
+              //   child: ListTile(
+              //       title: Text('Switch to Dark Mode',
+              //       style: GoogleFonts.ptSansNarrow(),
+              //       ),
+              //       trailing:  Switch(
+              //         value: isSwitched,
+              //         onChanged: (value){
+              //           setState(() {
+              //             isSwitched = value;
+              //             print(isSwitched);
+              //           });
+              //         },
+              //         activeTrackColor: Colors.black, // black54
+              //         activeColor: Colors.grey,
+              //       ),
+              //     leading: Icon(Icons.compare_arrows, color: Colors.black),
+              //   ),
+              // ),
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(

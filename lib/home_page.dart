@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               ListTile(
                 title: Text("My Profile"),
-                leading: Icon(Icons.person),
+                leading: Icon(Icons.person,),
                 onTap: () {
                   _viewProfile();
                 },
@@ -229,11 +229,17 @@ class _MyHomePageState extends State<MyHomePage> {
     AlertDialog alert = AlertDialog(
       title: Text(
         "Confirmation",
-        style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16)),
+        style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
       ),
-      content: Text(
+      content: ListView(
+        shrinkWrap: true,
+      children:[
+        Image.asset('images/logout.png', height: 100,alignment: Alignment.centerLeft,),
+        Text(
         "Are you sure to Logout?",
         style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16)),
+      ),
+      ]
       ),
       actions: [
         cancelButton,

@@ -25,6 +25,8 @@ class PrivacyPolicyPage extends StatelessWidget {
         child:Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            Image.asset('images/privacy.png', height: 80,),
+            SizedBox(height: 15,),
         Html(
         data: """
         <!DOCTYPE html>

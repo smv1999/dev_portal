@@ -38,6 +38,7 @@ dependencies:
   share_extend: ^1.1.9
   font_awesome_flutter: ^8.10.0
   flushbar: ^1.10.4
+  provider: ^4.3.2+2
 dev_dependencies:
   flutter_test:
     sdk: flutter
