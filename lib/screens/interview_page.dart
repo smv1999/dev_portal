@@ -33,13 +33,16 @@ class _InterviewPageState extends State<InterviewPage> {
         floatingActionButton: FloatingActionButton(
           child: FittedBox(
             fit: BoxFit.contain,
-            child: Icon(Icons.info),
+            child: Image.asset('images/info.png')
           ),
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
           onPressed: () {
             // Respond to button press
             // show info dialog
+            showCustomDialog(context, 'These resources are taken from online platforms and the author of this application '
+            'does not propose that he is the author of these resources. The credit goes to the creators of these content. The sole '
+            'purpose of using these resources is for educational purposes.', 'images/info.png');
           },
         ),
         appBar: AppBar(
@@ -194,6 +197,41 @@ class _InterviewPageState extends State<InterviewPage> {
           ),
         ));
   }
+  showCustomDialog(BuildContext context, String text, String imageName) {
+    Dialog errorDialog = Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+      child: Container(
+        height: 300.0,
+        width: 300.0,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Image.asset(
+                    imageName,
+                    height: 80,
+                    width: 80,
+                  )),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  text,
+                  textAlign: TextAlign.justify,
+                  style: GoogleFonts.ptSansNarrow(
+                      textStyle: TextStyle(fontSize: 17)),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+    showDialog(
+        context: context, builder: (BuildContext context) => errorDialog);
+  }
 }
 
 class PDFScreen extends StatelessWidget {
@@ -218,4 +256,5 @@ class PDFScreen extends StatelessWidget {
         ),
         path: pathPDF);
   }
+    
 }
