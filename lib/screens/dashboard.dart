@@ -79,7 +79,7 @@ class _DashboardState extends State<Dashboard> {
                         onTap: () {},
                         child: Card(
                           clipBehavior: Clip.antiAlias,
-                          child: Image.asset('images/career_guidance.jpg'),
+                          child: Image.asset('images/career_guidance.png'),
                           // Text('Career Guidance'),
                           elevation: 5,
                         ),
