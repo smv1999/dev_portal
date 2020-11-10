@@ -16,7 +16,7 @@ class _DashboardState extends State<Dashboard> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(
-            'Dev Portal',
+            'Dashboard',
             style: TextStyle(
                 color: Colors.black,
                 fontFamily: 'MyFont',

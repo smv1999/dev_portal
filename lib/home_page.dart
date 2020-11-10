@@ -69,6 +69,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ListTile(
+                title: Text("Find people"),
+                leading: Icon(Icons.search),
+                onTap: () {
+                  Navigator.of(context).pushNamed('/findpeople');
+                },
+              ),
+              ListTile(
                 title: Text("Interview Preparation Module"),
                 leading: Icon(Icons.corporate_fare),
                 onTap: () {

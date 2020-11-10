@@ -4,6 +4,7 @@ import 'package:dev_portal/screens/about_page.dart';
 import 'package:dev_portal/screens/byte_page.dart';
 import 'package:dev_portal/screens/connection_error.dart';
 import 'package:dev_portal/screens/dashboard.dart';
+import 'package:dev_portal/screens/find_people.dart';
 import 'package:dev_portal/screens/forgot_password_page.dart';
 import 'package:dev_portal/screens/interview_page.dart';
 import 'package:dev_portal/screens/new_post.dart';
@@ -59,6 +60,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Dashboard());
       case '/connectionerror':
         return MaterialPageRoute(builder: (_) => ConnectionError());
+      case '/findpeople':
+        return MaterialPageRoute(builder: (_) => FindPeople());
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();
