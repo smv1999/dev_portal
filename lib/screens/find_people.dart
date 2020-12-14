@@ -9,19 +9,25 @@ class FindPeople extends StatefulWidget {
 
 class _FindPeopleState extends State<FindPeople> {
   List<People> _people = [];
+
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      setState(() {
-          _setUpPeople();
-      });
+    setState(() {
+        refreshList();
     });
   }
 
-  void _setUpPeople() async {
-    _people = await DatabaseService.getPeople();
+  Future<void> refreshList() async {
+    refreshKey.currentState?.show();
+    await Future.delayed(Duration(seconds: 2));
+    List<People> temp = await DatabaseService.getPeople();
+    setState(() {
+      _people = temp;
+    });
   }
 
   @override
@@ -39,21 +45,15 @@ class _FindPeopleState extends State<FindPeople> {
           centerTitle: true,
           iconTheme: IconThemeData(color: Colors.black),
         ),
-        body: Padding(
-            padding: EdgeInsets.all(20.0),
+        body: RefreshIndicator(
+          key: refreshKey,
+            onRefresh: refreshList,
             child: ListView.builder(
+              key: UniqueKey(),
                 shrinkWrap: true,
-                key: UniqueKey(),
-                itemCount: _people.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      Text(
-                        _people[index].employmenttitle,
-                        key: UniqueKey(),
-                      )
-                    ],
-                  );
-                })));
+                itemCount: _people?.length,
+                itemBuilder: (BuildContext context, int index) => ListTile(
+                    title: Text(
+                        _people[index].firstname + _people[index].lastname)))));
   }
 }

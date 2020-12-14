@@ -83,6 +83,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.of(context).pushNamed('/interviewpage');
                 },
               ),
+               ListTile(
+                title: Text("Explore Jobs"),
+                leading: Icon(Icons.search),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed('/jobs');
+                },
+              ),
               ListTile(
                 title: Text("Mini Bytes"),
                 leading: Icon(Icons.donut_small),
