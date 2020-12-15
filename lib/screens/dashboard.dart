@@ -68,11 +68,25 @@ class _DashboardState extends State<Dashboard> {
                         onLongPress: () {
                           showFloatingFlushbar(context, 'Productivity Meter');
                         },
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/todolist');
+                        },
                         child: Card(
                           clipBehavior: Clip.antiAlias,
                           child: Image.asset('images/productivity.png'),
                           // Text('Productivity Meter'),
+                          elevation: 5,
+                        ),
+                      ),
+                       GestureDetector(
+                        onLongPress: () {
+                          showFloatingFlushbar(context, 'Project Ideas');
+                        },
+                        onTap: () {},
+                        child: Card(
+                          clipBehavior: Clip.antiAlias,
+                          child: Image.asset('images/projects.jpg'),
+                          // Text('Career Guidance'),
                           elevation: 5,
                         ),
                       ),

@@ -14,6 +14,7 @@ import 'package:dev_portal/screens/login_page.dart';
 import 'package:dev_portal/screens/intro_slider.dart';
 import 'package:dev_portal/screens/edit_user_profile_page.dart';
 import 'package:dev_portal/screens/privacy_policy_page.dart';
+import 'package:dev_portal/screens/todo_list.dart';
 import 'file:///C:/Users/smv1999/dev_portal/lib/main.dart';
 import 'package:dev_portal/screens/user_profile_page.dart';
 import 'package:dev_portal/screens/sign_up_page.dart';
@@ -65,6 +66,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => FindPeople());
       case '/jobs':
         return MaterialPageRoute(builder: (_) => ExploreJobs());  
+      case '/todolist':
+        return MaterialPageRoute(builder: (_) => TodoList());    
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();
