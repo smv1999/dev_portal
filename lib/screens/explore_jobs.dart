@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:dev_portal/models/jobs.dart';
+import 'package:firebase_mlkit_language/firebase_mlkit_language.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -15,6 +16,9 @@ class ExploreJobs extends StatefulWidget {
 }
 
 class _ExploreJobsState extends State<ExploreJobs> {
+  final LanguageIdentifier languageIdentifier =
+      FirebaseLanguage.instance.languageIdentifier();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +67,7 @@ class _ExploreJobsState extends State<ExploreJobs> {
                           width: 80,
                           height: 80,
                           child: snapshot.data[index].companyLogoURL == null
-                              ? Image.asset('images/somethingwrong.png')
+                              ? Image.asset('images/companies.jpg')
                               : Image.network(
                                   snapshot.data[index].companyLogoURL),
                         ),
@@ -121,7 +125,13 @@ class _ExploreJobsState extends State<ExploreJobs> {
     }
   }
 
-  showCustomDialog(BuildContext context, AsyncSnapshot snapshot, int index) {
+  showCustomDialog(
+      BuildContext context, AsyncSnapshot snapshot, int index) async {
+    final List<LanguageLabel> labels =
+        await languageIdentifier.processText(snapshot.data[index].description);
+    for (LanguageLabel label in labels) {
+      print(label.languageCode);
+    }
     Dialog errorDialog = Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: Container(
@@ -132,13 +142,6 @@ class _ExploreJobsState extends State<ExploreJobs> {
           child: ListView(
             shrinkWrap: true,
             children: [
-              // Padding(
-              //     padding: EdgeInsets.all(10.0),
-              //     child: Image.asset(
-              //       snapshot.data[index].companyLogoURL,
-              //       height: 100,
-              //       width: 100,
-              //     )),
               Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Html(

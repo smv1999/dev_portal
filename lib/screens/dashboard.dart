@@ -54,26 +54,6 @@ class _DashboardState extends State<Dashboard> {
                       // add buttons
                       GestureDetector(
                         onLongPress: () {
-                          showFloatingFlushbar(context, 'Share Snippets');
-                        },
-                        onTap: () {
-                          
-                        },
-                          child: Card(
-                        clipBehavior: Clip.antiAlias,
-                        child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Image.asset(
-                                'images/code_share.png',
-                                fit: BoxFit.cover,
-                              ),
-                              // Text('Share Snippets'),
-                            ]),
-                        elevation: 5,
-                      )),
-                      GestureDetector(
-                        onLongPress: () {
                           showFloatingFlushbar(context, 'Career Guidance');
                         },
                         onTap: () {},

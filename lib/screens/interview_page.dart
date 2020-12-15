@@ -30,173 +30,167 @@ class _InterviewPageState extends State<InterviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: FittedBox(
-            fit: BoxFit.contain,
-            child: Image.asset('images/info.png')
-          ),
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
-          onPressed: () {
-            // Respond to button press
-            // show info dialog
-            showCustomDialog(context, 'These resources are taken from online platforms and the author of this application '
-            'does not propose that he is the author of these resources. The credit goes to the creators of these content. The sole '
-            'purpose of using these resources is for educational purposes.', 'images/info.png');
-          },
+      floatingActionButton: FloatingActionButton(
+        child: SizedBox.expand(
+        child:FittedBox(
+            fit: BoxFit.contain, child: Image.asset('images/info.png')),
         ),
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(
-            'Interview Preparation Module',
-            style: TextStyle(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        onPressed: () {
+          // Respond to button press
+          // show info dialog
+          showCustomDialog(
+              context,
+              'These resources are taken from online platforms and the author of this application '
+                  'does not propose that he is the author of these resources. The credit goes to the creators of these content. The sole '
+                  'purpose of using these resources is for educational purposes.',
+              'images/info.png');
+        },
+      ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Interview Preparation Module',
+          style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'MyFont',
+              fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+      ),
+      body: ListView(
+        shrinkWrap: true,
+        children: [
+          Card(
+            margin: const EdgeInsets.all(8.0),
+            child: ListTile(
+              onTap: () => {
+                createFileOfPdfUrl(
+                        "http://smv1999.github.io/SubjectTopicsforInterviews.pdf")
+                    .then((f) {
+                  setState(() {
+                    pathPDF = f.path;
+                  });
+                }).then((_) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PDFScreen(
+                            pathPDF, "Subject Wise Topics for Interview")),
+                  );
+                })
+              },
+              title: Text(
+                'Subject Wise Topics for Interview',
+                style: GoogleFonts.ptSansNarrow(),
+              ),
+              leading:
+                  Container(width: 80, child: Image.asset('images/ai.png')),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
                 color: Colors.black,
-                fontFamily: 'MyFont',
-                fontWeight: FontWeight.bold),
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.white,
-        ),
-        body: Container(
-          // child: RaisedButton(
-          //   child: Text("Open PDF"),
-          //   onPressed: () => Navigator.push(
-          //     context,
-          //     MaterialPageRoute(builder: (context) => PDFScreen(pathPDF)),
-          //   ),
-          // )
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Card(
-                  margin: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    onTap: () => {
-                      createFileOfPdfUrl(
-                              "http://smv1999.github.io/SubjectTopicsforInterviews.pdf")
-                          .then((f) {
-                        setState(() {
-                          pathPDF = f.path;
-                        });
-                      }).then((_) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PDFScreen(pathPDF,
-                                  "Subject Wise Topics for Interview")),
-                        );
-                      })
-                    },
-                    title: Text(
-                      'Subject Wise Topics for Interview',
-                      style: GoogleFonts.ptSansNarrow(),
-                    ),
-                    leading: Container(
-                        width: 80, child: Image.asset('images/ai.png')),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                Card(
-                  margin: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    onTap: () => {
-                      createFileOfPdfUrl(
-                              "http://smv1999.github.io/NontechnicalHRQuestions.pdf")
-                          .then((f) {
-                        setState(() {
-                          pathPDF = f.path;
-                        });
-                      }).then((_) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PDFScreen(
-                                  pathPDF, "Non Technical HR Questions")),
-                        );
-                      })
-                    },
-                    title: Text(
-                      'Non Technical HR Questions',
-                      style: GoogleFonts.ptSansNarrow(),
-                    ),
-                    leading: Container(
-                        width: 80, child: Image.asset('images/cs.jpg')),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                Card(
-                  margin: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    onTap: () => {
-                      createFileOfPdfUrl(
-                              "http://smv1999.github.io/BigOCheatSheet.pdf")
-                          .then((f) {
-                        setState(() {
-                          pathPDF = f.path;
-                        });
-                      }).then((_) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PDFScreen(
-                                  pathPDF, "Time Complexity Cheatsheet")),
-                        );
-                      })
-                    },
-                    title: Text(
-                      'Time Complexity Cheatsheet',
-                      style: GoogleFonts.ptSansNarrow(),
-                    ),
-                    leading: Container(
-                        width: 80, child: Image.asset('images/time.jpg')),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                Card(
-                  margin: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    onTap: () => {
-                      createFileOfPdfUrl(
-                              "http://smv1999.github.io/OOPsJava.pdf")
-                          .then((f) {
-                        setState(() {
-                          pathPDF = f.path;
-                        });
-                      }).then((_) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  PDFScreen(pathPDF, "OOPs Concepts in Java")),
-                        );
-                      })
-                    },
-                    title: Text(
-                      'OOPs Concepts in Java',
-                      style: GoogleFonts.ptSansNarrow(),
-                    ),
-                    leading: Container(
-                        width: 80, child: Image.asset('images/java.png')),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
-        ));
+          Card(
+            margin: const EdgeInsets.all(8.0),
+            child: ListTile(
+              onTap: () => {
+                createFileOfPdfUrl(
+                        "http://smv1999.github.io/NontechnicalHRQuestions.pdf")
+                    .then((f) {
+                  setState(() {
+                    pathPDF = f.path;
+                  });
+                }).then((_) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PDFScreen(pathPDF, "Non Technical HR Questions")),
+                  );
+                })
+              },
+              title: Text(
+                'Non Technical HR Questions',
+                style: GoogleFonts.ptSansNarrow(),
+              ),
+              leading:
+                  Container(width: 80, child: Image.asset('images/cs.jpg')),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          Card(
+            margin: const EdgeInsets.all(8.0),
+            child: ListTile(
+              onTap: () => {
+                createFileOfPdfUrl(
+                        "http://smv1999.github.io/BigOCheatSheet.pdf")
+                    .then((f) {
+                  setState(() {
+                    pathPDF = f.path;
+                  });
+                }).then((_) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PDFScreen(pathPDF, "Time Complexity Cheatsheet")),
+                  );
+                })
+              },
+              title: Text(
+                'Time Complexity Cheatsheet',
+                style: GoogleFonts.ptSansNarrow(),
+              ),
+              leading:
+                  Container(width: 80, child: Image.asset('images/time.jpg')),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          Card(
+            margin: const EdgeInsets.all(8.0),
+            child: ListTile(
+              onTap: () => {
+                createFileOfPdfUrl("http://smv1999.github.io/OOPsJava.pdf")
+                    .then((f) {
+                  setState(() {
+                    pathPDF = f.path;
+                  });
+                }).then((_) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PDFScreen(pathPDF, "OOPs Concepts in Java")),
+                  );
+                })
+              },
+              title: Text(
+                'OOPs Concepts in Java',
+                style: GoogleFonts.ptSansNarrow(),
+              ),
+              leading:
+                  Container(width: 80, child: Image.asset('images/java.png')),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
+
   showCustomDialog(BuildContext context, String text, String imageName) {
     Dialog errorDialog = Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
@@ -256,5 +250,4 @@ class PDFScreen extends StatelessWidget {
         ),
         path: pathPDF);
   }
-    
 }
