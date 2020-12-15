@@ -82,7 +82,9 @@ class _DashboardState extends State<Dashboard> {
                         onLongPress: () {
                           showFloatingFlushbar(context, 'Project Ideas');
                         },
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/projects');
+                        },
                         child: Card(
                           clipBehavior: Clip.antiAlias,
                           child: Image.asset('images/projects.jpg'),
