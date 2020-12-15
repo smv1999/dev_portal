@@ -5,6 +5,9 @@ import 'package:dev_portal/models/jobs.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_html/style.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ExploreJobs extends StatefulWidget {
   @override
@@ -50,6 +53,7 @@ class _ExploreJobsState extends State<ExploreJobs> {
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
                       return ListTile(
+                        onTap: () => showCustomDialog(context, snapshot, index),
                         subtitle: Text(snapshot.data[index].companyName),
                         title: Text(
                           snapshot.data[index].title,
@@ -105,7 +109,8 @@ class _ExploreJobsState extends State<ExploreJobs> {
             j["title"],
             j["description"],
             j["how_to_apply"],
-            j["company_logo"]);
+            j["company_logo"],
+            j["url"]);
         jobs.add(job);
       }
       return jobs;
@@ -113,6 +118,67 @@ class _ExploreJobsState extends State<ExploreJobs> {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       throw Exception('Failed to load album');
+    }
+  }
+
+  showCustomDialog(BuildContext context, AsyncSnapshot snapshot, int index) {
+    Dialog errorDialog = Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+      child: Container(
+        height: 500.0,
+        width: 400.0,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              // Padding(
+              //     padding: EdgeInsets.all(10.0),
+              //     child: Image.asset(
+              //       snapshot.data[index].companyLogoURL,
+              //       height: 100,
+              //       width: 100,
+              //     )),
+              Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Html(
+                    data: snapshot.data[index].description,
+                    style: {
+                      "body": Style(
+                        fontSize: FontSize(17.0),
+                      )
+                    },
+                  )),
+              RaisedButton(
+                child: Text(
+                  'Job URL',
+                  style: GoogleFonts.ptSansNarrow(
+                      textStyle: TextStyle(fontSize: 15)),
+                ),
+                onPressed: () => _openJobURL(snapshot.data[index].jobURL),
+                color: Colors.black,
+                splashColor: Colors.black54,
+                textColor: Colors.white,
+                padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+                elevation: 5.0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(30.0)),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+    showDialog(
+        context: context, builder: (BuildContext context) => errorDialog);
+  }
+
+  void _openJobURL(String jobURL) async {
+    var url = jobURL;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
     }
   }
 }

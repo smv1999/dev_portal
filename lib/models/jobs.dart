@@ -8,6 +8,7 @@ class Jobs {
   String description;
   String how_to_apply;
   String companyLogoURL;
+  String jobURL;
 
   Jobs(
       this.jobType,
@@ -18,6 +19,7 @@ class Jobs {
       this.title,
       this.description,
       this.how_to_apply,
-      this.companyLogoURL);
+      this.companyLogoURL,
+      this.jobURL);
 
 }
