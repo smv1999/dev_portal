@@ -23,6 +23,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
   DatabaseReference myRef, userNameRef;
   String imagePath;
   bool imageFlag = false;
+  final TextEditingController controller = TextEditingController(text: '');
 
   Future<void> getImage() async {
     final FirebaseUser user = await auth.getCurrentUser();
@@ -182,14 +183,18 @@ class _EditUserProfileState extends State<EditUserProfile> {
                       height: 10.0,
                     ),
                     TextFormField(
+                        controller: controller,
                         maxLines: 1,
                         maxLength: 10,
                         validator: (val) =>
                             val.isEmpty ? 'Enter your DOB' : null,
-//                        onTap:() => _selectDate(context),
+                       onTap:() => {
+                         selectDate(context),
+                          controller.text = "${selectedDate.toLocal()}".split(' ')[0]
+                         },
                         onChanged: (text) {
                           setState(() {
-                            dob = text;
+                            dob = "${selectedDate.toLocal()}".split(' ')[0];
                           });
                         },
                         decoration: InputDecoration(

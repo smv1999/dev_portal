@@ -10,6 +10,7 @@ import 'package:dev_portal/screens/find_people.dart';
 import 'package:dev_portal/screens/forgot_password_page.dart';
 import 'package:dev_portal/screens/interview_page.dart';
 import 'package:dev_portal/screens/new_post.dart';
+import 'package:dev_portal/screens/new_task.dart';
 import 'package:dev_portal/screens/projects_ideas.dart';
 import 'package:dev_portal/screens/settings_page.dart';
 import 'package:dev_portal/screens/login_page.dart';
@@ -71,6 +72,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => TodoList());    
       case '/projects':
         return MaterialPageRoute(builder: (_) => ProjectIdeas());    
+      case '/newtask':
+        return MaterialPageRoute(builder: (_) => NewTask());    
+      
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();

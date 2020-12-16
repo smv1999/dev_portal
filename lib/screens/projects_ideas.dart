@@ -74,56 +74,58 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
           FutureBuilder(
             future: f,
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context, index) {
-                    return Dismissible(
-                      key: UniqueKey(),
-                      child: Card(
-                        margin: const EdgeInsets.all(8.0),
-                        child: ListTile(
-                          subtitle:
-                              Text(snapshot.data[index].projectDescription),
-                          title: Text(
-                            snapshot.data[index].projectTitle,
-                            style: GoogleFonts.ptSansNarrow(),
+              if (snapshot.data != null) {
+                if (snapshot.data.length != 0) {
+                  return ListView.builder(
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index) {
+                      return Dismissible(
+                        key: UniqueKey(),
+                        child: Card(
+                          margin: const EdgeInsets.all(8.0),
+                          child: ListTile(
+                            subtitle:
+                                Text(snapshot.data[index].projectDescription),
+                            title: Text(
+                              snapshot.data[index].projectTitle,
+                              style: GoogleFonts.ptSansNarrow(),
+                            ),
                           ),
                         ),
-                      ),
-                      onDismissed: (direction) {
-                        // Remove the item from the data source.
-                        setState(() {
-                          String delTitle = snapshot.data[index].projectTitle;
-                          String delDescription =
-                              snapshot.data[index].projectDescription;
-                          snapshot.data.removeAt(index);
-                          deleteProjectData(delTitle, context, delDescription);
-                        });
-                      },
-                      // Show a red background as the item is swiped away.
-                      background: Container(
-                        padding: EdgeInsets.all(20.0),
-                        alignment: Alignment.centerRight,
-                        color: Colors.grey,
-                        child: Icon(
-                          Icons.delete,
-                          color: Colors.white,
+                        onDismissed: (direction) {
+                          // Remove the item from the data source.
+                          setState(() {
+                            String delTitle = snapshot.data[index].projectTitle;
+                            String delDescription =
+                                snapshot.data[index].projectDescription;
+                            snapshot.data.removeAt(index);
+                            deleteProjectData(
+                                delTitle, context, delDescription);
+                          });
+                        },
+                        // Show a red background as the item is swiped away.
+                        background: Container(
+                          padding: EdgeInsets.all(20.0),
+                          alignment: Alignment.centerRight,
+                          color: Colors.grey,
+                          child: Icon(
+                            Icons.delete,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                      );
+                    },
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                  );
+                }
+                return Container(
+                  child: Image.asset('images/data_not_found.png'),
                 );
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
-
-              // By default, show a loading spinner.
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+              return Container();
             },
           )
         ],
@@ -165,13 +167,13 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
                       },
                       decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 1.0),
-                              borderRadius: BorderRadius.circular(32.0)),
+                            borderSide:
+                                BorderSide(color: Colors.grey, width: 1.0),
+                          ),
                           focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 1.0),
-                              borderRadius: BorderRadius.circular(32.0)),
+                            borderSide:
+                                BorderSide(color: Colors.grey, width: 1.0),
+                          ),
                           hintText: 'Project Title',
                           hintStyle: GoogleFonts.ptSansNarrow()),
                       textAlign: TextAlign.left,
@@ -266,11 +268,13 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
         FirebaseDatabase.instance.reference().child('Projects').child(userId);
     myProjRef.once().then((DataSnapshot dataSnapshot) {
       setState(() {
-        for (var snapshot in dataSnapshot.value.values) {
-          Projects project =
-              Projects(snapshot["title"], snapshot["description"]);
+        if (dataSnapshot.value != null) {
+          for (var snapshot in dataSnapshot.value.values) {
+            Projects project =
+                Projects(snapshot["title"], snapshot["description"]);
 
-          projects.add(project);
+            projects.add(project);
+          }
         }
         return projects;
       });
