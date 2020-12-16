@@ -6,8 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
-
 
 class TodoList extends StatefulWidget {
   @override
@@ -21,11 +21,13 @@ class _TodoListState extends State<TodoList> {
   Auth auth = new Auth();
   Future f;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-
+  SharedPreferences prefs;
+  bool _seen;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => checkTipSeen());
     f = retrieveTaskData();
   }
 
@@ -41,7 +43,7 @@ class _TodoListState extends State<TodoList> {
         foregroundColor: Colors.black,
         onPressed: () {
           // Respond to button press
-          
+
           // open a new screen to add new task
           Navigator.of(context).pushNamed('/newtask');
         },
@@ -77,9 +79,12 @@ class _TodoListState extends State<TodoList> {
                         child: Card(
                           margin: const EdgeInsets.all(8.0),
                           child: ListTile(
-                            subtitle:
-                                Text(snapshot.data[index].taskDescription + "\n" + snapshot.data[index].dateCreated
-                                + "\n" + snapshot.data[index].taskDeadline),
+                            subtitle: Text(
+                                snapshot.data[index].taskDescription +
+                                    "\n" +
+                                    snapshot.data[index].dateCreated +
+                                    "\n" +
+                                    snapshot.data[index].taskDeadline),
                             title: Text(
                               snapshot.data[index].taskTitle,
                               style: GoogleFonts.ptSansNarrow(),
@@ -92,11 +97,13 @@ class _TodoListState extends State<TodoList> {
                             String delTitle = snapshot.data[index].taskTitle;
                             String delDescription =
                                 snapshot.data[index].taskDescription;
-                            String delDeadline = snapshot.data[index].taskDeadline;
-                            String delCreated = snapshot.data[index].dateCreated;
+                            String delDeadline =
+                                snapshot.data[index].taskDeadline;
+                            String delCreated =
+                                snapshot.data[index].dateCreated;
                             snapshot.data.removeAt(index);
-                            deleteTaskData(
-                                delTitle, context, delDescription, delDeadline, delCreated);
+                            deleteTaskData(delTitle, context, delDescription,
+                                delDeadline, delCreated);
                           });
                         },
                         // Show a red background as the item is swiped away.
@@ -129,6 +136,68 @@ class _TodoListState extends State<TodoList> {
     );
   }
 
+  Future checkTipSeen() async {
+    prefs = await SharedPreferences.getInstance();
+    _seen = (prefs.getBool('todosheetseen') ?? false);
+    if (!_seen) {
+      showBottomSheetDialog();
+      await prefs.setBool('todosheetseen', true);
+    }
+  }
+
+  void showBottomSheetDialog() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            color: Color(0xFF737373),
+            height: 250,
+            child: Container(
+              padding: EdgeInsets.all(20.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Image.asset(
+                      'images/getting_started.png',
+                      height: 80,
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Text(
+                      'Getting Started',
+                      style: GoogleFonts.ptSansNarrow(
+                          textStyle: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Text(
+                      'You can view the list of to-dos created here and delete them by swiping left on each item of the list.',
+                      style: GoogleFonts.ptSansNarrow(
+                          textStyle: TextStyle(
+                        fontSize: 18,
+                      )),
+                      textAlign: TextAlign.justify,
+                    ),
+                  ],
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).canvasColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(10),
+                  topRight: const Radius.circular(10),
+                ),
+              ),
+            ),
+          );
+        });
+  }
 
   Future<List<Tasks>> retrieveTaskData() async {
     final FirebaseUser user = await auth.getCurrentUser();
@@ -141,8 +210,8 @@ class _TodoListState extends State<TodoList> {
       setState(() {
         if (dataSnapshot.value != null) {
           for (var snapshot in dataSnapshot.value.values) {
-            Tasks task =
-                Tasks(snapshot["title"], snapshot["description"], snapshot["deadline"], snapshot["created"]);
+            Tasks task = Tasks(snapshot["title"], snapshot["description"],
+                snapshot["deadline"], snapshot["created"]);
 
             tasks.add(task);
           }
@@ -153,8 +222,8 @@ class _TodoListState extends State<TodoList> {
     return tasks;
   }
 
-  deleteTaskData(
-      var delTitle, BuildContext context, var delDescription, var delDeadline, var delCreated) async {
+  deleteTaskData(var delTitle, BuildContext context, var delDescription,
+      var delDeadline, var delCreated) async {
     final FirebaseUser user = await auth.getCurrentUser();
     final userId = user.uid;
     FirebaseDatabase.instance
@@ -170,7 +239,10 @@ class _TodoListState extends State<TodoList> {
             action: SnackBarAction(
                 label: "UNDO",
                 onPressed: () => setState(
-                      () => {undoDeleteTask(delTitle, delDescription, delDeadline, delCreated)},
+                      () => {
+                        undoDeleteTask(
+                            delTitle, delDescription, delDeadline, delCreated)
+                      },
                     ) // this is what you needed
                 ),
           ));
@@ -188,7 +260,8 @@ class _TodoListState extends State<TodoList> {
     });
   }
 
-  undoDeleteTask(var delTitle, var delDescription, var delDeadline, var delCreated) async {
+  undoDeleteTask(
+      var delTitle, var delDescription, var delDeadline, var delCreated) async {
     taskTitle = delTitle;
     taskDescription = delDescription;
     taskDeadline = delDeadline;
@@ -203,7 +276,6 @@ class _TodoListState extends State<TodoList> {
     taskMap.putIfAbsent('description', () => taskDescription);
     taskMap.putIfAbsent('deadline', () => taskDeadline);
     taskMap.putIfAbsent('created', () => dateCreated);
-
 
     mytaskRef.push().set(taskMap);
 
