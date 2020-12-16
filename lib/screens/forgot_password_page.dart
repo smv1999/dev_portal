@@ -1,8 +1,8 @@
+import 'package:dev_portal/services/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toast/toast.dart';
-import '../services/authentication.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   @override
