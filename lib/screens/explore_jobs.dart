@@ -33,6 +33,20 @@ class _ExploreJobsState extends State<ExploreJobs> {
           ),
           centerTitle: true,
           iconTheme: IconThemeData(color: Colors.black),
+          actions: <Widget>[
+            Container(
+              padding: EdgeInsets.all(10),
+          child:GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed('/morejobs');
+            },
+            child: Icon(
+              Icons.explore,
+            ),
+          )
+          )
+        ],
+        actionsIconTheme: IconThemeData(color: Colors.black),
         ),
         body: ListView(
           shrinkWrap: true,

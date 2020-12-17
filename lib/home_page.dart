@@ -193,13 +193,16 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.black),
         actions: <Widget>[
-          GestureDetector(
+          Container(
+            padding: EdgeInsets.all(10),
+          child:GestureDetector(
             onTap: () {
               showAlertDialog(context);
             },
             child: Icon(
               Icons.logout,
             ),
+          ),
           )
         ],
         actionsIconTheme: IconThemeData(color: Colors.black),
