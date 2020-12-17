@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 
 class ProjectIdeas extends StatefulWidget {
@@ -20,11 +21,14 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
   DatabaseReference myProjRef;
   Auth auth = new Auth();
   Future f;
+  SharedPreferences prefs;
+  bool _seen;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => checkTipSeen());
     f = retrieveProjectData();
   }
 
@@ -238,6 +242,70 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
     showDialog(
         context: context, builder: (BuildContext context) => errorDialog);
   }
+
+   Future checkTipSeen() async {
+    prefs = await SharedPreferences.getInstance();
+    _seen = (prefs.getBool('projectsheetseen') ?? false);
+    if (!_seen) {
+      showBottomSheetDialog();
+      await prefs.setBool('projectsheetseen', true);
+    }
+  }
+
+  void showBottomSheetDialog() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            color: Color(0xFF737373),
+            height: 250,
+            child: Container(
+              padding: EdgeInsets.all(20.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Image.asset(
+                      'images/getting_started.png',
+                      height: 80,
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Text(
+                      'Getting Started',
+                      style: GoogleFonts.ptSansNarrow(
+                          textStyle: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Text(
+                      'You can view the list of project ideas created here and delete them by swiping left on each item of the list.',
+                      style: GoogleFonts.ptSansNarrow(
+                          textStyle: TextStyle(
+                        fontSize: 18,
+                      )),
+                      textAlign: TextAlign.justify,
+                    ),
+                  ],
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).canvasColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(10),
+                  topRight: const Radius.circular(10),
+                ),
+              ),
+            ),
+          );
+        });
+  }
+
 
   void _saveProjectData(BuildContext context) async {
     if (_formKey.currentState.validate()) {

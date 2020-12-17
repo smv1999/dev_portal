@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Scaffold(
       drawer: Container(
-        width: 245.0,
+        width: 260.0,
         child: Drawer(
           child: ListView(
             children: <Widget>[
