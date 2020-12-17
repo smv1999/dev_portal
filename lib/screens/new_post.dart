@@ -201,7 +201,7 @@ class _NewPostState extends State<NewPost> {
               SizedBox(
                 height: 100,
                 width: 100,
-                child: Icon(Icons.warning_sharp,),
+                child: Icon(Icons.warning_sharp, size: 80,),
               ),
               Padding(
                 padding: EdgeInsets.all(10.0),

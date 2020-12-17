@@ -18,6 +18,7 @@ class _FindPeopleState extends State<FindPeople> {
   List<String> following = [], followers = [];
   Future f;
   String currentUserName = "";
+  bool followingOn = false;
 
   @override
   void initState() {
@@ -127,41 +128,56 @@ class _FindPeopleState extends State<FindPeople> {
     final FirebaseUser user = await auth.getCurrentUser();
     final userId = user.uid;
 
-    myPeopleRef = FirebaseDatabase.instance.reference().child('Profile');
-    myPeopleRef.once().then((DataSnapshot dataSnapshot) {
-      for (var snapshot in dataSnapshot.value.values) {
-        if (snapshot["username"] == toFollowUserName) {
-          var addFollowerUserId = dataSnapshot.value.keys.firstWhere(
-              (k) => dataSnapshot.value[k] == snapshot,
-              orElse: () => null);
-          myfollowersRef = FirebaseDatabase.instance
-              .reference()
-              .child('Follow')
-              .child(addFollowerUserId)
-              .child('followers');
-
-          HashMap<String, String> addFollowersMap = new HashMap();
-          // add the current user as follower to the followed user.
-          addFollowersMap.putIfAbsent('userid', () => currentUserName);
-
-          myfollowersRef.push().set(addFollowersMap);
-        }
-      }
-    });
-
     myfollowingRef = FirebaseDatabase.instance
         .reference()
         .child('Follow')
         .child(userId)
         .child('following');
 
-    HashMap<String, String> toFollowMap = new HashMap();
-    // add the followed user to the following list
-    toFollowMap.putIfAbsent('userid', () => toFollowUserName);
+    if (following.contains(toFollowUserName)) {
+      myPeopleRef = FirebaseDatabase.instance.reference().child('Profile');
+      myPeopleRef.once().then((DataSnapshot dataSnapshot) {
+        for (var snapshot in dataSnapshot.value.values) {
+          if (snapshot["username"] == toFollowUserName) {
+            var addFollowerUserId = dataSnapshot.value.keys.firstWhere(
+                (k) => dataSnapshot.value[k] == snapshot,
+                orElse: () => null);
+            showUnfollowDialog(context, "Are you sure you want to unfollow?",
+                toFollowUserName, addFollowerUserId);
+          }
+        }
+      });
+    } else {
+      myPeopleRef = FirebaseDatabase.instance.reference().child('Profile');
+      myPeopleRef.once().then((DataSnapshot dataSnapshot) {
+        for (var snapshot in dataSnapshot.value.values) {
+          if (snapshot["username"] == toFollowUserName) {
+            var addFollowerUserId = dataSnapshot.value.keys.firstWhere(
+                (k) => dataSnapshot.value[k] == snapshot,
+                orElse: () => null);
+            myfollowersRef = FirebaseDatabase.instance
+                .reference()
+                .child('Follow')
+                .child(addFollowerUserId)
+                .child('followers');
 
-    myfollowingRef.push().set(toFollowMap);
+            HashMap<String, String> addFollowersMap = new HashMap();
+            // add the current user as follower to the followed user.
+            addFollowersMap.putIfAbsent('userid', () => currentUserName);
 
-    f = retrievePeopleData();
+            myfollowersRef.push().set(addFollowersMap);
+          }
+        }
+      });
+
+      HashMap<String, String> toFollowMap = new HashMap();
+      // add the followed user to the following list
+      toFollowMap.putIfAbsent('userid', () => toFollowUserName);
+
+      myfollowingRef.push().set(toFollowMap);
+
+      f = retrievePeopleData();
+    }
   }
 
   Future<List<People>> retrievePeopleData() async {
@@ -174,7 +190,12 @@ class _FindPeopleState extends State<FindPeople> {
         FirebaseDatabase.instance.reference().child('Profile').child(userId);
     myProfileRef.once().then((DataSnapshot dataSnapshot) {
       setState(() {
-        currentUserName = dataSnapshot.value["username"];
+        if (dataSnapshot.value != null)
+          currentUserName = dataSnapshot.value["username"];
+        if (currentUserName == "") {
+          showCustomDialog(context,
+              "You cannot Follow/Unfollow anyone before creating your profile. Go ahead and create your stunning profile!");
+        }
       });
     });
 
@@ -215,5 +236,176 @@ class _FindPeopleState extends State<FindPeople> {
       });
     });
     return people;
+  }
+
+  unfollowPeople(String unfollowUserName, String addFollowUserId) async {
+    final FirebaseUser user = await auth.getCurrentUser();
+    final userId = user.uid;
+
+    myfollowingRef = FirebaseDatabase.instance
+        .reference()
+        .child('Follow')
+        .child(userId)
+        .child('following');
+
+    myfollowersRef = FirebaseDatabase.instance
+        .reference()
+        .child('Follow')
+        .child(addFollowUserId)
+        .child('followers');
+
+    myfollowingRef.once().then((DataSnapshot dataSnapshot) {
+      for (var snapshot in dataSnapshot.value.values) {
+        if (snapshot["userid"] == unfollowUserName) {
+          var userKey = dataSnapshot.value.keys.firstWhere(
+              (k) => dataSnapshot.value[k] == snapshot,
+              orElse: () => null);
+          FirebaseDatabase.instance
+              .reference()
+              .child('Follow')
+              .child(userId)
+              .child('following')
+              .child(userKey)
+              .remove();
+        }
+      }
+    });
+
+    myfollowersRef.once().then((DataSnapshot dataSnapshot) {
+      for (var snapshot in dataSnapshot.value.values) {
+        if (snapshot["userid"] == currentUserName) {
+          var userKey = dataSnapshot.value.keys.firstWhere(
+              (k) => dataSnapshot.value[k] == snapshot,
+              orElse: () => null);
+          FirebaseDatabase.instance
+              .reference()
+              .child('Follow')
+              .child(addFollowUserId)
+              .child('followers')
+              .child(userKey)
+              .remove();
+        }
+      }
+    });
+
+    f = retrievePeopleData();
+    Navigator.of(context).pop();
+  }
+
+  showUnfollowDialog(BuildContext context, String text, String unfollowUserName,
+      String addFollowUserId) {
+    Dialog errorDialog = Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+      child: Container(
+        height: 300.0,
+        width: 300.0,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              SizedBox(
+                height: 100,
+                width: 100,
+                child: Icon(
+                  Icons.warning_sharp,
+                  size: 80,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  text,
+                  textAlign: TextAlign.justify,
+                  style: GoogleFonts.ptSansNarrow(
+                      textStyle: TextStyle(fontSize: 17)),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: RaisedButton(
+                  child: Text(
+                    'Unfollow',
+                    style: GoogleFonts.ptSansNarrow(
+                        textStyle: TextStyle(fontWeight: FontWeight.bold)),
+                  ),
+                  onPressed: () {
+                    // call unfollow function
+                    unfollowPeople(unfollowUserName, addFollowUserId);
+                  },
+                  textColor: Colors.white,
+                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+                  elevation: 5.0,
+                  color: Colors.black,
+                  splashColor: Colors.grey,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => errorDialog,
+        barrierDismissible: false);
+  }
+
+  showCustomDialog(BuildContext context, String text) {
+    Dialog errorDialog = Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+      child: Container(
+        height: 300.0,
+        width: 300.0,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              SizedBox(
+                height: 100,
+                width: 100,
+                child: Icon(
+                  Icons.warning_sharp,
+                  size: 80,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  text,
+                  textAlign: TextAlign.justify,
+                  style: GoogleFonts.ptSansNarrow(
+                      textStyle: TextStyle(fontSize: 17)),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: RaisedButton(
+                  child: Text(
+                    'Go to Profile',
+                    style: GoogleFonts.ptSansNarrow(
+                        textStyle: TextStyle(fontWeight: FontWeight.bold)),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, "/profile", ModalRoute.withName('/profile'));
+                  },
+                  textColor: Colors.white,
+                  padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+                  elevation: 5.0,
+                  color: Colors.black,
+                  splashColor: Colors.grey,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => errorDialog,
+        barrierDismissible: false);
   }
 }
