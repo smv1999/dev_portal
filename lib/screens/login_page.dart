@@ -44,14 +44,14 @@ class MyLoginPageState extends State {
             appBar: AppBar(
               automaticallyImplyLeading: false,
               title: Text(
-                'Dev Portal',
+                'Login',
                 style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'MyFont'),
               ),
               centerTitle: true,
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.blue,
             ),
             body: Center(
               child: Container(
@@ -125,7 +125,7 @@ class MyLoginPageState extends State {
                                 _obscureText
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: Colors.black,
+                                color: Colors.blue,
                               ),
                               onPressed: () {
                                 // Update the state i.e. toogle the state of passwordVisible variable
@@ -155,8 +155,8 @@ class MyLoginPageState extends State {
                               style: TextStyle(fontSize: 18),
                             ),
                             onPressed: _computeResult,
-                            color: Colors.black,
-                            splashColor: Colors.grey,
+                            color: Colors.blue,
+                            splashColor: Colors.blueAccent,
                             textColor: Colors.white,
                             padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
                             elevation: 5.0,

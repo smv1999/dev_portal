@@ -6,7 +6,6 @@ import 'package:splashscreen/splashscreen.dart';
 
 void main() => runApp(SplashScreenPage());
 
-
 class SplashScreenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -15,13 +14,11 @@ class SplashScreenPage extends StatelessWidget {
       initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,
       home: new MySplash(),
-      theme: ThemeData(
-       fontFamily: 'MyFont',
-        primaryColor: Colors.white
-      ),
+      theme: ThemeData(fontFamily: 'MyFont', primaryColor: Colors.white),
     );
   }
 }
+
 class MySplash extends StatefulWidget {
   @override
   _MySplashState createState() => _MySplashState();
@@ -35,7 +32,10 @@ class _MySplashState extends State<MySplash> {
       body: SplashScreen(
         title: new Text(
           'Dev Portal',
-          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, fontFamily: 'MyFont'),
+          style: new TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+              fontFamily: 'MyFont'),
         ),
         seconds: 3,
         navigateAfterSeconds: new IntroScreenPage(),
@@ -43,10 +43,12 @@ class _MySplashState extends State<MySplash> {
         backgroundColor: Colors.white,
         styleTextUnderTheLoader: new TextStyle(),
         photoSize: 100.0,
-        loaderColor: Colors.black,
-        loadingText: Text('Community Portal for Developers', style: GoogleFonts.ptSansNarrow(),),
+        loaderColor: Colors.blue,
+        loadingText: Text(
+          'Community Portal for Developers',
+          style: GoogleFonts.ptSansNarrow(),
+        ),
       ),
-
-    ) ;
+    );
   }
 }

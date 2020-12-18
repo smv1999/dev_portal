@@ -7,16 +7,16 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blue,
         title: Text(
           'About Dev Portal',
           style: TextStyle(
             fontFamily: 'MyFont',
-            color: Colors.black,
+            color: Colors.white,
             fontWeight: FontWeight.bold
           ),
         ),
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
       ),
       body:Padding(

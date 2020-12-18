@@ -16,12 +16,12 @@ class _BytePageState extends State<BytePage> {
           title: Text(
             'Mini Bytes',
             style: TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontFamily: 'MyFont',
                 fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.blue,
         ),
         body: Container(
           child: SingleChildScrollView(
@@ -31,11 +31,9 @@ class _BytePageState extends State<BytePage> {
                   height: 10.0,
                 ),
                 Center(
-                  child: TyperAnimatedTextKit(
-                    text: [
-                      "Trending Topics",
-                    ],
-                    textStyle: TextStyle(fontSize: 30.0, fontFamily: "MyFont"),
+                  child: Text(
+                    "Trending Topics",
+                    style: TextStyle(fontSize: 30.0, fontFamily: "MyFont"),
                   ),
                 ),
                 SizedBox(
@@ -62,7 +60,7 @@ class _BytePageState extends State<BytePage> {
                         width: 80, child: Image.asset('images/ai.png')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
-                      color: Colors.black,
+                      color: Colors.grey,
                     ),
                   ),
                 ),
@@ -91,7 +89,7 @@ class _BytePageState extends State<BytePage> {
                         width: 80, child: Image.asset('images/blockchain.png')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
-                      color: Colors.black,
+                      color: Colors.grey,
                     ),
                   ),
                 ),
@@ -120,7 +118,7 @@ class _BytePageState extends State<BytePage> {
                         child: Image.asset('images/cloudcomputing.png')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
-                      color: Colors.black,
+                      color: Colors.grey,
                     ),
                   ),
                 ),
@@ -149,7 +147,7 @@ class _BytePageState extends State<BytePage> {
                         width: 80, child: Image.asset('images/bigdata.png')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
-                      color: Colors.black,
+                      color: Colors.grey,
                     ),
                   ),
                 ),
@@ -178,7 +176,7 @@ class _BytePageState extends State<BytePage> {
                         width: 80, child: Image.asset('images/iot.png')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
-                      color: Colors.black,
+                      color: Colors.grey,
                     ),
                   ),
                 ),
@@ -206,7 +204,7 @@ class _BytePageState extends State<BytePage> {
                         width: 80, child: Image.asset('images/vrar.png')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
-                      color: Colors.black,
+                      color: Colors.grey,
                     ),
                   ),
                 ),

@@ -32,8 +32,7 @@ class _InterviewPageState extends State<InterviewPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: SizedBox.expand(
-        child:FittedBox(
-            fit: BoxFit.contain, child: Icon(Icons.info)),
+          child: FittedBox(fit: BoxFit.contain, child: Icon(Icons.info)),
         ),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
@@ -237,7 +236,12 @@ class PDFScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PDFViewerScaffold(
         appBar: AppBar(
-          title: Text(this.docName),
+          backgroundColor: Colors.blue,
+          iconTheme: IconThemeData(color: Colors.white),
+          title: Text(this.docName,
+              style: TextStyle(
+                color: Colors.white,
+              )),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.share),
@@ -247,6 +251,7 @@ class PDFScreen extends StatelessWidget {
               },
             ),
           ],
+          actionsIconTheme: IconThemeData(color: Colors.white),
         ),
         path: pathPDF);
   }

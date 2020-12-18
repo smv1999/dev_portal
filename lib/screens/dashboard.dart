@@ -26,7 +26,7 @@ class _DashboardState extends State<Dashboard> {
           backgroundColor: Colors.blue,
           automaticallyImplyLeading: false,
           title: Text(
-            'Dashboard',
+            'Dev Portal',
             style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'MyFont',

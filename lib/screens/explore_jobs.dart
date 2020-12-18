@@ -23,16 +23,17 @@ class _ExploreJobsState extends State<ExploreJobs> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.blue,
           automaticallyImplyLeading: false,
           title: Text(
             'Dev Portal',
             style: TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontFamily: 'MyFont',
                 fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: IconThemeData(color: Colors.white),
           actions: <Widget>[
             Container(
               padding: EdgeInsets.all(10),
@@ -46,7 +47,7 @@ class _ExploreJobsState extends State<ExploreJobs> {
           )
           )
         ],
-        actionsIconTheme: IconThemeData(color: Colors.black),
+        actionsIconTheme: IconThemeData(color: Colors.white),
         ),
         body: ListView(
           shrinkWrap: true,
@@ -87,7 +88,7 @@ class _ExploreJobsState extends State<ExploreJobs> {
                         ),
                         trailing: Icon(
                           Icons.arrow_forward_ios,
-                          color: Colors.black,
+                          color: Colors.grey,
                         ),
                       );
                     },

@@ -20,18 +20,17 @@ class MyRegisterPageState extends State {
     // TODO: implement build
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          'Dev Portal',
-          style: TextStyle(color: Colors.black,
+          'Sign Up',
+          style: TextStyle(color: Colors.white,
           fontFamily: 'MyFont',
           fontWeight: FontWeight.bold
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blue,
       ),
       body: Center(
         child: Container(
@@ -97,7 +96,7 @@ class MyRegisterPageState extends State {
                     _obscureText
                     ? Icons.visibility
                       : Icons.visibility_off,
-                      color: Colors.black,
+                      color: Colors.blue,
                     ),
                     onPressed: () {
                       // Update the state i.e. toogle the state of passwordVisible variable
@@ -124,8 +123,8 @@ class MyRegisterPageState extends State {
                     child: RaisedButton(
                       child: Text('REGISTER', style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18)),),
                       onPressed: _computeResult,
-                      color: Colors.black,
-                      splashColor: Colors.black54,
+                      color: Colors.blue,
+                      splashColor: Colors.blueAccent,
                       textColor: Colors.white,
                       padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
                       elevation: 5.0,

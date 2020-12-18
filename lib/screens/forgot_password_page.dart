@@ -17,18 +17,17 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Scaffold(
-          backgroundColor: Colors.white,
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Text(
-              'Dev Portal',
+              'Forgot Password',
               style: TextStyle(
                 fontFamily: 'MyFont',
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.bold
               ),
             ),
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.blue,
             centerTitle: true,
           ),
           body: Center(
@@ -84,8 +83,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18)),
                         ),
                         onPressed: _sendPasswordResetEmail,
-                        color: Colors.black,
-                        splashColor: Colors.black54,
+                        color: Colors.blue,
+                        splashColor: Colors.blueAccent,
                         textColor: Colors.white,
                         padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
                         elevation: 5.0,
