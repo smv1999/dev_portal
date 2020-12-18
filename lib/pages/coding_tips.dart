@@ -45,12 +45,9 @@ class _CodingTipsPageState extends State<CodingTipsPage>
               height: 30.0,
             ),
             Center(
-              child: TextLiquidFill(
-                text: 'Tips for Best Coding Style',
-                waveColor: Colors.black,
-                boxBackgroundColor: Colors.white,
-                textStyle: TextStyle(fontSize: 35.0, fontFamily: 'MyFont'),
-                boxHeight: 50.0,
+              child: Text(
+                'Tips for Best Coding Style',
+                style: TextStyle(fontSize: 35.0, fontFamily: 'MyFont'),
               ),
             ),
             Container(
@@ -93,11 +90,9 @@ class _CodingTipsPageState extends State<CodingTipsPage>
               height: 10.0,
             ),
             Center(
-              child: TyperAnimatedTextKit(
-                text: [
+              child: Text(
                   "Articles on Best Coding Practices",
-                ],
-                textStyle: TextStyle(fontSize: 30.0, fontFamily: "MyFont"),
+                style: TextStyle(fontSize: 30.0, fontFamily: "MyFont"),
               ),
             ),
             SizedBox(
@@ -116,7 +111,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article1.jpg?token=AKHIZQNFJJWTTWO6YHXHWMC7G7J3O'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.black,
+                  color: Colors.grey,
                 ),
               ),
             ),
@@ -136,7 +131,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article2.png?token=AKHIZQNIX5T5J5MCI2TWAE27G7LK2'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.black,
+                  color: Colors.grey,
                 ),
               ),
             ),
@@ -156,7 +151,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article3.png?token=AKHIZQJF2CPMPK7X7RZIMSS7G7LOA'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.black,
+                  color: Colors.grey,
                 ),
               ),
             ),
@@ -176,7 +171,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article4.jpg?token=AKHIZQJDZSO3TPNNLDIPQWC7G7LTW'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.black,
+                  color: Colors.grey,
                 ),
               ),
             ),
@@ -204,7 +199,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article4.jpg?token=AKHIZQJDZSO3TPNNLDIPQWC7G7LTW'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.black,
+                  color: Colors.grey,
                 ),
               ),
             ),
@@ -224,7 +219,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article4.jpg?token=AKHIZQJDZSO3TPNNLDIPQWC7G7LTW'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.black,
+                  color: Colors.grey,
                 ),
               ),
             ),
@@ -244,7 +239,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article4.jpg?token=AKHIZQJDZSO3TPNNLDIPQWC7G7LTW'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.black,
+                  color: Colors.grey,
                 ),
               ),
             ),
@@ -264,7 +259,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article4.jpg?token=AKHIZQJDZSO3TPNNLDIPQWC7G7LTW'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.black,
+                  color: Colors.grey,
                 ),
               ),
             ),
@@ -281,7 +276,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article9.jpeg?token=AKHIZQILQBJZSTFZTHR2FFK7G735U'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.black,
+                  color: Colors.grey,
                 ),
               ),
             ),
@@ -298,7 +293,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article10.png?token=AKHIZQNHUHXNYUN6VFSALES7G74I4'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.black,
+                  color: Colors.grey,
                 ),
               ),
             ),
@@ -315,7 +310,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/article10.png?token=AKHIZQNHUHXNYUN6VFSALES7G74I4'),),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.black,
+                  color: Colors.grey,
                 ),
               ),
             ),

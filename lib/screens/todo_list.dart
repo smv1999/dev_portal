@@ -39,8 +39,8 @@ class _TodoListState extends State<TodoList> {
         child: SizedBox.expand(
           child: FittedBox(fit: BoxFit.contain, child: Icon(Icons.add)),
         ),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
         onPressed: () {
           // Respond to button press
 
@@ -49,18 +49,21 @@ class _TodoListState extends State<TodoList> {
         },
       ),
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         automaticallyImplyLeading: false,
         title: Text(
           'To Do List',
           style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontFamily: 'MyFont',
               fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.black),
       ),
-      body: ListView(
+      body: Container(
+        color: Colors.white60,
+      child:ListView(
         shrinkWrap: true,
         children: [
           SizedBox(
@@ -132,6 +135,7 @@ class _TodoListState extends State<TodoList> {
             },
           )
         ],
+      ),
       ),
     );
   }

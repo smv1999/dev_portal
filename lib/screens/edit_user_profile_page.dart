@@ -15,7 +15,21 @@ class EditUserProfile extends StatefulWidget {
 
 class _EditUserProfileState extends State<EditUserProfile> {
   final _formKey = GlobalKey<FormState>();
-  String firstName, lastName, dob, phoneNumber, summary, email, username, website, employmentTitle, stackoverflow, youtube, skills, linkedin, medium, github;
+  String firstName,
+      lastName,
+      dob,
+      phoneNumber,
+      summary,
+      email,
+      username,
+      website,
+      employmentTitle,
+      stackoverflow,
+      youtube,
+      skills,
+      linkedin,
+      medium,
+      github;
   Auth auth = new Auth();
   File _image;
   final picker = ImagePicker();
@@ -44,33 +58,34 @@ class _EditUserProfileState extends State<EditUserProfile> {
     imagePath = await taskSnapshot.ref.getDownloadURL();
     imageFlag = true;
   }
+
   DateTime selectedDate = DateTime.now();
 
   Future<void> selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-        firstDate: DateTime(1900),
-        lastDate: DateTime(2101),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2101),
     );
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
       });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Colors.blue,
+        iconTheme: IconThemeData(color: Colors.white),
         title: Text(
           'Edit Profile',
           style: TextStyle(
-            fontFamily: 'MyFont',
-            color: Colors.black,
-            fontWeight: FontWeight.bold
-          ),
+              fontFamily: 'MyFont',
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         actions: <Widget>[
@@ -83,504 +98,513 @@ class _EditUserProfileState extends State<EditUserProfile> {
                 child: Icon(Icons.check_circle),
               )),
         ],
-        actionsIconTheme: IconThemeData(color: Colors.black),
+        actionsIconTheme: IconThemeData(color: Colors.white),
       ),
       body: Center(
         child: Container(
             color: Colors.white,
             child: Padding(
-              padding: EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(10.0),
               child: Form(
                 key: _formKey,
                 child: SingleChildScrollView(
-                  child:Column(
-                  children:<Widget>[
-                    (_image != null)
-                        ? InkWell(
-                            onTap: getImage,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.black,
-                              radius: 60.0,
+                    child: Card(
+                  margin: const EdgeInsets.all(8.0),
+                  child: ListView(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    children: [
+                      (_image != null)
+                          ? InkWell(
+                              onTap: getImage,
                               child: CircleAvatar(
-                                radius: 58.0,
-                                backgroundImage: new FileImage(_image),
-                                backgroundColor: Colors.white,
-                              ),
-                            ))
-                        : InkWell(
-                            onTap: getImage,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.black,
-                              radius: 50.0,
+                                backgroundColor: Colors.black,
+                                radius: 60.0,
+                                child: CircleAvatar(
+                                  radius: 58.0,
+                                  backgroundImage: new FileImage(_image),
+                                  backgroundColor: Colors.white,
+                                ),
+                              ))
+                          : InkWell(
+                              onTap: getImage,
                               child: CircleAvatar(
-                                radius: 48.0,
-                                backgroundImage:
-                                    AssetImage('images/newimage.png'),
-                                backgroundColor: Colors.white,
-                              ),
-                            )),
-                    SizedBox(
-                      height: 15.0,
-                    ),
-                    TextFormField(
-                        maxLines: 1,
-                        validator: (val) =>
-                            val.isEmpty ? 'Enter your First Name' : null,
-                        onChanged: (text) {
-                          setState(() {
-                            firstName = text;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'First Name',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                        ),
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            height: 1.4,
-                            color: Colors.black,
-                            fontFamily: 'Montserrat')),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    TextFormField(
-                        maxLines: 1,
-                        validator: (val) =>
-                            val.isEmpty ? 'Enter your Last Name' : null,
-                        onChanged: (text) {
-                          setState(() {
-                            lastName = text;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Last Name',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                        ),
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            height: 1.4,
-                            color: Colors.black,
-                            fontFamily: 'Montserrat')),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    TextFormField(
-                        controller: controller,
-                        maxLines: 1,
-                        maxLength: 10,
-                        validator: (val) =>
-                            val.isEmpty ? 'Enter your DOB' : null,
-                       onTap:() => {
-                         selectDate(context),
-                          controller.text = "${selectedDate.toLocal()}".split(' ')[0]
-                         },
-                        onChanged: (text) {
-                          setState(() {
-                            dob = "${selectedDate.toLocal()}".split(' ')[0];
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Enter Date of birth',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                        ),
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.datetime,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            height: 1.4,
-                            color: Colors.black,
-                            fontFamily: 'Montserrat')),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    TextFormField(
-                        maxLines: 1,
-                        validator: (val) =>
-                            val.isEmpty ? 'Enter your Summary' : null,
-                        onChanged: (text) {
-                          setState(() {
-                            summary = text;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Summary',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                        ),
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            height: 1.4,
-                            color: Colors.black,
-                            fontFamily: 'Montserrat')),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    TextFormField(
-                        maxLines: 1,
-                        validator: (val) =>
-                            val.isEmpty ? 'Enter your Email' : null,
-                        onChanged: (text) {
-                          setState(() {
-                            email = text;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Email',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                        ),
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.emailAddress,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            height: 1.4,
-                            color: Colors.black,
-                            fontFamily: 'Montserrat')),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    TextFormField(
-                        maxLines: 1,
-                        validator: (val) =>
-                            val.isEmpty ? 'Enter your Username' : null,
-                        onChanged: (text) {
-                          setState(() {
-                            username = text;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Username',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                        ),
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            height: 1.4,
-                            color: Colors.black,
-                            fontFamily: 'Montserrat')),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    TextFormField(
-                        maxLines: 1,
-                        validator: (val) =>
-                            val.isEmpty ? 'Enter your Website' : null,
-                        onChanged: (text) {
-                          setState(() {
-                            website = text;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Website',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                        ),
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.url,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            height: 1.4,
-                            color: Colors.black,
-                            fontFamily: 'Montserrat')),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    TextFormField(
-                        maxLines: 1,
-                        maxLength: 10,
-                        validator: (val) =>
-                            val.isEmpty ? 'Enter your Phone Number' : null,
-                        onChanged: (text) {
-                          setState(() {
-                            phoneNumber = text;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Phone Number',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                        ),
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.number,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            height: 1.4,
-                            color: Colors.black,
-                            fontFamily: 'Montserrat')),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    TextFormField(
-                        maxLines: 1,
-                        validator: (val) =>
-                            val.isEmpty ? 'Enter your Employment Title' : null,
-                        onChanged: (text) {
-                          setState(() {
-                            employmentTitle = text;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Employment Title',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                        ),
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            height: 1.4,
-                            color: Colors.black,
-                            fontFamily: 'Montserrat')),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    TextFormField(
-                        maxLines: 1,
-                        validator: (val) =>
-                            val.isEmpty ? 'Enter your Skills/Languages' : null,
-                        onChanged: (text) {
-                          setState(() {
-                            skills = text;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Skills/Languages',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                        ),
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            height: 1.4,
-                            color: Colors.black,
-                            fontFamily: 'Montserrat')),
-                    SizedBox(
-                      height: 15.0,
-                    ),
-                    Center(
-                      child: Text(
-                        'Social Links',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'MyFont', fontSize: 18),
+                                backgroundColor: Colors.black,
+                                radius: 50.0,
+                                child: CircleAvatar(
+                                  radius: 48.0,
+                                  backgroundImage:
+                                      AssetImage('images/newimage.png'),
+                                  backgroundColor: Colors.white,
+                                ),
+                              )),
+                      SizedBox(
+                        height: 15.0,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    TextFormField(
-                        maxLines: 1,
-                        onChanged: (text) {
-                          setState(() {
-                            youtube = text;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'YouTube Channel URL',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
+                      TextFormField(
+                          maxLines: 1,
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter your First Name' : null,
+                          onChanged: (text) {
+                            setState(() {
+                              firstName = text;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'First Name',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat')),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                          maxLines: 1,
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter your Last Name' : null,
+                          onChanged: (text) {
+                            setState(() {
+                              lastName = text;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Last Name',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
                           ),
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat')),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                          controller: controller,
+                          maxLines: 1,
+                          maxLength: 10,
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter your DOB' : null,
+                          onTap: () => {
+                                selectDate(context),
+                                controller.text =
+                                    "${selectedDate.toLocal()}".split(' ')[0]
+                              },
+                          onChanged: (text) {
+                            setState(() {
+                              dob = "${selectedDate.toLocal()}".split(' ')[0];
+                            });
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Enter Date of birth',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                          ),
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.datetime,
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat')),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                          maxLines: 1,
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter your Summary' : null,
+                          onChanged: (text) {
+                            setState(() {
+                              summary = text;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Summary',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                          ),
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat')),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                          maxLines: 1,
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter your Email' : null,
+                          onChanged: (text) {
+                            setState(() {
+                              email = text;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Email',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                          ),
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.emailAddress,
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat')),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                          maxLines: 1,
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter your Username' : null,
+                          onChanged: (text) {
+                            setState(() {
+                              username = text;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Username',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                          ),
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat')),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                          maxLines: 1,
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter your Website' : null,
+                          onChanged: (text) {
+                            setState(() {
+                              website = text;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Website',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                          ),
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.url,
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat')),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                          maxLines: 1,
+                          maxLength: 10,
+                          validator: (val) =>
+                              val.isEmpty ? 'Enter your Phone Number' : null,
+                          onChanged: (text) {
+                            setState(() {
+                              phoneNumber = text;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Phone Number',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                          ),
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.number,
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat')),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                          maxLines: 1,
+                          validator: (val) => val.isEmpty
+                              ? 'Enter your Employment Title'
+                              : null,
+                          onChanged: (text) {
+                            setState(() {
+                              employmentTitle = text;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Employment Title',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                          ),
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat')),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                          maxLines: 1,
+                          validator: (val) => val.isEmpty
+                              ? 'Enter your Skills/Languages'
+                              : null,
+                          onChanged: (text) {
+                            setState(() {
+                              skills = text;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Skills/Languages',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                          ),
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat')),
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      Center(
+                        child: Text(
+                          'Social Links',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'MyFont',
+                              fontSize: 18),
                         ),
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.url,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            height: 1.4,
-                            color: Colors.black,
-                            fontFamily: 'Montserrat')),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    TextFormField(
-                        maxLines: 1,
-                        onChanged: (text) {
-                          setState(() {
-                            stackoverflow = text;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Stack Overflow profile URL',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                          maxLines: 1,
+                          onChanged: (text) {
+                            setState(() {
+                              youtube = text;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'YouTube Channel URL',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.url,
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat')),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                          maxLines: 1,
+                          onChanged: (text) {
+                            setState(() {
+                              stackoverflow = text;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Stack Overflow profile URL',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
                           ),
-                        ),
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.url,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            height: 1.4,
-                            color: Colors.black,
-                            fontFamily: 'Montserrat')),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    TextFormField(
-                        maxLines: 1,
-                        onChanged: (text) {
-                          setState(() {
-                            linkedin = text;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'LinkedIn profile URL',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.url,
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat')),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                          maxLines: 1,
+                          onChanged: (text) {
+                            setState(() {
+                              linkedin = text;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'LinkedIn profile URL',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.url,
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat')),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                          maxLines: 1,
+                          onChanged: (text) {
+                            setState(() {
+                              medium = text;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Medium profile URL',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
                           ),
-                        ),
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.url,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            height: 1.4,
-                            color: Colors.black,
-                            fontFamily: 'Montserrat')),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    TextFormField(
-                        maxLines: 1,
-                        onChanged: (text) {
-                          setState(() {
-                            medium = text;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Medium profile URL',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.url,
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat')),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                          maxLines: 1,
+                          onChanged: (text) {
+                            setState(() {
+                              github = text;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'GitHub profile URL',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                            ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                        ),
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.url,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            height: 1.4,
-                            color: Colors.black,
-                            fontFamily: 'Montserrat')),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    TextFormField(
-                        maxLines: 1,
-                        onChanged: (text) {
-                          setState(() {
-                            github = text;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'GitHub profile URL',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                          ),
-                        ),
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.url,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            height: 1.4,
-                            color: Colors.black,
-                            fontFamily: 'Montserrat')),
-                  ],
-                ),
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.url,
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              height: 1.4,
+                              color: Colors.black,
+                              fontFamily: 'Montserrat')),
+                    ],
+                  ),
+                )),
               ),
-            ),
-            )
-    ),
+            )),
       ),
     );
   }
@@ -589,12 +613,15 @@ class _EditUserProfileState extends State<EditUserProfile> {
     if (_formKey.currentState.validate()) {
       final FirebaseUser user = await auth.getCurrentUser();
       final userId = user.uid;
-      myRef = FirebaseDatabase.instance.reference().child('Profile').child(userId);
-      userNameRef = FirebaseDatabase.instance.reference().child('Usernames').child(userId);
-       
-      if(imageFlag) 
-      {
-        HashMap<String,String> profileMap = new HashMap();
+      myRef =
+          FirebaseDatabase.instance.reference().child('Profile').child(userId);
+      userNameRef = FirebaseDatabase.instance
+          .reference()
+          .child('Usernames')
+          .child(userId);
+
+      if (imageFlag) {
+        HashMap<String, String> profileMap = new HashMap();
         profileMap.putIfAbsent('firstname', () => firstName);
         profileMap.putIfAbsent('lastname', () => lastName);
         profileMap.putIfAbsent('dob', () => dob);
@@ -613,19 +640,17 @@ class _EditUserProfileState extends State<EditUserProfile> {
         profileMap.putIfAbsent('github', () => github);
         myRef.set(profileMap);
 
-        HashMap<String,String> userMap = new HashMap();
-        userMap.putIfAbsent('username', ()=> username);
+        HashMap<String, String> userMap = new HashMap();
+        userMap.putIfAbsent('username', () => username);
         userNameRef.set(userMap);
-        
+
         Toast.show("Submitted Successfully!", context,
             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
         Navigator.of(context).pushReplacementNamed('/profile'); // change this
-      }
-      else{
-         Toast.show("Please select your profile image", context,
+      } else {
+        Toast.show("Please select your profile image", context,
             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       }
-      
     }
   }
 }

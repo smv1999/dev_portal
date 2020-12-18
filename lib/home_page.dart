@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
                ListTile(
                 title: Text("Explore Jobs"),
-                leading: Icon(Icons.search),
+                leading: Icon(Icons.explore),
                 onTap: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).pushNamed('/jobs');
@@ -174,24 +174,16 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         title: Text(
           'Dev Portal',
           style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontFamily: 'MyFont',
               fontWeight: FontWeight.bold),
         ),
-        //        leading: GestureDetector(
-        //          onTap: () {
-        //            // open dialog
-        //            showCustomDialog(context);
-        //          },
-        //          child: Icon(
-        //            Icons.menu,
-        //          ),
-        //        ),
         centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(color: Colors.white),
         actions: <Widget>[
           Container(
             padding: EdgeInsets.all(10),
@@ -205,7 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           )
         ],
-        actionsIconTheme: IconThemeData(color: Colors.black),
+        actionsIconTheme: IconThemeData(color: Colors.white),
       ),
     );
   }

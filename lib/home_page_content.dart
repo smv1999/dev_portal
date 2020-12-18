@@ -1,3 +1,8 @@
+import 'package:dev_portal/services/ProgressBar.dart';
+import 'package:dev_portal/services/authentication.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,15 +30,161 @@ class _HomePageContentState extends State<HomePageContent> {
     Colors.orange,
     Colors.yellow
   ];
+  FirebaseStorage _storage = FirebaseStorage.instance;
+  DatabaseReference myRef;
+  Auth auth = new Auth();
+  String _profile_image, firstName = "Developer";
+  ProgressBar progressBar;
+
+  @override
+  void initState() {
+    super.initState();
+    progressBar = ProgressBar();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Add Your Code here.
+      showSendingProgressBar();
+      setState(() {
+        _setData();
+      });
+    });
+  }
+  
+  @override
+  void dispose() {
+    progressBar.hide();
+    super.dispose();
+  }
+
+  void showSendingProgressBar() {
+    progressBar.show(context);
+  }
+
+  void hideSendingProgressBar() {
+    progressBar.hide();
+  }
+    Future<void> _setData() async {
+    // retrieve from Firebase DB and display
+    final FirebaseUser user = await auth.getCurrentUser();
+    final userId = user.uid;
+    StorageReference reference = _storage.ref().child(userId).child("Images/");
+    myRef =
+        FirebaseDatabase.instance.reference().child('Profile').child(userId);
+    myRef.once().then((DataSnapshot dataSnapshot) {
+      setState(() {
+        if (dataSnapshot.value != null) {
+          _profile_image = dataSnapshot.value["imagepath"];
+          firstName = dataSnapshot.value["firstname"];
+          hideSendingProgressBar();
+        }
+        else {
+          setState(() {
+            hideSendingProgressBar();
+          });
+        }
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: ListView(
+      child:ListView(
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           children: [
+            Container(
+                padding: EdgeInsets.all(20.0),
+                color: Colors.blue,
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    _profile_image != null
+                        ? InkWell(
+                            child: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 50.0,
+                            child: CircleAvatar(
+                              radius: 48.0,
+                              backgroundImage: new NetworkImage(_profile_image),
+                              backgroundColor: Colors.white,
+                            ),
+                          ))
+                        : InkWell(
+                            child: CircleAvatar(
+                            backgroundColor: Colors.black,
+                            radius: 50.0,
+                            child: CircleAvatar(
+                              radius: 48.0,
+                              backgroundImage:
+                                  AssetImage('images/newimage.png'),
+                              backgroundColor: Colors.white,
+                            ),
+                          )),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: new TextSpan(
+                        children: <TextSpan>[
+                          new TextSpan(
+                              text: 'Welcome, ',
+                              style: TextStyle(
+                                  fontSize: 18.0, color: Colors.white)),
+                          new TextSpan(
+                            text: firstName,
+                            style: new TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10.0,),
+                   Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      RaisedButton(
+                            child: Text(
+                              'Explore Jobs',
+                              style: GoogleFonts.ptSansNarrow(
+                                  textStyle:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                            ),
+                            onPressed: () {
+                                Navigator.of(context).pushNamed('/jobs');
+                            },
+                            textColor: Colors.blue,
+                            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                            elevation: 5.0,
+                            color: Colors.white,
+                            splashColor: Colors.white54,
+                            shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(20.0))
+                          ),
+                          RaisedButton(
+                            child: Text(
+                              'Find People',
+                              style: GoogleFonts.ptSansNarrow(
+                                  textStyle:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                            ),
+                            onPressed: (){
+                                Navigator.of(context).pushNamed('/findpeople');
+                            },
+                            textColor: Colors.blue,
+                            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                            elevation: 5.0,
+                            color: Colors.white,
+                            splashColor: Colors.white54,
+                            shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(20.0))
+                          )
+                    ], 
+                   )
+                  ],
+                )),
+                SizedBox(height: 15.0,),
             Container(
               height: 35,
               width: 75,
@@ -260,7 +411,6 @@ class _HomePageContentState extends State<HomePageContent> {
             ),
           ],
         ),
-      ),
     );
   }
 }

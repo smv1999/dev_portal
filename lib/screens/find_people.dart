@@ -1,6 +1,6 @@
 import 'dart:collection';
-
 import 'package:dev_portal/models/people.dart';
+import 'package:dev_portal/services/ProgressBar.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -19,28 +19,49 @@ class _FindPeopleState extends State<FindPeople> {
   Future f;
   String currentUserName = "";
   bool followingOn = false;
+  ProgressBar progressBar;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    progressBar = ProgressBar();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Add Your Code here.
+      showSendingProgressBar();
+    });
     f = retrievePeopleData();
+  }
+
+  @override
+  void dispose() {
+    progressBar.hide();
+    super.dispose();
+  }
+
+  void showSendingProgressBar() {
+    progressBar.show(context);
+  }
+
+  void hideSendingProgressBar() {
+    progressBar.hide();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.blue,
           automaticallyImplyLeading: false,
           title: Text(
             'Find People',
             style: TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontFamily: 'MyFont',
                 fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: IconThemeData(color: Colors.white,),
         ),
         body: ListView(
           shrinkWrap: true,
@@ -96,8 +117,8 @@ class _FindPeopleState extends State<FindPeople> {
                                         ),
                                   onPressed: () => followPeople(
                                       snapshot.data[index].userName),
-                                  color: Colors.black,
-                                  splashColor: Colors.black54,
+                                  color: Colors.blue,
+                                  splashColor: Colors.blueAccent,
                                   textColor: Colors.white,
                                   elevation: 5.0,
                                   shape: RoundedRectangleBorder(
@@ -235,6 +256,7 @@ class _FindPeopleState extends State<FindPeople> {
         return people;
       });
     });
+    hideSendingProgressBar();
     return people;
   }
 
@@ -310,13 +332,14 @@ class _FindPeopleState extends State<FindPeople> {
                 child: Icon(
                   Icons.warning_sharp,
                   size: 80,
+                  color: Colors.blue,
                 ),
               ),
               Padding(
                 padding: EdgeInsets.all(10.0),
                 child: Text(
                   text,
-                  textAlign: TextAlign.justify,
+                  textAlign: TextAlign.center,
                   style: GoogleFonts.ptSansNarrow(
                       textStyle: TextStyle(fontSize: 17)),
                 ),
@@ -336,8 +359,8 @@ class _FindPeopleState extends State<FindPeople> {
                   textColor: Colors.white,
                   padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
                   elevation: 5.0,
-                  color: Colors.black,
-                  splashColor: Colors.grey,
+                  color: Colors.blue,
+                  splashColor: Colors.blueAccent,
                 ),
               )
             ],
@@ -347,8 +370,8 @@ class _FindPeopleState extends State<FindPeople> {
     );
     showDialog(
         context: context,
-        builder: (BuildContext context) => errorDialog,
-        barrierDismissible: false);
+        builder: (BuildContext context) => errorDialog
+       );
   }
 
   showCustomDialog(BuildContext context, String text) {

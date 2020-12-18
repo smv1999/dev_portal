@@ -19,15 +19,12 @@ class _BooksPageState extends State<BooksPage> {
             shrinkWrap: true,
             children: <Widget>[
               SizedBox(height: 15.0,),
-              Center(child:TextLiquidFill(
-                text: 'Popular Books',
-                waveColor: Colors.black,
-                boxBackgroundColor: Colors.white,
-                textStyle: TextStyle(
+              Center(child:Text(
+                'Popular Books',
+                style: TextStyle(
                     fontSize: 30.0,
                     fontFamily: 'MyFont'
                 ),
-                boxHeight: 50.0,
               ),
               ),
               SizedBox(height: 15.0,),
@@ -81,21 +78,16 @@ class _BooksPageState extends State<BooksPage> {
                     ],
                   ),
               ),
-              SizedBox(height: 15.0,),
-              Center(child:TyperAnimatedTextKit(
-                  onTap: () {
-                    print("Tap Event");
-                  },
-                  text: [
+              SizedBox(height: 20.0,),
+              Center(child:Text(
                     "Popular Best Tech Movies",
-                  ],
-                  textStyle: TextStyle(
+                  style: TextStyle(
                       fontSize: 30.0,
                       fontFamily: "MyFont"
                   ),
               ),
               ),
-              SizedBox(height: 10.0,),
+              SizedBox(height: 15.0,),
               Container(
                 child:GridView.count(
                   physics: ScrollPhysics(),

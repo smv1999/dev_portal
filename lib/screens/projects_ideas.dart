@@ -39,8 +39,8 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
         child: SizedBox.expand(
           child: FittedBox(fit: BoxFit.contain, child: Icon(Icons.add)),
         ),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
         onPressed: () {
           // Respond to button press
           // show dialog
@@ -48,11 +48,12 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
         },
       ),
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         automaticallyImplyLeading: false,
         title: Text(
           'Dev Portal',
           style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontFamily: 'MyFont',
               fontWeight: FontWeight.bold),
         ),

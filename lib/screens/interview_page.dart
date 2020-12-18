@@ -33,10 +33,10 @@ class _InterviewPageState extends State<InterviewPage> {
       floatingActionButton: FloatingActionButton(
         child: SizedBox.expand(
         child:FittedBox(
-            fit: BoxFit.contain, child: Image.asset('images/info.png')),
+            fit: BoxFit.contain, child: Icon(Icons.info)),
         ),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
         onPressed: () {
           // Respond to button press
           // show info dialog
@@ -45,7 +45,7 @@ class _InterviewPageState extends State<InterviewPage> {
               'These resources are taken from online platforms and the author of this application '
                   'does not propose that he is the author of these resources. The credit goes to the creators of these content. The sole '
                   'purpose of using these resources is for educational purposes.',
-              'images/info.png');
+              'images/info_blue.png');
         },
       ),
       appBar: AppBar(
@@ -53,12 +53,12 @@ class _InterviewPageState extends State<InterviewPage> {
         title: Text(
           'Interview Preparation Module',
           style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontFamily: 'MyFont',
               fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blue,
       ),
       body: ListView(
         shrinkWrap: true,
@@ -90,7 +90,7 @@ class _InterviewPageState extends State<InterviewPage> {
                   Container(width: 80, child: Image.asset('images/ai.png')),
               trailing: Icon(
                 Icons.arrow_forward_ios,
-                color: Colors.black,
+                color: Colors.grey,
               ),
             ),
           ),
@@ -121,7 +121,7 @@ class _InterviewPageState extends State<InterviewPage> {
                   Container(width: 80, child: Image.asset('images/cs.jpg')),
               trailing: Icon(
                 Icons.arrow_forward_ios,
-                color: Colors.black,
+                color: Colors.grey,
               ),
             ),
           ),
@@ -152,7 +152,7 @@ class _InterviewPageState extends State<InterviewPage> {
                   Container(width: 80, child: Image.asset('images/time.jpg')),
               trailing: Icon(
                 Icons.arrow_forward_ios,
-                color: Colors.black,
+                color: Colors.grey,
               ),
             ),
           ),
@@ -182,7 +182,7 @@ class _InterviewPageState extends State<InterviewPage> {
                   Container(width: 80, child: Image.asset('images/java.png')),
               trailing: Icon(
                 Icons.arrow_forward_ios,
-                color: Colors.black,
+                color: Colors.grey,
               ),
             ),
           ),
@@ -206,8 +206,8 @@ class _InterviewPageState extends State<InterviewPage> {
                   padding: EdgeInsets.all(10.0),
                   child: Image.asset(
                     imageName,
-                    height: 80,
-                    width: 80,
+                    height: 60,
+                    width: 60,
                   )),
               Padding(
                 padding: EdgeInsets.all(10.0),

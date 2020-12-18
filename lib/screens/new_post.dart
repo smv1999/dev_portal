@@ -81,8 +81,7 @@ class _NewPostState extends State<NewPost> {
     ++post_no;
     return Center(
           child: Container(
-            height: 500.0,
-            width: 300.0,
+            padding: EdgeInsets.all(20.0),
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Form(
@@ -134,11 +133,11 @@ class _NewPostState extends State<NewPost> {
                                 color: Colors.black,
                                 fontFamily: 'Montserrat')),
                         SizedBox(
-                          height: 10,
+                          height: 15,
                         ),
-                        Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: RaisedButton(
+                        ButtonTheme(
+                          minWidth: 200,
+                         child:RaisedButton(
                             child: Text(
                               'POST',
                               style: GoogleFonts.ptSansNarrow(
@@ -149,8 +148,10 @@ class _NewPostState extends State<NewPost> {
                             textColor: Colors.white,
                             padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
                             elevation: 5.0,
-                            color: Colors.black,
-                            splashColor: Colors.grey,
+                            color: Colors.blue,
+                            splashColor: Colors.blueAccent,
+                            shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(20.0))
                           ),
                         ),
                       ],

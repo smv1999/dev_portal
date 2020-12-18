@@ -64,12 +64,12 @@ class _UserProfileState extends State<UserProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Colors.blue,
+          iconTheme: IconThemeData(color: Colors.white),
           title: Text(
             'Profile',
             style: TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontFamily: 'MyFont',
                 fontWeight: FontWeight.bold),
           ),
@@ -85,297 +85,359 @@ class _UserProfileState extends State<UserProfile> {
                   child: Icon(Icons.edit),
                 )),
           ],
-          actionsIconTheme: IconThemeData(color: Colors.black),
+          actionsIconTheme: IconThemeData(color: Colors.white),
         ),
         body: Container(
           color: Colors.white,
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(0.0),
             child: ListView(
               children: <Widget>[
-                _profile_image != null
-                    ? InkWell(
-                        child: CircleAvatar(
-                        backgroundColor: Colors.black,
-                        radius: 50.0,
-                        child: CircleAvatar(
-                          radius: 48.0,
-                          backgroundImage: new NetworkImage(_profile_image),
-                          backgroundColor: Colors.white,
+                Container(
+                    padding: EdgeInsets.all(20.0),
+                    color: Colors.blue,
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        _profile_image != null
+                            ? InkWell(
+                                child: CircleAvatar(
+                                backgroundColor: Colors.white,
+                                radius: 50.0,
+                                child: CircleAvatar(
+                                  radius: 48.0,
+                                  backgroundImage:
+                                      new NetworkImage(_profile_image),
+                                  backgroundColor: Colors.white,
+                                ),
+                              ))
+                            : InkWell(
+                                child: CircleAvatar(
+                                backgroundColor: Colors.black,
+                                radius: 50.0,
+                                child: CircleAvatar(
+                                  radius: 48.0,
+                                  backgroundImage:
+                                      AssetImage('images/newimage.png'),
+                                  backgroundColor: Colors.white,
+                                ),
+                              )),
+                              SizedBox(height: 15.0,),
+                        RichText(
+                          textAlign: TextAlign.center,
+                          text: new TextSpan(
+                            children: <TextSpan>[
+                              new TextSpan(
+                                  text: 'Welcome, ',
+                                  style: TextStyle(
+                                      fontSize: 18.0, color: Colors.white)),
+                              new TextSpan(
+                                text: firstName,
+                                style: new TextStyle(
+                                    fontSize: 16.0,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
-                      ))
-                    : InkWell(
-                        child: CircleAvatar(
-                        backgroundColor: Colors.black,
-                        radius: 50.0,
-                        child: CircleAvatar(
-                          radius: 48.0,
-                          backgroundImage: AssetImage('images/newimage.png'),
-                          backgroundColor: Colors.white,
-                        ),
-                      )),
+                      ],
+                    )),
                 SizedBox(
                   height: 15.0,
                 ),
-                Text(
-                  'First Name',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
-                ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                Text(
-                  firstName ?? 'First Name',
-                  style: GoogleFonts.ptSansNarrow(),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  'Last Name',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
-                ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                Text(
-                  lastName ?? 'Last Name',
-                  style: GoogleFonts.ptSansNarrow(),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  'Date of birth',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
-                ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                Text(
-                  dob ?? 'DOB',
-                  style: GoogleFonts.ptSansNarrow(),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  'Summary',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
-                ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                Text(
-                  summary ?? 'Summary',
-                  style: GoogleFonts.ptSansNarrow(),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  'Email',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
-                ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                Text(
-                  email ?? 'Email',
-                  style: GoogleFonts.ptSansNarrow(),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  'Username',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
-                ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                Text(
-                  username ?? 'Username',
-                  style: GoogleFonts.ptSansNarrow(),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  'Website',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
-                ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                GestureDetector(
-                  onTap: () => _launchURL(website),
-                  child: Text(website ?? 'Website',
-                      style: TextStyle(
-                          fontFamily: 'MyFont',
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.underline,
-                          color: Colors.lightBlueAccent)),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  'Phone Number',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
-                ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                Text(
-                  phoneNumber ?? 'Phone Number',
-                  style: GoogleFonts.ptSansNarrow(),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  'Employment Title',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
-                ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                Text(
-                  employmentTitle ?? 'Employment Title',
-                  style: GoogleFonts.ptSansNarrow(),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  'Skills/Languages',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
-                ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                Text(
-                  skills ?? 'Skills',
-                  style: GoogleFonts.ptSansNarrow(),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  'YouTube Channel URL',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontFamily: 'MyFont'),
-                ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                GestureDetector(
-                  onTap: () => _launchURL(youtube),
-                  child: Text(youtube ?? 'YouTube',
-                      style: TextStyle(
-                          fontFamily: 'MyFont',
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.underline,
-                          color: Colors.lightBlueAccent)),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  'Stack Overflow Profile URL',
-                  style: TextStyle(
-                    fontFamily: 'MyFont',
-                    fontWeight: FontWeight.bold,
+                Card(
+                  margin: const EdgeInsets.all(8.0),
+                  child: Container(
+                    padding: EdgeInsets.all(15.0),
+                    child: ListView(physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      children: [
+                        Text(
+                          'First Name',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'MyFont', fontSize: 16.0),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        Text(
+                          firstName ?? 'First Name',
+                          style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16.0))
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Text(
+                          'Last Name',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'MyFont', fontSize: 16.0),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        Text(
+                          lastName ?? 'Last Name',
+                          style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16.0)),
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Text(
+                          'Date of birth',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'MyFont', fontSize: 16.0),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        Text(
+                          dob ?? 'DOB',
+                          style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16.0)),
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Text(
+                          'Summary',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'MyFont', fontSize: 16.0),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        Text(
+                          summary ?? 'Summary',
+                          style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16.0)),
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Text(
+                          'Email',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'MyFont', fontSize: 16.0),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        Text(
+                          email ?? 'Email',
+                          style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16.0)),
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Text(
+                          'Username',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'MyFont', fontSize: 16.0),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        Text(
+                          username ?? 'Username',
+                          style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16.0)),
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Text(
+                          'Website',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'MyFont', fontSize: 16.0),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        GestureDetector(
+                          onTap: () => _launchURL(website),
+                          child: Text(website ?? 'Website',
+                              style: TextStyle(
+                                  fontFamily: 'MyFont',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16.0,
+                                  decoration: TextDecoration.underline,
+                                  color: Colors.lightBlueAccent)),
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Text(
+                          'Phone Number',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0,
+                              fontFamily: 'MyFont'),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        Text(
+                          phoneNumber ?? 'Phone Number',
+                          style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16.0)),
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Text(
+                          'Employment Title',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'MyFont', fontSize: 16.0),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        Text(
+                          employmentTitle ?? 'Employment Title',
+                          style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16.0)),
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Text(
+                          'Skills/Languages',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'MyFont', fontSize: 16.0),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        Text(
+                          skills ?? 'Skills',
+                          style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16.0)),
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Text(
+                          'YouTube Channel URL',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'MyFont', fontSize: 16.0),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        GestureDetector(
+                          onTap: () => _launchURL(youtube),
+                          child: Text(youtube ?? 'YouTube',
+                              style: TextStyle(
+                                  fontFamily: 'MyFont',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16.0,
+                                  decoration: TextDecoration.underline,
+                                  color: Colors.lightBlueAccent)),
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Text(
+                          'Stack Overflow Profile URL',
+                          style: TextStyle(
+                            fontFamily: 'MyFont',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        GestureDetector(
+                          onTap: () => _launchURL(stackoverflow),
+                          child: Text(stackoverflow ?? 'Stack Overflow',
+                              style: TextStyle(
+                                  fontFamily: 'MyFont',
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 16.0,
+                                  color: Colors.lightBlueAccent)),
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Text(
+                          'LinkedIn profile URL',
+                          style: TextStyle(
+                            fontFamily: 'MyFont',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        GestureDetector(
+                          onTap: () => _launchURL(linkedin),
+                          child: Text(linkedin ?? 'LinkedIn',
+                              style: TextStyle(
+                                  fontFamily: 'MyFont',
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 16.0,
+                                  color: Colors.lightBlueAccent)),
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Text(
+                          'Medium profile URL',
+                          style: TextStyle(
+                            fontFamily: 'MyFont',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        GestureDetector(
+                          onTap: () => _launchURL(medium),
+                          child: Text(medium ?? 'Medium',
+                              style: TextStyle(
+                                  fontFamily: 'MyFont',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16.0,
+                                  decoration: TextDecoration.underline,
+                                  color: Colors.lightBlueAccent)),
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Text(
+                          'GitHub profile URL',
+                          style: TextStyle(
+                            fontFamily: 'MyFont',
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        GestureDetector(
+                          onTap: () => _launchURL(github),
+                          child: Text(github ?? 'GitHub',
+                              style: TextStyle(
+                                  fontFamily: 'MyFont',
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline,
+                                  color: Colors.lightBlueAccent)),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                GestureDetector(
-                  onTap: () => _launchURL(stackoverflow),
-                  child: Text(stackoverflow ?? 'Stack Overflow',
-                      style: TextStyle(
-                          fontFamily: 'MyFont',
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.underline,
-                          color: Colors.lightBlueAccent)),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  'LinkedIn profile URL',
-                  style: TextStyle(
-                    fontFamily: 'MyFont',
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                GestureDetector(
-                  onTap: () => _launchURL(linkedin),
-                  child: Text(linkedin ?? 'LinkedIn',
-                      style: TextStyle(
-                          fontFamily: 'MyFont',
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.underline,
-                          color: Colors.lightBlueAccent)),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  'Medium profile URL',
-                  style: TextStyle(
-                    fontFamily: 'MyFont',
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                GestureDetector(
-                  onTap: () => _launchURL(medium),
-                  child: Text(medium ?? 'Medium',
-                      style: TextStyle(
-                          fontFamily: 'MyFont',
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.underline,
-                          color: Colors.lightBlueAccent)),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  'GitHub profile URL',
-                  style: TextStyle(
-                    fontFamily: 'MyFont',
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                GestureDetector(
-                  onTap: () => _launchURL(github),
-                  child: Text(github ?? 'GitHub',
-                      style: TextStyle(
-                          fontFamily: 'MyFont',
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.underline,
-                          color: Colors.lightBlueAccent)),
                 ),
                 SizedBox(
                   height: 8.0,

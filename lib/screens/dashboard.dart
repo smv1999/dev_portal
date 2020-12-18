@@ -23,11 +23,12 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
         // Create a grid layout of the dashboard items
         appBar: AppBar(
+          backgroundColor: Colors.blue,
           automaticallyImplyLeading: false,
           title: Text(
             'Dashboard',
             style: TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontFamily: 'MyFont',
                 fontWeight: FontWeight.bold),
           ),
@@ -42,12 +43,9 @@ class _DashboardState extends State<Dashboard> {
                   height: 15.0,
                 ),
                 Center(
-                  child: TextLiquidFill(
-                    text: 'Dashboard',
-                    waveColor: Colors.black,
-                    boxBackgroundColor: Colors.white,
-                    textStyle: TextStyle(fontSize: 30.0, fontFamily: 'MyFont'),
-                    boxHeight: 50.0,
+                  child: Text(
+                    'Dashboard',
+                    style: TextStyle(fontSize: 30.0, fontFamily: 'MyFont'),
                   ),
                 ),
                 SizedBox(
