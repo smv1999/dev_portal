@@ -12,6 +12,7 @@ import 'package:dev_portal/screens/interview_page.dart';
 import 'package:dev_portal/screens/more_jobs.dart';
 import 'package:dev_portal/screens/new_post.dart';
 import 'package:dev_portal/screens/new_task.dart';
+import 'package:dev_portal/screens/popular_entities.dart';
 import 'package:dev_portal/screens/projects_ideas.dart';
 import 'package:dev_portal/screens/settings_page.dart';
 import 'package:dev_portal/screens/login_page.dart';
@@ -77,6 +78,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => NewTask());    
       case '/morejobs':
         return MaterialPageRoute(builder: (_) => MoreJobs());    
+      case '/popular':
+        return MaterialPageRoute(builder: (_) => Popular());    
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();

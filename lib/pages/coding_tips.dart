@@ -179,11 +179,9 @@ class _CodingTipsPageState extends State<CodingTipsPage>
               height: 15.0,
             ),
             Center(
-              child: TyperAnimatedTextKit(
-                text: [
+              child: Text(
                   "From the Author",
-                ],
-                textStyle: TextStyle(fontSize: 30.0, fontFamily: "MyFont"),
+                style: TextStyle(fontSize: 30.0, fontFamily: "MyFont"),
               ),
             ),
             Card(
@@ -314,6 +312,57 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                 ),
               ),
             ),
+             Card(
+              margin: const EdgeInsets.all(8.0),
+              child: ListTile(
+                onTap: () => openArticle(12),
+                title: Text(
+                  'Linear Data Structures - Linked Lists',
+                  style: GoogleFonts.ptSansNarrow(),
+                ),
+                leading: Container(width: 80.0,
+                  child:Image.network(
+                    'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/linkedlist.png'),),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+             Card(
+              margin: const EdgeInsets.all(8.0),
+              child: ListTile(
+                onTap: () => openArticle(13),
+                title: Text(
+                  'Linear Data Structures - Doubly Linked Lists',
+                  style: GoogleFonts.ptSansNarrow(),
+                ),
+                leading: Container(width: 80.0,
+                  child:Image.network(
+                    'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/linkedlist.png'),),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+             Card(
+              margin: const EdgeInsets.all(8.0),
+              child: ListTile(
+                onTap: () => openArticle(14),
+                title: Text(
+                  'Tree Data Structure',
+                  style: GoogleFonts.ptSansNarrow(),
+                ),
+                leading: Container(width: 80.0,
+                  child:Image.network(
+                    'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/tree.png'),),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -406,6 +455,19 @@ class _CodingTipsPageState extends State<CodingTipsPage>
         url =
             'https://medium.com/@vaidhyanathan.sm/all-you-need-to-know-about-pointers-part-2-b6153ed93fe';
         break;
+      case 12:
+      url = 
+            'https://medium.com/nerd-for-tech/linear-data-structures-linked-lists-726fd0718a0';
+        break;
+      case 13:
+      url = 
+            'https://medium.com/nerd-for-tech/linear-data-structures-doubly-linked-lists-4d50d68435b0';
+        break;
+      case 14:
+      url = 
+            'https://medium.com/nerd-for-tech/tree-data-structure-ce938cf157e';
+        break;
+            
     }
     if (await canLaunch(url)) {
       await launch(url);
