@@ -363,6 +363,23 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                 ),
               ),
             ),
+             Card(
+              margin: const EdgeInsets.all(8.0),
+              child: ListTile(
+                onTap: () => openArticle(15),
+                title: Text(
+                  'Software Development Life Cycle',
+                  style: GoogleFonts.ptSansNarrow(),
+                ),
+                leading: Container(width: 80.0,
+                  child:Image.network(
+                    'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/sdlc.jpeg'),),
+                trailing: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -466,6 +483,10 @@ class _CodingTipsPageState extends State<CodingTipsPage>
       case 14:
       url = 
             'https://medium.com/nerd-for-tech/tree-data-structure-ce938cf157e';
+        break;
+      case 15:
+      url = 
+            'https://medium.com/nerd-for-tech/software-development-life-cycle-cde7f069d5f3';
         break;
             
     }
