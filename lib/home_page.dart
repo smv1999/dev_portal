@@ -120,8 +120,8 @@ class _MyHomePageState extends State<MyHomePage> {
         onItemSelected: onTabTapped, // new
         items: [
           BottomNavyBarItem(
-            activeColor: Colors.black,
-            inactiveColor: Colors.grey,
+            activeColor: Colors.blue,
+            inactiveColor: Colors.blueGrey,
             icon: new Icon(Icons.home),
             title: new Text(
               'Home',
@@ -131,8 +131,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           BottomNavyBarItem(
-            activeColor: Colors.black,
-            inactiveColor: Colors.grey,
+            activeColor: Colors.blue,
+            inactiveColor: Colors.blueGrey,
             icon: new Icon(Icons.lightbulb_outline),
             title: new Text(
               'Coding Tips',
@@ -142,8 +142,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           BottomNavyBarItem(
-              activeColor: Colors.black,
-              inactiveColor: Colors.grey,
+              activeColor: Colors.blue,
+              inactiveColor: Colors.blueGrey,
               icon: Icon(Icons.add),
               title: Text(
                 'New Post',
@@ -152,8 +152,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
               )),
           BottomNavyBarItem(
-              activeColor: Colors.black,
-              inactiveColor: Colors.grey,
+              activeColor: Colors.blue,
+              inactiveColor: Colors.blueGrey,
               icon: Icon(Icons.library_books),
               title: Text(
                 'Books',
@@ -162,8 +162,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
               )),
           BottomNavyBarItem(
-              activeColor: Colors.black,
-              inactiveColor: Colors.grey,
+              activeColor: Colors.blue,
+              inactiveColor: Colors.blueGrey,
               icon: Icon(Icons.post_add),
               title: Text(
                 'Feed',
