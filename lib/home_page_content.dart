@@ -202,7 +202,7 @@ class _HomePageContentState extends State<HomePageContent> {
               'images/blockchain.png',
               'images/vrar.png',
               'images/cloudcomputing.png',
-              'images/bigdata.png',
+              'images/bigdata.jpeg',
               'images/rpa.png',
               'images/iot.png'
             ].map((i) {
