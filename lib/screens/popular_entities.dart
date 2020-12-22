@@ -3,6 +3,7 @@ import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:rating_dialog/rating_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Popular extends StatefulWidget {
@@ -11,6 +12,8 @@ class Popular extends StatefulWidget {
 }
 
 class _PopularState extends State<Popular> {
+  SharedPreferences prefs;
+  bool _seen;
   Map<String, double> langs = {
     "Python": 40,
     "Java": 25,
@@ -50,10 +53,18 @@ class _PopularState extends State<Popular> {
   void initState() {
     // TODO: implement initState
     super.initState();
-     WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       // Add Your Code here.
-      showRatingDialog();
+      checkTipSeen();
     });
+  }
+
+    Future checkTipSeen() async {
+    prefs = await SharedPreferences.getInstance();
+    _seen = (prefs.getBool('ratingseen') ?? false);
+    if (!_seen) {
+      showRatingDialog();
+    }
   }
 
   @override
@@ -218,15 +229,18 @@ class _PopularState extends State<Popular> {
             negativeComment: "We're sad to hear 😭", // optional
             accentColor: Colors.blue, // optional
             onSubmitPressed: (int rating) {
+               prefs.setBool('ratingseen', true);
               _rateOurApp();
             },
             onAlternativePressed: () {
-              _reportIssue();              
+               prefs.setBool('ratingseen', true);
+              _reportIssue();
             },
           );
         });
   }
-   void _rateOurApp() async {
+
+  void _rateOurApp() async {
     const url =
         'https://play.google.com/store/apps/details?id=com.programmersgateway.sm1999.dev_portal';
     if (await canLaunch(url)) {
@@ -235,7 +249,8 @@ class _PopularState extends State<Popular> {
       throw 'Could not launch $url';
     }
   }
-   void _reportIssue() async {
+
+  void _reportIssue() async {
     final Email email = Email(
       body:
           'I would like to bring the following about Dev Portal to your notice:',
