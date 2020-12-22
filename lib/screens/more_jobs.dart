@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -110,6 +112,11 @@ class _MoreJobsState extends State<MoreJobs> {
   }
 
   list() {
+    var images = ['images/job1.png','images/job2.jpeg','images/job3.jpg','images/job4.jpg','images/job5.jpg'];
+
+    final _random = new Random();
+
+
     return ListView.builder(
       itemCount: _feed.items.length,
       itemBuilder: (BuildContext context, int index) {
@@ -117,7 +124,7 @@ class _MoreJobsState extends State<MoreJobs> {
         return ListTile(
           title: title(item.title),
           subtitle: subtitle(item.pubDate.toString()),
-          leading: thumbnail('images/dev.jpg'),
+          leading: thumbnail(images[_random.nextInt(images.length)]),
           trailing: rightIcon(),
           contentPadding: EdgeInsets.all(5.0),
           onTap: () => openFeed(item.link),
