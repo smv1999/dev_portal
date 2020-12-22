@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:rating_dialog/rating_dialog.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Popular extends StatefulWidget {
   @override
@@ -42,6 +45,17 @@ class _PopularState extends State<Popular> {
     Colors.orange,
     Colors.yellow
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Add Your Code here.
+      showRatingDialog();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -183,5 +197,53 @@ class _PopularState extends State<Popular> {
             ),
           ],
         )));
+  }
+
+  void showRatingDialog() {
+    showDialog(
+        context: context,
+        barrierDismissible: false, // set to false if you want to force a rating
+        builder: (context) {
+          return RatingDialog(
+            icon: const Icon(
+              Icons.star,
+              size: 100,
+              color: Colors.blue,
+            ), // set your own image/icon widget
+            title: "Do you enjoy using Dev Portal?",
+            description: "Tap a star to give your rating.",
+            submitButton: "SUBMIT",
+            alternativeButton: "Contact us instead?", // optional
+            positiveComment: "We are so happy to hear 😍", // optional
+            negativeComment: "We're sad to hear 😭", // optional
+            accentColor: Colors.blue, // optional
+            onSubmitPressed: (int rating) {
+              _rateOurApp();
+            },
+            onAlternativePressed: () {
+              _reportIssue();              
+            },
+          );
+        });
+  }
+   void _rateOurApp() async {
+    const url =
+        'https://play.google.com/store/apps/details?id=com.programmersgateway.sm1999.dev_portal';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+   void _reportIssue() async {
+    final Email email = Email(
+      body:
+          'I would like to bring the following about Dev Portal to your notice:',
+      subject: 'Issue Report - Dev Portal',
+      recipients: ['devteamprogrammersgateway@gmail.com'],
+      isHTML: false,
+    );
+
+    await FlutterEmailSender.send(email);
   }
 }
