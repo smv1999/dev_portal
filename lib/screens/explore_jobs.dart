@@ -16,9 +16,6 @@ class ExploreJobs extends StatefulWidget {
 }
 
 class _ExploreJobsState extends State<ExploreJobs> {
-  final LanguageIdentifier languageIdentifier =
-      FirebaseLanguage.instance.languageIdentifier();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,18 +33,17 @@ class _ExploreJobsState extends State<ExploreJobs> {
           iconTheme: IconThemeData(color: Colors.white),
           actions: <Widget>[
             Container(
-              padding: EdgeInsets.all(10),
-          child:GestureDetector(
-            onTap: () {
-              Navigator.of(context).pushNamed('/morejobs');
-            },
-            child: Icon(
-              Icons.explore,
-            ),
-          )
-          )
-        ],
-        actionsIconTheme: IconThemeData(color: Colors.white),
+                padding: EdgeInsets.all(10),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/morejobs');
+                  },
+                  child: Icon(
+                    Icons.explore,
+                  ),
+                ))
+          ],
+          actionsIconTheme: IconThemeData(color: Colors.white),
         ),
         body: ListView(
           shrinkWrap: true,
@@ -142,11 +138,6 @@ class _ExploreJobsState extends State<ExploreJobs> {
 
   showCustomDialog(
       BuildContext context, AsyncSnapshot snapshot, int index) async {
-    final List<LanguageLabel> labels =
-        await languageIdentifier.processText(snapshot.data[index].description);
-    for (LanguageLabel label in labels) {
-      print(label.languageCode);
-    }
     Dialog errorDialog = Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: Container(

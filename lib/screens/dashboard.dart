@@ -1,8 +1,15 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:dev_portal/models/github_profile.dart';
+import 'package:dev_portal/services/authentication.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -12,10 +19,18 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   SharedPreferences prefs;
   bool _seen;
-
+  DatabaseReference myRef;
+  Auth auth = new Auth();
+  String githubUsername = "smv1999";
+  String githubProfileURL = "https://github.com/harshcasper";
+  Future f;
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => checkTipSeen());
+    fetchGitHubUsername();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      checkTipSeen();
+    });
+     f = fetchGitHubProfileDetails(); 
   }
 
   @override
@@ -52,42 +67,209 @@ class _DashboardState extends State<Dashboard> {
                   height: 15.0,
                 ),
                 Container(
-                  child: GridView.count(
-                    physics: ScrollPhysics(),
+                  child: ListView(
                     shrinkWrap: true,
-                    mainAxisSpacing: 25.0,
-                    crossAxisCount: 2,
-                    children: <Widget>[
-                      GestureDetector(
-                        onLongPress: () {
-                          showFloatingFlushbar(context, 'To Do Lists');
-                        },
-                        onTap: () {
-                          Navigator.of(context).pushNamed('/todolist');
-                        },
-                        child: Card(
+                    physics: NeverScrollableScrollPhysics(),
+                    children: [
+                      GridView.count(
+                        physics: ScrollPhysics(),
+                        shrinkWrap: true,
+                        mainAxisSpacing: 25.0,
+                        crossAxisCount: 2,
+                        children: <Widget>[
+                          GestureDetector(
+                            onLongPress: () {
+                              showFloatingFlushbar(context, 'To Do Lists');
+                            },
+                            onTap: () {
+                              Navigator.of(context).pushNamed('/todolist');
+                            },
+                            child: Card(
+                              clipBehavior: Clip.antiAlias,
+                              child: Image.asset('images/productivity.png'),
+                              elevation: 5,
+                            ),
+                          ),
+                          GestureDetector(
+                            onLongPress: () {
+                              showFloatingFlushbar(context, 'Project Ideas');
+                            },
+                            onTap: () {
+                              Navigator.of(context).pushNamed('/projects');
+                            },
+                            child: Card(
+                              clipBehavior: Clip.antiAlias,
+                              child: Image.asset('images/projects.jpg'),
+                              // Text('Career Guidance'),
+                              elevation: 5,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      Text(
+                        'GitHub Activity Score',
+                        style: GoogleFonts.ptSansNarrow(
+                          textStyle: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Container(
+                        width: 250,
+                        child: GestureDetector(
+                          onTap: () {
+                            openProfileURL();
+                          },
+                        child:Card(
                           clipBehavior: Clip.antiAlias,
-                          child: Image.asset('images/productivity.png'),
+                          child: ListView(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            children: [
+                              FutureBuilder(
+                                future: f,
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return ListView(
+                                        padding: EdgeInsets.all(20.0),
+                                        shrinkWrap: true,
+                                        children: [
+                                          Center(
+                                            child: snapshot.data.profileImage ==
+                                                    null
+                                                ? InkWell(
+                                                    child: CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.black,
+                                                    radius: 50.0,
+                                                    child: CircleAvatar(
+                                                      radius: 48.0,
+                                                      backgroundImage:
+                                                          new AssetImage(
+                                                              'images/programming.jpg'),
+                                                      backgroundColor:
+                                                          Colors.black,
+                                                    ),
+                                                  ))
+                                                : InkWell(
+                                                    child: CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.black,
+                                                    radius: 50.0,
+                                                    child: CircleAvatar(
+                                                      radius: 48.0,
+                                                      backgroundImage:
+                                                          new NetworkImage(
+                                                              snapshot.data
+                                                                  .profileImage),
+                                                      backgroundColor:
+                                                          Colors.black,
+                                                    ),
+                                                  )),
+                                          ),
+                                          Center(
+                                            child: Text(
+                                              snapshot.data.name,
+                                              style: GoogleFonts.ptSansNarrow(
+                                                  textStyle: TextStyle(
+                                                      fontSize: 16.0)),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 10.0,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text('Followers: ' +
+                                                      snapshot.data.followers
+                                                          .toString()),
+                                                  SizedBox(
+                                                    height: 8.0,
+                                                  ),
+                                                  Text('Following: ' +
+                                                      snapshot.data.following
+                                                          .toString()),
+                                                ],
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text('Public Repos: ' +
+                                                      snapshot.data.publicRepos
+                                                          .toString()),
+                                                  SizedBox(
+                                                    height: 8.0,
+                                                  ),
+                                                  Text('Blog: ' +
+                                                      snapshot.data.blog),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 8.0,
+                                          ),
+                                          RichText(
+                                            textAlign: TextAlign.center,
+                                            text: new TextSpan(
+                                              children: <TextSpan>[
+                                                new TextSpan(
+                                                    text: 'Your Score: ',
+                                                    style: TextStyle(
+                                                        fontSize: 16.0,
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold)),
+                                                new TextSpan(
+                                                  text: (snapshot.data
+                                                                  .followers *
+                                                              1 +
+                                                          snapshot.data
+                                                                  .publicRepos *
+                                                              2)
+                                                      .toString(),
+                                                  style: new TextStyle(
+                                                    fontSize: 16.0,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ]);
+                                  } else if (snapshot.hasError) {
+                                    return Text("${snapshot.error}");
+                                  }
+
+                                  // By default, show a loading spinner.
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                },
+                              )
+                            ],
+                          ),
                           elevation: 5,
                         ),
-                      ),
-                      GestureDetector(
-                        onLongPress: () {
-                          showFloatingFlushbar(context, 'Project Ideas');
-                        },
-                        onTap: () {
-                          Navigator.of(context).pushNamed('/projects');
-                        },
-                        child: Card(
-                          clipBehavior: Clip.antiAlias,
-                          child: Image.asset('images/projects.jpg'),
-                          // Text('Career Guidance'),
-                          elevation: 5,
                         ),
-                      ),
+                      )
                     ],
                   ),
-                ),
+                )
               ])),
         ));
   }
@@ -98,6 +280,55 @@ class _DashboardState extends State<Dashboard> {
     if (!_seen) {
       showBottomSheetDialog();
       await prefs.setBool('sheetseen', true);
+    }
+  }
+
+   void openProfileURL() async {
+    var url =
+        githubProfileURL;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  void fetchGitHubUsername() async {
+    final FirebaseUser user = await auth.getCurrentUser();
+    final userId = user.uid;
+    myRef =
+        FirebaseDatabase.instance.reference().child('Profile').child(userId);
+    myRef.once().then((DataSnapshot dataSnapshot) {
+      setState(() {
+        if (dataSnapshot.value != null) {
+          githubUsername = dataSnapshot.value["github"];
+        }
+      });
+    });
+  }
+
+  Future<GitHubProfile> fetchGitHubProfileDetails() async {
+    final response =
+        await http.get('https://api.github.com/users/' + githubUsername);
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      var jsonData = json.decode(response.body);
+
+      GitHubProfile gitHubProfile = GitHubProfile(
+          jsonData["avatar_url"],
+          jsonData["html_url"],
+          jsonData["followers"],
+          jsonData["following"],
+          jsonData["name"],
+          jsonData["blog"],
+          jsonData["public_repos"]);
+      githubProfileURL = jsonData["html_url"];
+      return gitHubProfile;
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load album');
     }
   }
 
