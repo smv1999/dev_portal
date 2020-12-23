@@ -210,11 +210,13 @@ class _EditUserProfileState extends State<EditUserProfile> {
                           onTap: () => {
                                 selectDate(context),
                                 controller.text =
-                                    "${selectedDate.toLocal()}".split(' ')[0]
+                                    "${selectedDate.toLocal()}".split(' ')[0],
+                                    dob = "${selectedDate.toLocal()}".split(' ')[0]; 
+
                               },
                           onChanged: (text) {
                             setState(() {
-                              dob = "${selectedDate.toLocal()}".split(' ')[0];
+                              dob = "${selectedDate.toLocal()}".split(' ')[0]; 
                             });
                           },
                           decoration: InputDecoration(

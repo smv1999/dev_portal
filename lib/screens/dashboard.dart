@@ -30,7 +30,7 @@ class _DashboardState extends State<Dashboard> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       checkTipSeen();
     });
-     f = fetchGitHubProfileDetails(); 
+    f = fetchGitHubProfileDetails();
   }
 
   @override
@@ -121,152 +121,198 @@ class _DashboardState extends State<Dashboard> {
                       SizedBox(
                         height: 20.0,
                       ),
-                      Container(
-                        width: 250,
-                        child: GestureDetector(
-                          onTap: () {
-                            openProfileURL();
-                          },
-                        child:Card(
-                          clipBehavior: Clip.antiAlias,
-                          child: ListView(
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            children: [
-                              FutureBuilder(
-                                future: f,
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return ListView(
-                                        padding: EdgeInsets.all(20.0),
-                                        shrinkWrap: true,
-                                        children: [
-                                          Center(
-                                            child: snapshot.data.profileImage ==
-                                                    null
-                                                ? InkWell(
-                                                    child: CircleAvatar(
-                                                    backgroundColor:
-                                                        Colors.black,
-                                                    radius: 50.0,
-                                                    child: CircleAvatar(
-                                                      radius: 48.0,
-                                                      backgroundImage:
-                                                          new AssetImage(
-                                                              'images/programming.jpg'),
-                                                      backgroundColor:
-                                                          Colors.black,
-                                                    ),
-                                                  ))
-                                                : InkWell(
-                                                    child: CircleAvatar(
-                                                    backgroundColor:
-                                                        Colors.black,
-                                                    radius: 50.0,
-                                                    child: CircleAvatar(
-                                                      radius: 48.0,
-                                                      backgroundImage:
-                                                          new NetworkImage(
-                                                              snapshot.data
-                                                                  .profileImage),
-                                                      backgroundColor:
-                                                          Colors.black,
-                                                    ),
-                                                  )),
-                                          ),
-                                          Center(
-                                            child: Text(
-                                              snapshot.data.name,
-                                              style: GoogleFonts.ptSansNarrow(
-                                                  textStyle: TextStyle(
-                                                      fontSize: 16.0)),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 10.0,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text('Followers: ' +
-                                                      snapshot.data.followers
-                                                          .toString()),
-                                                  SizedBox(
-                                                    height: 8.0,
-                                                  ),
-                                                  Text('Following: ' +
-                                                      snapshot.data.following
-                                                          .toString()),
-                                                ],
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text('Public Repos: ' +
-                                                      snapshot.data.publicRepos
-                                                          .toString()),
-                                                  SizedBox(
-                                                    height: 8.0,
-                                                  ),
-                                                  Text('Blog: ' +
-                                                      snapshot.data.blog),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 8.0,
-                                          ),
-                                          RichText(
-                                            textAlign: TextAlign.center,
-                                            text: new TextSpan(
-                                              children: <TextSpan>[
-                                                new TextSpan(
-                                                    text: 'Your Score: ',
-                                                    style: TextStyle(
-                                                        fontSize: 16.0,
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold)),
-                                                new TextSpan(
-                                                  text: (snapshot.data
-                                                                  .followers *
-                                                              1 +
-                                                          snapshot.data
-                                                                  .publicRepos *
-                                                              2)
-                                                      .toString(),
-                                                  style: new TextStyle(
-                                                    fontSize: 16.0,
-                                                    color: Colors.black,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ]);
-                                  } else if (snapshot.hasError) {
-                                    return Text("${snapshot.error}");
-                                  }
-
-                                  // By default, show a loading spinner.
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
+                      (!(githubUsername == null))
+                          ? Container(
+                              width: 250,
+                              child: GestureDetector(
+                                onTap: () {
+                                  openProfileURL();
                                 },
-                              )
-                            ],
-                          ),
-                          elevation: 5,
-                        ),
-                        ),
-                      )
+                                child: Card(
+                                  clipBehavior: Clip.antiAlias,
+                                  child: ListView(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    children: [
+                                      FutureBuilder(
+                                        future: f,
+                                        builder: (context, snapshot) {
+                                          if (snapshot.hasData) {
+                                            return ListView(
+                                                padding: EdgeInsets.all(20.0),
+                                                shrinkWrap: true,
+                                                children: [
+                                                  Center(
+                                                    child: snapshot.data
+                                                                .profileImage ==
+                                                            null
+                                                        ? InkWell(
+                                                            child: CircleAvatar(
+                                                            backgroundColor:
+                                                                Colors.black,
+                                                            radius: 50.0,
+                                                            child: CircleAvatar(
+                                                              radius: 48.0,
+                                                              backgroundImage:
+                                                                  new AssetImage(
+                                                                      'images/programming.jpg'),
+                                                              backgroundColor:
+                                                                  Colors.black,
+                                                            ),
+                                                          ))
+                                                        : InkWell(
+                                                            child: CircleAvatar(
+                                                            backgroundColor:
+                                                                Colors.black,
+                                                            radius: 50.0,
+                                                            child: CircleAvatar(
+                                                              radius: 48.0,
+                                                              backgroundImage:
+                                                                  new NetworkImage(
+                                                                      snapshot
+                                                                          .data
+                                                                          .profileImage),
+                                                              backgroundColor:
+                                                                  Colors.white,
+                                                            ),
+                                                          )),
+                                                  ),
+                                                  Center(
+                                                    child: Text(
+                                                      snapshot.data.name,
+                                                      style: GoogleFonts
+                                                          .ptSansNarrow(
+                                                              textStyle:
+                                                                  TextStyle(
+                                                                      fontSize:
+                                                                          16.0)),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10.0,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text('Followers: ' +
+                                                              snapshot.data
+                                                                  .followers
+                                                                  .toString()),
+                                                          SizedBox(
+                                                            height: 8.0,
+                                                          ),
+                                                          Text('Following: ' +
+                                                              snapshot.data
+                                                                  .following
+                                                                  .toString()),
+                                                        ],
+                                                      ),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text('Public Repos: ' +
+                                                              snapshot.data
+                                                                  .publicRepos
+                                                                  .toString()),
+                                                          SizedBox(
+                                                            height: 8.0,
+                                                          ),
+                                                          Text('Blog: ' +
+                                                              snapshot
+                                                                  .data.blog),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 8.0,
+                                                  ),
+                                                  RichText(
+                                                    textAlign: TextAlign.center,
+                                                    text: new TextSpan(
+                                                      children: <TextSpan>[
+                                                        new TextSpan(
+                                                            text:
+                                                                'Your Score: ',
+                                                            style: TextStyle(
+                                                                fontSize: 16.0,
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                        new TextSpan(
+                                                          text: (snapshot.data
+                                                                          .followers *
+                                                                      1 +
+                                                                  snapshot.data
+                                                                          .publicRepos *
+                                                                      2)
+                                                              .toString(),
+                                                          style: new TextStyle(
+                                                            fontSize: 16.0,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ]);
+                                          } else if (snapshot.hasError) {
+                                            return Text("${snapshot.error}");
+                                          }
+
+                                          // By default, show a loading spinner.
+                                          return Center(
+                                            child: CircularProgressIndicator(),
+                                          );
+                                        },
+                                      )
+                                    ],
+                                  ),
+                                  elevation: 5,
+                                ),
+                              ),
+                            )
+                          : Container(
+                              child: ListView(
+                                shrinkWrap: true,
+                                children: [
+                                  Text("In order to see your activity score, please provide your GitHub username in profile.",
+                                  style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16.0,)),
+                                  textAlign: TextAlign.justify,),
+                                  SizedBox(height: 8.0,),
+                                  RaisedButton(
+                                child: Text(
+                                  'Go to Profile',
+                                  style: GoogleFonts.ptSansNarrow(
+                                      textStyle: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                                onPressed: () {
+                                  Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      "/profile",
+                                      ModalRoute.withName('/profile'));
+                                },
+                                textColor: Colors.white,
+                                padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+                                elevation: 5.0,
+                                color: Colors.black,
+                                splashColor: Colors.grey,
+                              ),
+                                ],
+                              ),
+                            )
                     ],
                   ),
                 )
@@ -283,9 +329,8 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
-   void openProfileURL() async {
-    var url =
-        githubProfileURL;
+  void openProfileURL() async {
+    var url = githubProfileURL;
     if (await canLaunch(url)) {
       await launch(url);
     } else {
