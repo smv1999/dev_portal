@@ -49,9 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         Theme.of(context).platform == TargetPlatform.iOS
                             ? Colors.black
                             : Colors.white,
-                    child: Image.network(profileImageUrl)
-                    // Later to be changed as profile image
-                    ),
+                    child: Image.network(profileImageUrl)),
               ),
               ListTile(
                 title: Text("Dashboard"),
@@ -63,7 +61,9 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               ListTile(
                 title: Text("My Profile"),
-                leading: Icon(Icons.person,),
+                leading: Icon(
+                  Icons.person,
+                ),
                 onTap: () {
                   _viewProfile();
                 },
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.of(context).pushNamed('/interviewpage');
                 },
               ),
-               ListTile(
+              ListTile(
                 title: Text("Explore Jobs"),
                 leading: Icon(Icons.explore),
                 onTap: () {
@@ -187,14 +187,14 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           Container(
             padding: EdgeInsets.all(10),
-          child:GestureDetector(
-            onTap: () {
-              showAlertDialog(context);
-            },
-            child: Icon(
-              Icons.logout,
+            child: GestureDetector(
+              onTap: () {
+                showAlertDialog(context);
+              },
+              child: Icon(
+                Icons.logout,
+              ),
             ),
-          ),
           )
         ],
         actionsIconTheme: IconThemeData(color: Colors.white),
@@ -239,18 +239,21 @@ class _MyHomePageState extends State<MyHomePage> {
     AlertDialog alert = AlertDialog(
       title: Text(
         "Confirmation",
-        style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+        style: GoogleFonts.ptSansNarrow(
+          textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
       ),
-      content: ListView(
-        shrinkWrap: true,
-      children:[
-        Image.asset('images/logout.png', height: 100,alignment: Alignment.centerLeft,),
+      content: ListView(shrinkWrap: true, children: [
+        Image.asset(
+          'images/logout.png',
+          height: 100,
+          alignment: Alignment.centerLeft,
+        ),
         Text(
-        "Are you sure to Logout?",
-        style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16)),
-      ),
-      ]
-      ),
+          "Are you sure to Logout?",
+          style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16)),
+        ),
+      ]),
       actions: [
         cancelButton,
         continueButton,

@@ -61,21 +61,6 @@ class _IntroScreenState extends State<IntroScreen> {
     );
     slides.add(
       new Slide(
-        title: "Have a Byte",
-        description: "Get information in byte sized high-quality content",
-        pathImage: "images/intro3.png",
-        styleTitle: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 30,
-            fontFamily: 'MyFont'),
-        styleDescription:
-            TextStyle(color: Colors.black, fontSize: 18, fontFamily: 'MyFont'),
-        backgroundColor: Colors.white,
-      ),
-    );
-    slides.add(
-      new Slide(
         title: "Interview Preparation Module",
         description: "Quality content to help you prepare for interviews",
         pathImage: "images/intro4.png",
@@ -91,8 +76,53 @@ class _IntroScreenState extends State<IntroScreen> {
     );
     slides.add(
       new Slide(
-        title: "Have a discussion",
-        description: "Make use of the discussion forums and learn together",
+        title: "Manage your productivity",
+        description: "Create and Manage To-do lists and Project Ideas",
+        pathImage: "images/productivity.png",
+        styleTitle: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+            fontFamily: 'MyFont'),
+        styleDescription:
+            TextStyle(color: Colors.black, fontSize: 18, fontFamily: 'MyFont'),
+        backgroundColor: Colors.white,
+      ),
+    );
+    slides.add(
+      new Slide(
+        title: "Explore Job Opportunities",
+        description: "Stay updated with Tech jobs",
+        pathImage: "images/explore_jobs.jpg",
+        styleTitle: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+            fontFamily: 'MyFont'),
+        styleDescription:
+            TextStyle(color: Colors.black, fontSize: 18, fontFamily: 'MyFont'),
+        backgroundColor: Colors.white,
+      ),
+    );
+    slides.add(
+      new Slide(
+        title: "Have a Byte",
+        description: "Get access to high-quality byte sized content",
+        pathImage: "images/intro3.png",
+        styleTitle: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+            fontFamily: 'MyFont'),
+        styleDescription:
+            TextStyle(color: Colors.black, fontSize: 18, fontFamily: 'MyFont'),
+        backgroundColor: Colors.white,
+      ),
+    );
+    slides.add(
+      new Slide(
+        title: "Engage with the community",
+        description: "Share your thoughts with the community",
         pathImage: "images/intro5.png",
         styleTitle: TextStyle(
             color: Colors.black,

@@ -41,7 +41,7 @@ class _InterviewPageState extends State<InterviewPage> {
           // show info dialog
           showCustomDialog(
               context,
-              'These resources are taken from online platforms and the author of this application '
+              'These resources are taken from online platforms and the creator of this application '
                   'does not propose that he is the author of these resources. The credit goes to the creators of these content. The sole '
                   'purpose of using these resources is for educational purposes.',
               'images/info_blue.png');

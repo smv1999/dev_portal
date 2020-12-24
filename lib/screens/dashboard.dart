@@ -201,17 +201,73 @@ class _DashboardState extends State<Dashboard> {
                                                             CrossAxisAlignment
                                                                 .start,
                                                         children: [
-                                                          Text('Followers: ' +
-                                                              snapshot.data
-                                                                  .followers
-                                                                  .toString()),
+                                                          RichText(
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            text: new TextSpan(
+                                                              children: <
+                                                                  TextSpan>[
+                                                                new TextSpan(
+                                                                    text:
+                                                                        'Followers: ',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            12.0,
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontWeight:
+                                                                            FontWeight.bold)),
+                                                                new TextSpan(
+                                                                  text: (snapshot
+                                                                      .data
+                                                                      .followers
+                                                                      .toString()),
+                                                                  style:
+                                                                      new TextStyle(
+                                                                    fontSize:
+                                                                        12.0,
+                                                                    color: Colors
+                                                                        .black,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
                                                           SizedBox(
                                                             height: 8.0,
                                                           ),
-                                                          Text('Following: ' +
-                                                              snapshot.data
-                                                                  .following
-                                                                  .toString()),
+                                                          RichText(
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            text: new TextSpan(
+                                                              children: <
+                                                                  TextSpan>[
+                                                                new TextSpan(
+                                                                    text:
+                                                                        'Following: ',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            12.0,
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontWeight:
+                                                                            FontWeight.bold)),
+                                                                new TextSpan(
+                                                                  text: (snapshot
+                                                                      .data
+                                                                      .following
+                                                                      .toString()),
+                                                                  style:
+                                                                      new TextStyle(
+                                                                    fontSize:
+                                                                        12.0,
+                                                                    color: Colors
+                                                                        .black,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
                                                         ],
                                                       ),
                                                       Column(
@@ -219,16 +275,72 @@ class _DashboardState extends State<Dashboard> {
                                                             CrossAxisAlignment
                                                                 .start,
                                                         children: [
-                                                          Text('Public Repos: ' +
-                                                              snapshot.data
-                                                                  .publicRepos
-                                                                  .toString()),
+                                                          RichText(
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            text: new TextSpan(
+                                                              children: <
+                                                                  TextSpan>[
+                                                                new TextSpan(
+                                                                    text:
+                                                                        'Public Repos: ',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            12.0,
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontWeight:
+                                                                            FontWeight.bold)),
+                                                                new TextSpan(
+                                                                  text: (snapshot
+                                                                      .data
+                                                                      .publicRepos
+                                                                      .toString()),
+                                                                  style:
+                                                                      new TextStyle(
+                                                                    fontSize:
+                                                                        12.0,
+                                                                    color: Colors
+                                                                        .black,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
                                                           SizedBox(
                                                             height: 8.0,
                                                           ),
-                                                          Text('Blog: ' +
-                                                              snapshot
-                                                                  .data.blog),
+                                                          RichText(
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            text: new TextSpan(
+                                                              children: <
+                                                                  TextSpan>[
+                                                                new TextSpan(
+                                                                    text:
+                                                                        'Blog: ',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            12.0,
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontWeight:
+                                                                            FontWeight.bold)),
+                                                                new TextSpan(
+                                                                  text: (snapshot
+                                                                      .data
+                                                                      .blog),
+                                                                  style:
+                                                                      new TextStyle(
+                                                                    fontSize:
+                                                                        12.0,
+                                                                    color: Colors
+                                                                        .black,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
                                                         ],
                                                       )
                                                     ],
@@ -244,7 +356,7 @@ class _DashboardState extends State<Dashboard> {
                                                             text:
                                                                 'Your Score: ',
                                                             style: TextStyle(
-                                                                fontSize: 16.0,
+                                                                fontSize: 14.0,
                                                                 color: Colors
                                                                     .black,
                                                                 fontWeight:
@@ -259,7 +371,7 @@ class _DashboardState extends State<Dashboard> {
                                                                       2)
                                                               .toString(),
                                                           style: new TextStyle(
-                                                            fontSize: 16.0,
+                                                            fontSize: 14.0,
                                                             color: Colors.black,
                                                           ),
                                                         ),
@@ -287,29 +399,37 @@ class _DashboardState extends State<Dashboard> {
                               child: ListView(
                                 shrinkWrap: true,
                                 children: [
-                                  Text("In order to see your activity score, please provide your GitHub username in profile.",
-                                  style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16.0,)),
-                                  textAlign: TextAlign.justify,),
-                                  SizedBox(height: 8.0,),
+                                  Text(
+                                    "In order to see your activity score, please provide your GitHub username in profile.",
+                                    style: GoogleFonts.ptSansNarrow(
+                                        textStyle: TextStyle(
+                                      fontSize: 16.0,
+                                    )),
+                                    textAlign: TextAlign.justify,
+                                  ),
+                                  SizedBox(
+                                    height: 8.0,
+                                  ),
                                   RaisedButton(
-                                child: Text(
-                                  'Go to Profile',
-                                  style: GoogleFonts.ptSansNarrow(
-                                      textStyle: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                ),
-                                onPressed: () {
-                                  Navigator.pushNamedAndRemoveUntil(
-                                      context,
-                                      "/profile",
-                                      ModalRoute.withName('/profile'));
-                                },
-                                textColor: Colors.white,
-                                padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
-                                elevation: 5.0,
-                                color: Colors.black,
-                                splashColor: Colors.grey,
-                              ),
+                                    child: Text(
+                                      'Go to Profile',
+                                      style: GoogleFonts.ptSansNarrow(
+                                          textStyle: TextStyle(
+                                              fontWeight: FontWeight.bold)),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pushNamedAndRemoveUntil(
+                                          context,
+                                          "/profile",
+                                          ModalRoute.withName('/profile'));
+                                    },
+                                    textColor: Colors.white,
+                                    padding:
+                                        EdgeInsets.fromLTRB(10, 18, 10, 18),
+                                    elevation: 5.0,
+                                    color: Colors.black,
+                                    splashColor: Colors.grey,
+                                  ),
                                 ],
                               ),
                             )
