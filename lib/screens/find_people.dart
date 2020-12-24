@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'package:dev_portal/models/people.dart';
+import 'package:dev_portal/screens/view_profile.dart';
 import 'package:dev_portal/services/ProgressBar.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,7 +19,6 @@ class _FindPeopleState extends State<FindPeople> {
   List<String> following = [], followers = [];
   Future f;
   String currentUserName = "";
-  bool followingOn = false;
   ProgressBar progressBar;
 
   @override
@@ -61,7 +61,9 @@ class _FindPeopleState extends State<FindPeople> {
                 fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
-          iconTheme: IconThemeData(color: Colors.white,),
+          iconTheme: IconThemeData(
+            color: Colors.white,
+          ),
         ),
         body: ListView(
           shrinkWrap: true,
@@ -78,55 +80,66 @@ class _FindPeopleState extends State<FindPeople> {
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
                         return Card(
-                          margin: const EdgeInsets.all(8.0),
-                          child: ListTile(
-                            subtitle:
-                                Text(snapshot.data[index].employmentTitle),
-                            title: Text(
-                              snapshot.data[index].firstName +
-                                  " " +
-                                  snapshot.data[index].lastName,
-                              style: GoogleFonts.ptSansNarrow(),
-                            ),
-                            leading: CircleAvatar(
-                                backgroundColor: Theme.of(context).platform ==
-                                        TargetPlatform.iOS
-                                    ? Colors.black
-                                    : Colors.white,
-                                child: Image.network(
-                                    snapshot.data[index].imagePath)
-
-                                // Later to be changed as profile image
+                            margin: const EdgeInsets.all(8.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ViewProfile(
+                                        text: snapshot.data[index].userName,
+                                      ),
+                                    ));
+                              },
+                              child: ListTile(
+                                subtitle:
+                                    Text(snapshot.data[index].employmentTitle),
+                                title: Text(
+                                  snapshot.data[index].firstName +
+                                      " " +
+                                      snapshot.data[index].lastName,
+                                  style: GoogleFonts.ptSansNarrow(),
                                 ),
-                            trailing: Container(
-                              height: 50,
-                              child: RaisedButton(
-                                  child: following.contains(
-                                          snapshot.data[index].userName)
-                                      ? Text(
-                                          'Following',
-                                          style: GoogleFonts.ptSansNarrow(
-                                              textStyle:
-                                                  TextStyle(fontSize: 14)),
-                                        )
-                                      : Text(
-                                          'Follow',
-                                          style: GoogleFonts.ptSansNarrow(
-                                              textStyle:
-                                                  TextStyle(fontSize: 14)),
-                                        ),
-                                  onPressed: () => followPeople(
-                                      snapshot.data[index].userName),
-                                  color: Colors.blue,
-                                  splashColor: Colors.blueAccent,
-                                  textColor: Colors.white,
-                                  elevation: 5.0,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(10.0))),
-                            ),
-                          ),
-                        );
+                                leading: CircleAvatar(
+                                    backgroundColor:
+                                        Theme.of(context).platform ==
+                                                TargetPlatform.iOS
+                                            ? Colors.black
+                                            : Colors.white,
+                                    child: Image.network(
+                                        snapshot.data[index].imagePath)
+
+                                    // Later to be changed as profile image
+                                    ),
+                                trailing: Container(
+                                  height: 50,
+                                  child: RaisedButton(
+                                      child: following.contains(
+                                              snapshot.data[index].userName)
+                                          ? Text(
+                                              'Following',
+                                              style: GoogleFonts.ptSansNarrow(
+                                                  textStyle:
+                                                      TextStyle(fontSize: 14)),
+                                            )
+                                          : Text(
+                                              'Follow',
+                                              style: GoogleFonts.ptSansNarrow(
+                                                  textStyle:
+                                                      TextStyle(fontSize: 14)),
+                                            ),
+                                      onPressed: () => followPeople(
+                                          snapshot.data[index].userName),
+                                      color: Colors.blue,
+                                      splashColor: Colors.blueAccent,
+                                      textColor: Colors.white,
+                                      elevation: 5.0,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              new BorderRadius.circular(10.0))),
+                                ),
+                              ),
+                            ));
                       },
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
@@ -369,9 +382,7 @@ class _FindPeopleState extends State<FindPeople> {
       ),
     );
     showDialog(
-        context: context,
-        builder: (BuildContext context) => errorDialog
-       );
+        context: context, builder: (BuildContext context) => errorDialog);
   }
 
   showCustomDialog(BuildContext context, String text) {
