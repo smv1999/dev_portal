@@ -62,7 +62,11 @@ class _UserProfileState extends State<UserProfile> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () {
+        Navigator.of(context).pushReplacementNamed('/home');
+      },
+    child:Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blue,
           iconTheme: IconThemeData(color: Colors.white),
@@ -445,7 +449,8 @@ class _UserProfileState extends State<UserProfile> {
               ],
             ),
           ),
-        ));
+        ),
+    ));
   }
 
   Future<void> _setData() async {

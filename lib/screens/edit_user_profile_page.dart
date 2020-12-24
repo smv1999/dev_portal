@@ -35,7 +35,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
   final picker = ImagePicker();
   FirebaseStorage _storage = FirebaseStorage.instance;
   DatabaseReference myRef, userNameRef;
-  String imagePath;
+  String imagePath; 
   bool imageFlag = false;
   final TextEditingController controller = TextEditingController(text: '');
 
@@ -211,7 +211,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                                 selectDate(context),
                                 controller.text =
                                     "${selectedDate.toLocal()}".split(' ')[0],
-                                    dob = "${selectedDate.toLocal()}".split(' ')[0]; 
+                                    dob = "${selectedDate.toLocal()}".split(' ')[0] 
 
                               },
                           onChanged: (text) {

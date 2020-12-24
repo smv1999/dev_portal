@@ -174,10 +174,12 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
                           enabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.grey, width: 1.0),
+                            borderRadius: BorderRadius.circular(32.0),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.grey, width: 1.0),
+                            borderRadius: BorderRadius.circular(32.0),
                           ),
                           hintText: 'Project Title',
                           hintStyle: GoogleFonts.ptSansNarrow()),
@@ -244,7 +246,7 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
         context: context, builder: (BuildContext context) => errorDialog);
   }
 
-   Future checkTipSeen() async {
+  Future checkTipSeen() async {
     prefs = await SharedPreferences.getInstance();
     _seen = (prefs.getBool('projectsheetseen') ?? false);
     if (!_seen) {
@@ -306,7 +308,6 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
           );
         });
   }
-
 
   void _saveProjectData(BuildContext context) async {
     if (_formKey.currentState.validate()) {

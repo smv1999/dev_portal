@@ -33,7 +33,11 @@ class _TodoListState extends State<TodoList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () {
+        Navigator.of(context).pushReplacementNamed('/dashboard');
+      },
+    child:Scaffold(
       key: _scaffoldKey,
       floatingActionButton: FloatingActionButton(
         child: SizedBox.expand(
@@ -137,6 +141,7 @@ class _TodoListState extends State<TodoList> {
         ],
       ),
       ),
+    ),
     );
   }
 

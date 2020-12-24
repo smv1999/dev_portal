@@ -183,7 +183,6 @@ class _NewTaskState extends State<NewTask> {
       taskMap.putIfAbsent('deadline', () => taskDeadline);
       taskMap.putIfAbsent('created', () => dateCreated);
 
-      print(taskDeadline);
 
       myTaskRef.push().set(taskMap);
 
