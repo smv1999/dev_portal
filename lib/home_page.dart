@@ -68,6 +68,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   _viewProfile();
                 },
               ),
+               ListTile(
+                title: Text("My Posts"),
+                leading: Icon(
+                  Icons.post_add,
+                ),
+                onTap: () {
+                  Navigator.of(context).pushNamed('/myposts');
+                },
+              ),
               ListTile(
                 title: Text("Find people"),
                 leading: Icon(Icons.search),
@@ -144,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavyBarItem(
               activeColor: Colors.blue,
               inactiveColor: Colors.blueGrey,
-              icon: Icon(Icons.add),
+              icon: Icon(Icons.add_circle),
               title: Text(
                 'New Post',
                 style: GoogleFonts.ptSansNarrow(
@@ -164,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavyBarItem(
               activeColor: Colors.blue,
               inactiveColor: Colors.blueGrey,
-              icon: Icon(Icons.post_add),
+              icon: Icon(Icons.dynamic_feed),
               title: Text(
                 'Feed',
                 style: GoogleFonts.ptSansNarrow(

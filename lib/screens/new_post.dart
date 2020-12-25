@@ -23,7 +23,7 @@ class _NewPostState extends State<NewPost> {
   final picker = ImagePicker();
   FirebaseStorage _storage = FirebaseStorage.instance;
   DatabaseReference myPostRef, userNameRef;
-  String imagePath, firstName, lastName, fullName;
+  String imagePath, firstName, lastName, fullName, userName, profileImage;
   bool imageFlag = false;
   static int post_no = 0;
   Future<void> getImage() async {
@@ -64,7 +64,9 @@ class _NewPostState extends State<NewPost> {
         if (dataSnapshot.value != null) {
           firstName = dataSnapshot.value["firstname"];
           lastName = dataSnapshot.value["lastname"];
-          fullName = firstName + lastName;
+          fullName = firstName + " " + lastName;
+          userName = dataSnapshot.value["username"];
+          profileImage = dataSnapshot.value["imagepath"];
         } else {
           setState(() {
             // warning: fill your profile details before creating a post
@@ -79,7 +81,8 @@ class _NewPostState extends State<NewPost> {
   @override
   Widget build(BuildContext context) {
     ++post_no;
-    return Center(
+    return 
+    Center(
           child: Container(
             padding: EdgeInsets.all(20.0),
             child: Padding(
@@ -165,7 +168,7 @@ class _NewPostState extends State<NewPost> {
     if (_formKey.currentState.validate()) {
       final FirebaseUser user = await auth.getCurrentUser();
       final userId = user.uid;
-      myPostRef = FirebaseDatabase.instance.reference().child("Posts");
+      myPostRef = FirebaseDatabase.instance.reference().child("Posts").child(userId);
       dynamic currentTime = DateFormat.jm().format(DateTime.now());
       dynamic date = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
@@ -174,13 +177,14 @@ class _NewPostState extends State<NewPost> {
         profileMap.putIfAbsent('description', () => post_description);
         profileMap.putIfAbsent('postpath', () => imagePath);
         profileMap.putIfAbsent('name', () => fullName);
-        profileMap.putIfAbsent('publisher', () => userId);
+        profileMap.putIfAbsent('publisher', () => userName);
         profileMap.putIfAbsent('datetime', () => date + " " + currentTime);
+        profileMap.putIfAbsent('profileimage', () => profileImage);
         myPostRef.push().set(profileMap);
 
         Toast.show("Your Post is successful", context,
             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-        Navigator.of(context).pushNamed('/home');
+        Navigator.of(context).pushReplacementNamed('/myposts');
       } else {
         Toast.show("Uploading Please Wait...", context,
             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
