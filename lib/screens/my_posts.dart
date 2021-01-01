@@ -32,108 +32,120 @@ class _MyPostsState extends State<MyPosts> {
       onWillPop: () {
         Navigator.of(context).pushReplacementNamed('/home');
       },
-     child:Scaffold(
-      appBar: AppBar(
-        elevation: 0, // to remove the shadow effect
-        backgroundColor: Colors.blue,
-        centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.white), // for the back button
-        title: Text(
-          'My Posts',
-          style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'MyFont',
-              fontWeight: FontWeight.bold),
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0, // to remove the shadow effect
+          backgroundColor: Colors.blue,
+          centerTitle: true,
+          iconTheme: IconThemeData(color: Colors.white), // for the back button
+          title: Text(
+            'My Posts',
+            style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'MyFont',
+                fontWeight: FontWeight.bold),
+          ),
         ),
-      ),
-      body: Container(
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            SizedBox(
-              height: 20.0,
-            ),
-            FutureBuilder(
-                future: f,
-                builder: (context, snapshot) {
-                  if (snapshot.data != null) {
-                    if (snapshot.data.length != 0) {
-                      return ListView.builder(
-                        reverse: true,
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: snapshot.data.length,
-                          itemBuilder: (context, index) {
-                            return Card(
-                              margin: EdgeInsets.all(8.0),
-                              child: Container(
-                                padding: EdgeInsets.all(15.0),
-                                child: ListView(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  children: [
-                                    ListTile(
-                                      subtitle:
-                                          Text(snapshot.data[index].datetime),
-                                      title: Text(snapshot.data[index].name),
-                                      leading: snapshot
-                                                  .data[index].profileImage !=
-                                              null
-                                          ? InkWell(
-                                              child: CircleAvatar(
-                                              backgroundColor: Colors.white,
-                                              radius: 30.0,
-                                              child: CircleAvatar(
-                                                radius: 28.0,
-                                                backgroundImage:
-                                                    new NetworkImage(snapshot
-                                                        .data[index]
-                                                        .profileImage),
+        body: Container(
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              SizedBox(
+                height: 20.0,
+              ),
+              FutureBuilder(
+                  future: f,
+                  builder: (context, snapshot) {
+                    if (snapshot.data != null) {
+                      if (snapshot.data.length != 0) {
+                        return ListView.builder(
+                            reverse: true,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (context, index) {
+                              return Card(
+                                margin: EdgeInsets.all(8.0),
+                                child: Container(
+                                  padding: EdgeInsets.all(15.0),
+                                  child: ListView(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    children: [
+                                      ListTile(
+                                        subtitle:
+                                            Text(snapshot.data[index].datetime),
+                                        title: Text(snapshot.data[index].name),
+                                        leading: snapshot
+                                                    .data[index].profileImage !=
+                                                null
+                                            ? InkWell(
+                                                child: CircleAvatar(
                                                 backgroundColor: Colors.white,
-                                              ),
-                                            ))
-                                          : InkWell(
-                                              child: CircleAvatar(
-                                              backgroundColor: Colors.white,
-                                              radius: 30.0,
-                                              child: CircleAvatar(
-                                                radius: 28.0,
-                                                backgroundImage: AssetImage(
-                                                    'images/newimage.png'),
+                                                radius: 30.0,
+                                                child: CircleAvatar(
+                                                  radius: 28.0,
+                                                  backgroundImage:
+                                                      new NetworkImage(snapshot
+                                                          .data[index]
+                                                          .profileImage),
+                                                  backgroundColor: Colors.white,
+                                                ),
+                                              ))
+                                            : InkWell(
+                                                child: CircleAvatar(
                                                 backgroundColor: Colors.white,
-                                              ),
-                                            )),
-                                    ),
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Image.network(
-                                      snapshot.data[index].postpath,
-                                      height: 250.0,
-                                    ),
-                                    SizedBox(height: 10.0,),
-                                    Text(
-                                      snapshot.data[index].description,
-                                      style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 15.0))
-                                    )
-                                  ],
+                                                radius: 30.0,
+                                                child: CircleAvatar(
+                                                  radius: 28.0,
+                                                  backgroundImage: AssetImage(
+                                                      'images/newimage.png'),
+                                                  backgroundColor: Colors.white,
+                                                ),
+                                              )),
+                                      ),
+                                      SizedBox(
+                                        height: 5.0,
+                                      ),
+                                      Container(
+                                        height: 230.0,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          image: DecorationImage(
+                                              image: NetworkImage(snapshot
+                                                  .data[index].postpath),
+                                              fit: BoxFit.contain),
+                                          border: Border.all(
+                                            color: Colors.black,
+                                            width: 3.0,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10.0,
+                                      ),
+                                      Text(snapshot.data[index].description,
+                                          style: GoogleFonts.ptSansNarrow(
+                                              textStyle:
+                                                  TextStyle(fontSize: 15.0)))
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          });
+                              );
+                            });
+                      }
+                      return Container(
+                        child: Image.asset('images/data_not_found.png'),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text("${snapshot.error}");
                     }
-                    return Container(
-                      child: Image.asset('images/data_not_found.png'),
-                    );
-                  } else if (snapshot.hasError) {
-                    return Text("${snapshot.error}");
-                  }
-                  return Container();
-                }),
-          ],
+                    return Container();
+                  }),
+            ],
+          ),
         ),
       ),
-     ),
     );
   }
 

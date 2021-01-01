@@ -16,9 +16,9 @@ class _MoreJobsState extends State<MoreJobs> {
       "https://weworkremotely.com/categories/remote-programming-jobs.rss";
   RssFeed _feed;
   String _title = "";
-  static const String loadingFeedMsg = 'Loading Feed ...';
-  static const String feedLoadErrorMsg = 'Error Loading Feed!';
-  static const String feedOpenErrorMsg = 'Error Opening Feed!';
+  static const String loadingFeedMsg = 'Loading Jobs ...';
+  static const String feedLoadErrorMsg = 'Error Loading Jobs!';
+  static const String feedOpenErrorMsg = 'Error Opening Jobs!';
   GlobalKey<RefreshIndicatorState> _refreshKey;
 
   updateTitle(title) {

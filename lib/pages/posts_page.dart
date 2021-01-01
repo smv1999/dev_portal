@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:dev_portal/services/ProgressBar.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -19,12 +20,32 @@ class _PostsPageState extends State<PostsPage> {
   FirebaseStorage _storage = FirebaseStorage.instance;
   DatabaseReference myfollowingRef, myPeopleRef, postsRef;
   Future f;
+  ProgressBar _sendingMsgProgressBar;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _sendingMsgProgressBar = ProgressBar();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Add Your Code here.
+      showSendingProgressBar();
+    });
     f = retrievePostsData();
+  }
+
+  @override
+  void dispose() {
+    _sendingMsgProgressBar.hide();
+    super.dispose();
+  }
+
+  void showSendingProgressBar() {
+    _sendingMsgProgressBar.show(context);
+  }
+
+  void hideSendingProgressBar() {
+    _sendingMsgProgressBar.hide();
   }
 
   @override
@@ -50,7 +71,7 @@ class _PostsPageState extends State<PostsPage> {
                           return Card(
                             margin: EdgeInsets.all(8.0),
                             child: Container(
-                              padding: EdgeInsets.all(15.0),
+                              padding: EdgeInsets.all(10.0),
                               child: ListView(
                                 physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
@@ -90,9 +111,19 @@ class _PostsPageState extends State<PostsPage> {
                                   SizedBox(
                                     height: 5.0,
                                   ),
-                                  Image.network(
-                                    snapshot.data[index].postpath,
-                                    height: 250.0,
+                                  Container(
+                                    height: 230.0,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              snapshot.data[index].postpath),
+                                          fit: BoxFit.contain),
+                                      border: Border.all(
+                                        color: Colors.black,
+                                        width: 3.0,
+                                      ),
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 10.0,
@@ -169,6 +200,9 @@ class _PostsPageState extends State<PostsPage> {
           }
         }
       });
+    });
+    setState(() {
+      hideSendingProgressBar();
     });
     return posts;
   }

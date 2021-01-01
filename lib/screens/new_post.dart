@@ -112,7 +112,7 @@ class _NewPostState extends State<NewPost> {
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 image:
-                                    DecorationImage(image: FileImage(_image), fit: BoxFit.cover),
+                                    DecorationImage(image: FileImage(_image), fit: BoxFit.contain),
                                 border: Border.all(
                                   color: Colors.black,
                                   width: 3.0,
@@ -180,7 +180,7 @@ class _NewPostState extends State<NewPost> {
                     height: 15,
                   ),
                   ButtonTheme(
-                    minWidth: 200,
+                    minWidth: 320,
                     child: RaisedButton(
                         child: Text(
                           'POST',

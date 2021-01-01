@@ -38,15 +38,16 @@ class _NewTaskState extends State<NewTask> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         title: Text(
           'New Task',
           style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontFamily: 'MyFont',
               fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(color: Colors.white),
         actions: <Widget>[
           Padding(
               padding: EdgeInsets.only(right: 20.0),
@@ -57,7 +58,7 @@ class _NewTaskState extends State<NewTask> {
                 child: Icon(Icons.check_circle),
               )),
         ],
-        actionsIconTheme: IconThemeData(color: Colors.black),
+        actionsIconTheme: IconThemeData(color: Colors.white),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),

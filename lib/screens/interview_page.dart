@@ -86,7 +86,7 @@ class _InterviewPageState extends State<InterviewPage> {
                 style: GoogleFonts.ptSansNarrow(),
               ),
               leading:
-                  Container(width: 80, child: Image.asset('images/ai.png')),
+                  Container(width: 80, child: Image.asset('images/job3.jpg')),
               trailing: Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.grey,
@@ -117,7 +117,7 @@ class _InterviewPageState extends State<InterviewPage> {
                 style: GoogleFonts.ptSansNarrow(),
               ),
               leading:
-                  Container(width: 80, child: Image.asset('images/cs.jpg')),
+                  Container(width: 80, child: Image.asset('images/job1.png')),
               trailing: Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.grey,

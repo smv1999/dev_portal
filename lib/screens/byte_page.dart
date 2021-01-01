@@ -144,7 +144,7 @@ class _BytePageState extends State<BytePage> {
                       style: GoogleFonts.ptSansNarrow(),
                     ),
                     leading: Container(
-                        width: 80, child: Image.asset('images/bigdata.png')),
+                        width: 80, child: Image.asset('images/bigdata.jpeg')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.grey,
