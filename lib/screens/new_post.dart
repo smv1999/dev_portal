@@ -34,9 +34,16 @@ class _NewPostState extends State<NewPost> {
     StorageReference reference =
         _storage.ref().child(userId).child("PostImages/" + post_no.toString());
     setState(() {
+       try{
       _image = File(pickedFile.path);
+       }
+       catch(e){
+         print(e);
+       }
     });
     //Upload the file to firebase
+
+    try{
     StorageUploadTask uploadTask = reference.putFile(_image);
 
     //Snapshot of the uploading task
@@ -45,6 +52,10 @@ class _NewPostState extends State<NewPost> {
         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     imagePath = await taskSnapshot.ref.getDownloadURL();
     imageFlag = true;
+    }
+    catch(e){
+      print(e);
+    }
   }
 
   @override
@@ -81,94 +92,124 @@ class _NewPostState extends State<NewPost> {
   @override
   Widget build(BuildContext context) {
     ++post_no;
-    return 
-    Center(
-          child: Container(
-            padding: EdgeInsets.all(20.0),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Form(
-                  key: _formKey,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: (_image != null)
-                              ? InkWell(
-                                  onTap: getImage,
-                                  child: Image.file(_image),
-                                )
-                              : InkWell(
-                                  onTap: getImage,
-                                  child: Image.asset('images/newimage.png'),
+    return Center(
+        child: Container(
+      padding: EdgeInsets.all(10.0),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: (_image != null)
+                        ? GestureDetector(
+                            onTap: getImage,
+                            child: Container(
+                              height: 230.0,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                image:
+                                    DecorationImage(image: FileImage(_image), fit: BoxFit.cover),
+                                border: Border.all(
+                                  color: Colors.black,
+                                  width: 3.0,
                                 ),
-                        ),
-                        SizedBox(
-                          height: 5.0,
-                        ),
-                        TextFormField(
-                            maxLines: 1,
-                            validator: (val) => val.isEmpty
-                                ? 'Enter a Description of your post'
-                                : null,
-                            onChanged: (text) {
-                              setState(() {
-                                post_description = text;
-                              });
-                            },
-                            decoration: InputDecoration(
-                              hintText: 'Description',
-                              enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.grey, width: 1.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.grey, width: 1.0),
                               ),
                             ),
-                            textAlign: TextAlign.left,
-                            keyboardType: TextInputType.text,
-                            style: TextStyle(
-                                fontSize: 16.0,
-                                height: 1.4,
-                                color: Colors.black,
-                                fontFamily: 'Montserrat')),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        ButtonTheme(
-                          minWidth: 200,
-                         child:RaisedButton(
-                            child: Text(
-                              'POST',
-                              style: GoogleFonts.ptSansNarrow(
-                                  textStyle:
-                                      TextStyle(fontWeight: FontWeight.bold)),
+                          )
+                        : GestureDetector(
+                            onTap: getImage,
+                            child: Container(
+                              height: 230.0,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                image:
+                                    DecorationImage(image: AssetImage('images/new_post.gif'), fit: BoxFit.cover),
+                                border: Border.all(
+                                  color: Colors.black,
+                                  width: 3.0,
+                                ),
+                              ),
                             ),
-                            onPressed: _submitPost,
-                            textColor: Colors.white,
-                            padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
-                            elevation: 5.0,
-                            color: Colors.blue,
-                            splashColor: Colors.blueAccent,
-                            shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(20.0))
                           ),
+                  ),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Text(
+                    'Tap to select an Image',
+                    style: GoogleFonts.ptSansNarrow(
+                        textStyle: TextStyle(
+                            fontSize: 15.0, fontWeight: FontWeight.bold)),
+                  ),
+                  SizedBox(
+                    height: 8.0,
+                  ),
+                  TextFormField(
+                      maxLines: 1,
+                      validator: (val) => val.isEmpty
+                          ? 'Enter a Description of your post'
+                          : null,
+                      onChanged: (text) {
+                        setState(() {
+                          post_description = text;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Description',
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 1.0),
                         ),
-                      ],
-                    ),
-                  )),
-            ),
-        ));
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 1.0),
+                        ),
+                      ),
+                      textAlign: TextAlign.left,
+                      keyboardType: TextInputType.text,
+                      style: TextStyle(
+                          fontSize: 16.0,
+                          height: 1.4,
+                          color: Colors.black,
+                          fontFamily: 'Montserrat')),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  ButtonTheme(
+                    minWidth: 200,
+                    child: RaisedButton(
+                        child: Text(
+                          'POST',
+                          style: GoogleFonts.ptSansNarrow(
+                              textStyle:
+                                  TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                        onPressed: _submitPost,
+                        textColor: Colors.white,
+                        padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
+                        elevation: 5.0,
+                        color: Colors.blue,
+                        splashColor: Colors.blueAccent,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(20.0))),
+                  ),
+                ],
+              ),
+            )),
+      ),
+    ));
   }
 
   _submitPost() async {
     if (_formKey.currentState.validate()) {
       final FirebaseUser user = await auth.getCurrentUser();
       final userId = user.uid;
-      myPostRef = FirebaseDatabase.instance.reference().child("Posts").child(userId);
+      myPostRef =
+          FirebaseDatabase.instance.reference().child("Posts").child(userId);
       dynamic currentTime = DateFormat.jm().format(DateTime.now());
       dynamic date = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
@@ -206,7 +247,10 @@ class _NewPostState extends State<NewPost> {
               SizedBox(
                 height: 100,
                 width: 100,
-                child: Icon(Icons.warning_sharp, size: 80,),
+                child: Icon(
+                  Icons.warning_sharp,
+                  size: 80,
+                ),
               ),
               Padding(
                 padding: EdgeInsets.all(10.0),
@@ -226,7 +270,8 @@ class _NewPostState extends State<NewPost> {
                         textStyle: TextStyle(fontWeight: FontWeight.bold)),
                   ),
                   onPressed: () {
-                    Navigator.pushNamedAndRemoveUntil(context, "/profile", ModalRoute.withName('/profile'));
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, "/profile", ModalRoute.withName('/profile'));
                   },
                   textColor: Colors.white,
                   padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
@@ -241,6 +286,8 @@ class _NewPostState extends State<NewPost> {
       ),
     );
     showDialog(
-        context: context, builder: (BuildContext context) => errorDialog, barrierDismissible: false);
+        context: context,
+        builder: (BuildContext context) => errorDialog,
+        barrierDismissible: false);
   }
 }
