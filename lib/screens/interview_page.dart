@@ -5,7 +5,6 @@ import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_extend/share_extend.dart';
-import 'package:toast/toast.dart';
 
 class InterviewPage extends StatefulWidget {
   @override

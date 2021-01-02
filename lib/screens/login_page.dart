@@ -1,11 +1,9 @@
-import 'dart:async';
 import 'package:dev_portal/home_page.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:progress_dialog/progress_dialog.dart';
 import 'package:toast/toast.dart';
 
 // Main Login Page

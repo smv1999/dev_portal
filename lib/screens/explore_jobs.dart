@@ -1,8 +1,5 @@
 import 'dart:convert';
-
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:dev_portal/models/jobs.dart';
-import 'package:firebase_mlkit_language/firebase_mlkit_language.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -52,12 +49,9 @@ class _ExploreJobsState extends State<ExploreJobs> {
               height: 15.0,
             ),
             Center(
-              child: TextLiquidFill(
-                text: 'Explore Job Opportunities',
-                waveColor: Colors.black,
-                boxBackgroundColor: Colors.white,
-                textStyle: TextStyle(fontSize: 25.0, fontFamily: 'MyFont'),
-                boxHeight: 50.0,
+              child: Text(
+                'Explore Job Opportunities',
+                style: TextStyle(fontSize: 25.0, fontFamily: 'MyFont'),
               ),
             ),
             FutureBuilder(

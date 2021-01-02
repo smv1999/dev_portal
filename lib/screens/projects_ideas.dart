@@ -1,7 +1,6 @@
 import 'dart:collection';
 
 import 'package:dev_portal/models/projects.dart';
-import 'package:dev_portal/services/ProgressBar.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
