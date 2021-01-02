@@ -137,7 +137,7 @@ class _BytePageState extends State<BytePage> {
                               "\n1. Apache Hadoop"
                               "\n2. Cassandra"
                               "\n3. MongoDB",
-                          "images/bigdata.png")
+                          "images/bigdata.jpeg")
                     },
                     title: Text(
                       'Big Data',

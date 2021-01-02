@@ -171,7 +171,7 @@ class _IntroScreenState extends State<IntroScreen> {
           color: Colors.white,
             child: Center(
               child: CircularProgressIndicator(
-                backgroundColor: Colors.black,
+                backgroundColor: Colors.blue
               ),
             ),
           );

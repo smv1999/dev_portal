@@ -44,12 +44,19 @@ class _MyHomePageState extends State<MyHomePage> {
               UserAccountsDrawerHeader(
                 accountName: Text(fullName),
                 accountEmail: Text(email),
-                currentAccountPicture: CircleAvatar(
-                    backgroundColor:
-                        Theme.of(context).platform == TargetPlatform.iOS
-                            ? Colors.black
-                            : Colors.white,
-                    child: Image.network(profileImageUrl)),
+                currentAccountPicture: InkWell(
+                    child: CircleAvatar(
+                  backgroundColor:
+                      Theme.of(context).platform == TargetPlatform.iOS
+                          ? Colors.black
+                          : Colors.white,
+                  radius: 50.0,
+                  child: CircleAvatar(
+                    radius: 48.0,
+                    backgroundImage: new NetworkImage(profileImageUrl),
+                    backgroundColor: Colors.white,
+                  ),
+                )),
               ),
               ListTile(
                 title: Text("Dashboard"),
@@ -68,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   _viewProfile();
                 },
               ),
-               ListTile(
+              ListTile(
                 title: Text("My Posts"),
                 leading: Icon(
                   Icons.post_add,
@@ -226,7 +233,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Text(
         "Cancel",
         style:
-            TextStyle(color: Colors.black, fontFamily: 'MyFont', fontSize: 16),
+            TextStyle(color: Colors.blue, fontFamily: 'MyFont', fontSize: 16),
       ),
       onPressed: () {
         Navigator.of(context, rootNavigator: true).pop();
@@ -236,7 +243,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Text(
         "Continue",
         style:
-            TextStyle(color: Colors.black, fontFamily: 'MyFont', fontSize: 16),
+            TextStyle(color: Colors.blue, fontFamily: 'MyFont', fontSize: 16),
       ),
       onPressed: () {
         Navigator.of(context, rootNavigator: true).pop();
@@ -249,15 +256,12 @@ class _MyHomePageState extends State<MyHomePage> {
       title: Text(
         "Confirmation",
         style: GoogleFonts.ptSansNarrow(
-          textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
         ),
       ),
       content: ListView(shrinkWrap: true, children: [
-        Image.asset(
-          'images/logout.png',
-          height: 100,
-          alignment: Alignment.centerLeft,
-        ),
+        Icon(Icons.logout, color: Colors.blue,size: 80.0,),
+        SizedBox(height: 15.0,),
         Text(
           "Are you sure to Logout?",
           style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16)),
