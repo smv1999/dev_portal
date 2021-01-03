@@ -49,14 +49,14 @@ class _BytePageState extends State<BytePage> {
                               "\n1. Artificial Narrow Intelligence"
                               "\n2. Artificial General Intelligence"
                               "\n3. Artificial Super Intelligence",
-                          "images/ai.png")
+                          "https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/ai.png")
                     },
                     title: Text(
                       'Artificial Intelligence',
                       style: GoogleFonts.ptSansNarrow(),
                     ),
                     leading: Container(
-                        width: 80, child: Image.asset('images/ai.png')),
+                        width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/ai.png')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.grey,
@@ -78,14 +78,14 @@ class _BytePageState extends State<BytePage> {
                               "\n1. Bitcoin"
                               "\n2. Ethereum"
                               "\n3. LiteCoin",
-                          "images/blockchain.png")
+                          "https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/blockchain.png")
                     },
                     title: Text(
                       'Blockchain',
                       style: GoogleFonts.ptSansNarrow(),
                     ),
                     leading: Container(
-                        width: 80, child: Image.asset('images/blockchain.png')),
+                        width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/blockchain.png')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.grey,
@@ -106,7 +106,7 @@ class _BytePageState extends State<BytePage> {
                               "\n1. Amazon Web Services"
                               "\n2. Google Cloud Platform"
                               "\n3. Microsoft Azure",
-                          "images/cloudcomputing.png")
+                          "https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/cloudcomputing.png")
                     },
                     title: Text(
                       'Cloud Computing',
@@ -114,7 +114,7 @@ class _BytePageState extends State<BytePage> {
                     ),
                     leading: Container(
                         width: 80,
-                        child: Image.asset('images/cloudcomputing.png')),
+                        child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/cloudcomputing.png')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.grey,
@@ -136,14 +136,14 @@ class _BytePageState extends State<BytePage> {
                               "\n1. Apache Hadoop"
                               "\n2. Cassandra"
                               "\n3. MongoDB",
-                          "images/bigdata.jpeg")
+                          "https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/bigdata.jpeg")
                     },
                     title: Text(
                       'Big Data',
                       style: GoogleFonts.ptSansNarrow(),
                     ),
                     leading: Container(
-                        width: 80, child: Image.asset('images/bigdata.jpeg')),
+                        width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/bigdata.jpeg')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.grey,
@@ -165,14 +165,14 @@ class _BytePageState extends State<BytePage> {
                               "\n1. Smart Cars"
                               "\n2. Smart Wearables"
                               "\n3. Smart Retail",
-                          "images/iot.png")
+                          "https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/iot.png")
                     },
                     title: Text(
                       'Internet of Things',
                       style: GoogleFonts.ptSansNarrow(),
                     ),
                     leading: Container(
-                        width: 80, child: Image.asset('images/iot.png')),
+                        width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/iot.png')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.grey,
@@ -193,14 +193,14 @@ class _BytePageState extends State<BytePage> {
                               "This technology is prominent in Gaming and Medicine. Some examples include"
                               "\n1. Pokemon Go"
                               "\n2. Instagram and Snapchat Filters",
-                          "images/vrar.png")
+                          "https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/vrar.png")
                     },
                     title: Text(
                       'Augmented Reality / Virtual Reality',
                       style: GoogleFonts.ptSansNarrow(),
                     ),
                     leading: Container(
-                        width: 80, child: Image.asset('images/vrar.png')),
+                        width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/vrar.png')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.grey,
@@ -226,7 +226,7 @@ class _BytePageState extends State<BytePage> {
             children: [
               Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: Image.asset(
+                  child: Image.network(
                     imageName,
                     height: 100,
                     width: 100,

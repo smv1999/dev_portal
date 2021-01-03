@@ -14,14 +14,14 @@ class CodingTipsPage extends StatefulWidget {
 class _CodingTipsPageState extends State<CodingTipsPage>
     with TickerProviderStateMixin {
   List<String> welcomeImages = [
-    "images/tips1.png",
-    "images/tips2.png",
-    "images/tips3.png",
-    "images/tips4.png",
-    "images/tips5.png",
-    "images/tips6.png",
-    "images/tips7.png",
-    "images/tips8.png",
+    "https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/tips1.png",
+    "https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/tips2.png",
+    "https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/tips3.png",
+    "https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/tips4.png",
+    "https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/tips5.png",
+    "https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/tips6.png",
+    "https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/tips7.png",
+    "https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/tips8.png",
   ];
   GlobalKey _cardKey = GlobalObjectKey("card");
   SharedPreferences prefs;
@@ -67,7 +67,7 @@ class _CodingTipsPageState extends State<CodingTipsPage>
                 cardBuilder: (context, index) => Card(
                   color: Colors.white, // white
                   shadowColor: Colors.grey,
-                  child: Image.asset('${welcomeImages[index]}'),
+                  child: Image.network('${welcomeImages[index]}'),
                 ),
                 cardController: controller = CardController(),
                 swipeUpdateCallback:

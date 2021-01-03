@@ -85,7 +85,7 @@ class _DashboardState extends State<Dashboard> {
                             },
                             child: Card(
                               clipBehavior: Clip.antiAlias,
-                              child: Image.asset('images/productivity.png'),
+                              child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/productivity.png'),
                               elevation: 5,
                             ),
                           ),
@@ -98,8 +98,7 @@ class _DashboardState extends State<Dashboard> {
                             },
                             child: Card(
                               clipBehavior: Clip.antiAlias,
-                              child: Image.asset('images/projects.jpg'),
-                              // Text('Career Guidance'),
+                              child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/projects.jpg'),
                               elevation: 5,
                             ),
                           ),
@@ -153,8 +152,8 @@ class _DashboardState extends State<Dashboard> {
                                                             child: CircleAvatar(
                                                               radius: 48.0,
                                                               backgroundImage:
-                                                                  new AssetImage(
-                                                                      'images/programming.jpg'),
+                                                                  new NetworkImage(
+                                                                      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/programming.jpg'),
                                                               backgroundColor:
                                                                   Colors.black,
                                                             ),
@@ -511,8 +510,8 @@ class _DashboardState extends State<Dashboard> {
                     SizedBox(
                       height: 10.0,
                     ),
-                    Image.asset(
-                      'images/getting_started.png',
+                    Image.network(
+                      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/getting_started.png',
                       height: 80,
                     ),
                     SizedBox(

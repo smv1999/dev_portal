@@ -146,7 +146,7 @@ class _FindPeopleState extends State<FindPeople> {
                     );
                   }
                   return Container(
-                    child: Image.asset('images/data_not_found.png'),
+                    child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/data_not_found.png'),
                   );
                 } else if (snapshot.hasError) {
                   return Text("${snapshot.error}");

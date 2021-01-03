@@ -88,15 +88,7 @@ class _MoreJobsState extends State<MoreJobs> {
   thumbnail(imageUrl) {
     return Padding(
       padding: EdgeInsets.only(left: 15.0),
-      // child: CachedNetworkImage(
-      //   placeholder: (context, url) => Image.asset('images/dev.jpg'),
-      //   imageUrl: imageUrl,
-      //   height: 50,
-      //   width: 70,
-      //   alignment: Alignment.center,
-      //   fit: BoxFit.fill,
-      // ),
-      child: Image.asset(imageUrl,
+      child: Image.network(imageUrl,
           height: 50, width: 70, alignment: Alignment.center, fit: BoxFit.fill),
     );
   }
@@ -110,10 +102,15 @@ class _MoreJobsState extends State<MoreJobs> {
   }
 
   list() {
-    var images = ['images/job1.png','images/job2.jpeg','images/job3.jpg','images/job4.jpg','images/job5.jpg'];
+    var images = [
+      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/job1.png',
+      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/job2.jpeg',
+      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/job3.jpg',
+      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/job4.jpg',
+      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/job5.jpg'
+    ];
 
     final _random = new Random();
-
 
     return ListView.builder(
       itemCount: _feed.items.length,

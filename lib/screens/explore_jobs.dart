@@ -72,7 +72,7 @@ class _ExploreJobsState extends State<ExploreJobs> {
                           width: 80,
                           height: 80,
                           child: snapshot.data[index].companyLogoURL == null
-                              ? Image.asset('images/companies.jpg')
+                              ? Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/companies.jpg')
                               : Image.network(
                                   snapshot.data[index].companyLogoURL),
                         ),

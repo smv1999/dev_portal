@@ -98,7 +98,7 @@ class _HomePageContentState extends State<HomePageContent> {
                           radius: 50.0,
                           child: CircleAvatar(
                             radius: 48.0,
-                            backgroundImage: AssetImage('images/newimage.png'),
+                            backgroundImage: NetworkImage('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/newimage.png'),
                             backgroundColor: Colors.white,
                           ),
                         )),
@@ -175,7 +175,7 @@ class _HomePageContentState extends State<HomePageContent> {
             width: 75,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("images/homebackgroundimage.png"),
+                image: NetworkImage("https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/homebackgroundimage.png"),
               ),
             ),
           ),
@@ -197,13 +197,13 @@ class _HomePageContentState extends State<HomePageContent> {
               scrollDirection: Axis.horizontal,
             ),
             items: [
-              'images/ai.png',
-              'images/blockchain.png',
-              'images/vrar.png',
-              'images/cloudcomputing.png',
-              'images/bigdata.jpeg',
-              'images/rpa.png',
-              'images/iot.png'
+              'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/ai.png',
+              'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/blockchain.png',
+              'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/vrar.png',
+              'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/cloudcomputing.png',
+              'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/bigdata.jpeg',
+              'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/rpa.png',
+              'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/iot.png'
             ].map((i) {
               return Builder(
                 builder: (BuildContext context) {
@@ -213,7 +213,7 @@ class _HomePageContentState extends State<HomePageContent> {
                       decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: Colors.grey)),
-                      child: Image.asset(i));
+                      child: Image.network(i));
                 },
               );
             }).toList(),
@@ -226,7 +226,7 @@ class _HomePageContentState extends State<HomePageContent> {
             width: 70,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("images/top_it_jobs.png"),
+                image: NetworkImage("https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/top_it_jobs.png"),
               ),
             ),
           ),

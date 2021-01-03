@@ -127,7 +127,7 @@ class _NewPostState extends State<NewPost> {
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 image:
-                                    DecorationImage(image: AssetImage('images/new_post.gif'), fit: BoxFit.cover),
+                                    DecorationImage(image: NetworkImage('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/new_post.gif'), fit: BoxFit.cover),
                                 border: Border.all(
                                   color: Colors.black,
                                   width: 3.0,

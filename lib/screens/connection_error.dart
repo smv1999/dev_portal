@@ -9,7 +9,7 @@ class ConnectionError extends StatelessWidget {
         child: ListView(shrinkWrap: true, children: [
           Padding(
             padding: EdgeInsets.all(40),
-            child: Image.asset('images/somethingwrong.png'),
+            child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/somethingwrong.png'),
           ),
           Center(
               child: Text(

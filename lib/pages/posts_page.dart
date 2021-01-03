@@ -102,8 +102,8 @@ class _PostsPageState extends State<PostsPage> {
                                                 radius: 30.0,
                                                 child: CircleAvatar(
                                                   radius: 28.0,
-                                                  backgroundImage: AssetImage(
-                                                      'images/newimage.png'),
+                                                  backgroundImage: NetworkImage(
+                                                      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/newimage.png'),
                                                   backgroundColor: Colors.white,
                                                 ),
                                               )),
@@ -138,7 +138,7 @@ class _PostsPageState extends State<PostsPage> {
                         });
                   }
                   return Container(
-                    child: Image.asset('images/data_not_found.png'),
+                    child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/data_not_found.png'),
                   );
                 } else if (snapshot.hasError) {
                   return Text("${snapshot.error}");

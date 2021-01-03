@@ -25,7 +25,7 @@ class AboutPage extends StatelessWidget {
         child:Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Image.asset('images/about.png', height: 80,),
+            Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/about.png', height: 80,),
             SizedBox(height: 15,),
             Text('Dev Portal is a Community Portal for Developers. It is an initiative to bring the developers across the world to connect with each'
                 ' other and it creates an environment for learning and growing together.\n\n'

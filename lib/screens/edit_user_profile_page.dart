@@ -134,7 +134,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                                 child: CircleAvatar(
                                   radius: 48.0,
                                   backgroundImage:
-                                      AssetImage('images/newimage.png'),
+                                      NetworkImage('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/newimage.png'),
                                   backgroundColor: Colors.white,
                                 ),
                               )),

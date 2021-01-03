@@ -43,7 +43,7 @@ class _InterviewPageState extends State<InterviewPage> {
               'These resources are taken from online platforms and the creator of this application '
                   'does not propose that he is the author of these resources. The credit goes to the creators of these content. The sole '
                   'purpose of using these resources is for educational purposes.',
-              'images/info_blue.png');
+              'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/info_blue.png');
         },
       ),
       appBar: AppBar(
@@ -85,7 +85,7 @@ class _InterviewPageState extends State<InterviewPage> {
                 style: GoogleFonts.ptSansNarrow(),
               ),
               leading:
-                  Container(width: 80, child: Image.asset('images/job3.jpg')),
+                  Container(width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/job3.jpg')),
               trailing: Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.grey,
@@ -116,7 +116,7 @@ class _InterviewPageState extends State<InterviewPage> {
                 style: GoogleFonts.ptSansNarrow(),
               ),
               leading:
-                  Container(width: 80, child: Image.asset('images/job1.png')),
+                  Container(width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/job1.png')),
               trailing: Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.grey,
@@ -147,7 +147,7 @@ class _InterviewPageState extends State<InterviewPage> {
                 style: GoogleFonts.ptSansNarrow(),
               ),
               leading:
-                  Container(width: 80, child: Image.asset('images/time.jpg')),
+                  Container(width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/time.jpg')),
               trailing: Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.grey,
@@ -177,7 +177,7 @@ class _InterviewPageState extends State<InterviewPage> {
                 style: GoogleFonts.ptSansNarrow(),
               ),
               leading:
-                  Container(width: 80, child: Image.asset('images/java.png')),
+                  Container(width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/java.png')),
               trailing: Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.grey,
@@ -202,7 +202,7 @@ class _InterviewPageState extends State<InterviewPage> {
             children: [
               Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: Image.asset(
+                  child: Image.network(
                     imageName,
                     height: 60,
                     width: 60,

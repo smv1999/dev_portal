@@ -129,7 +129,7 @@ class _TodoListState extends State<TodoList> {
                   );
                 }
                 return Container(
-                  child: Image.asset('images/data_not_found.png'),
+                  child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/data_not_found.png'),
                 );
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
@@ -168,8 +168,8 @@ class _TodoListState extends State<TodoList> {
                     SizedBox(
                       height: 10.0,
                     ),
-                    Image.asset(
-                      'images/getting_started.png',
+                    Image.network(
+                      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/getting_started.png',
                       height: 80,
                     ),
                     SizedBox(
