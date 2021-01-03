@@ -117,12 +117,12 @@ class _UserProfileState extends State<UserProfile> {
                               ))
                             : InkWell(
                                 child: CircleAvatar(
-                                backgroundColor: Colors.black,
+                                backgroundColor: Colors.white,
                                 radius: 50.0,
                                 child: CircleAvatar(
                                   radius: 48.0,
                                   backgroundImage:
-                                      NetworkImage('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/newimage.png'),
+                                      NetworkImage('https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png'),
                                   backgroundColor: Colors.white,
                                 ),
                               )),

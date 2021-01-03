@@ -92,7 +92,7 @@ class _IntroScreenState extends State<IntroScreen> {
       new Slide(
         title: "Explore Job Opportunities",
         description: "Stay updated with Tech jobs",
-        pathImage: "images/explore_jobs.jpg",
+        pathImage: "images/explore_jobs.png",
         styleTitle: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,

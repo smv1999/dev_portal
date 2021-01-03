@@ -402,6 +402,7 @@ class _FindPeopleState extends State<FindPeople> {
                 child: Icon(
                   Icons.warning_sharp,
                   size: 80,
+                  color: Colors.blue,
                 ),
               ),
               Padding(
@@ -428,8 +429,8 @@ class _FindPeopleState extends State<FindPeople> {
                   textColor: Colors.white,
                   padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
                   elevation: 5.0,
-                  color: Colors.black,
-                  splashColor: Colors.grey,
+                  color: Colors.blue,
+                  splashColor: Colors.blueAccent,
                 ),
               )
             ],

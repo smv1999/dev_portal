@@ -39,7 +39,7 @@ class _MySplashState extends State<MySplash> {
         ),
         seconds: 3,
         navigateAfterSeconds: new IntroScreenPage(),
-        image: new Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/dev_animated.gif'),
+        image: new Image.asset('images/dev.jpg'),
         backgroundColor: Colors.white,
         styleTextUnderTheLoader: new TextStyle(),
         photoSize: 100.0,

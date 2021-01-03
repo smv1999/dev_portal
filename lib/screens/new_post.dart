@@ -250,6 +250,7 @@ class _NewPostState extends State<NewPost> {
                 child: Icon(
                   Icons.warning_sharp,
                   size: 80,
+                  color: Colors.blue,
                 ),
               ),
               Padding(
@@ -276,8 +277,8 @@ class _NewPostState extends State<NewPost> {
                   textColor: Colors.white,
                   padding: EdgeInsets.fromLTRB(10, 18, 10, 18),
                   elevation: 5.0,
-                  color: Colors.black,
-                  splashColor: Colors.grey,
+                  color: Colors.blue,
+                  splashColor: Colors.blueAccent,
                 ),
               )
             ],
