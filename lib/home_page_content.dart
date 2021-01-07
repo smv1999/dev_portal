@@ -1,3 +1,4 @@
+import 'package:dev_portal/screens/carousel_tech_content.dart';
 import 'package:dev_portal/services/ProgressBar.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -98,7 +99,8 @@ class _HomePageContentState extends State<HomePageContent> {
                           radius: 50.0,
                           child: CircleAvatar(
                             radius: 48.0,
-                            backgroundImage: NetworkImage('https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png'),
+                            backgroundImage: NetworkImage(
+                                'https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png'),
                             backgroundColor: Colors.white,
                           ),
                         )),
@@ -175,7 +177,8 @@ class _HomePageContentState extends State<HomePageContent> {
             width: 75,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage("https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/homebackgroundimage.png"),
+                image: NetworkImage(
+                    "https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/homebackgroundimage.png"),
               ),
             ),
           ),
@@ -213,7 +216,31 @@ class _HomePageContentState extends State<HomePageContent> {
                       decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: Colors.grey)),
-                      child: Image.network(i));
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                transitionDuration: Duration(seconds: 3),
+                                pageBuilder:
+                                    (context, animation, secondaryAnimation) =>
+                                        CarouselTechContent(i),
+                                transitionsBuilder: (context, animation,
+                                    secondaryAnimation, child) {
+                                  animation = CurvedAnimation(
+                                      parent: animation,
+                                      curve: Curves.elasticInOut);
+
+                                  return ScaleTransition(
+                                    scale: animation,
+                                    alignment: Alignment.center,
+                                    child: child,
+                                  );
+                                },
+                              ));
+                        },
+                        child: Image.network(i),
+                      ));
                 },
               );
             }).toList(),
@@ -226,7 +253,8 @@ class _HomePageContentState extends State<HomePageContent> {
             width: 70,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage("https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/top_it_jobs.png"),
+                image: NetworkImage(
+                    "https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/top_it_jobs.png"),
               ),
             ),
           ),

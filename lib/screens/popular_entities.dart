@@ -41,12 +41,12 @@ class _PopularState extends State<Popular> {
   };
 
   List<Color> colorList = [
-    Colors.red,
+    Colors.blueAccent,
     Colors.blue,
-    Colors.green,
-    Colors.purple,
-    Colors.orange,
-    Colors.yellow
+    Colors.blueGrey,
+    Colors.lightBlue,
+    Colors.lightBlueAccent,
+    Colors.cyan
   ];
 
   @override
