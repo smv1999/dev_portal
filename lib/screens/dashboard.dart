@@ -32,6 +32,54 @@ class _DashboardState extends State<Dashboard> {
     f = fetchGitHubProfileDetails();
   }
 
+  showCustomDialog(BuildContext context) {
+    Dialog errorDialog = Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+      child: Container(
+        height: 250.0,
+        width: 280.0,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              InkWell(
+                  child: CircleAvatar(
+                backgroundColor: Colors.white,
+                radius: 50.0,
+                child: CircleAvatar(
+                  radius: 48.0,
+                  backgroundImage: new NetworkImage('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/github.png'),
+                  backgroundColor: Colors.white,
+                ),
+              )),
+              SizedBox(height: 15.0,),
+              Column(
+               children: [
+                 Text(
+                  'Followers : 1 point',
+                  style: GoogleFonts.ptSansNarrow(
+                      textStyle: TextStyle(fontSize: 17)),
+                ),
+                SizedBox(height: 8.0,),
+                Text(
+                  'Public Repos : 2 points',
+                  style: GoogleFonts.ptSansNarrow(
+                      textStyle: TextStyle(fontSize: 17)),
+                ),
+               ], 
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => errorDialog,
+        barrierDismissible: true);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +96,20 @@ class _DashboardState extends State<Dashboard> {
           ),
           centerTitle: true,
           iconTheme: IconThemeData(color: Colors.black),
+          actions: <Widget>[
+            Container(
+              padding: EdgeInsets.all(10),
+              child: GestureDetector(
+                onTap: () {
+                  showCustomDialog(context);
+                },
+                child: Icon(
+                  Icons.info,
+                ),
+              ),
+            )
+          ],
+          actionsIconTheme: IconThemeData(color: Colors.white),
         ),
         body: Container(
           child: Padding(
@@ -85,7 +147,8 @@ class _DashboardState extends State<Dashboard> {
                             },
                             child: Card(
                               clipBehavior: Clip.antiAlias,
-                              child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/productivity.png'),
+                              child: Image.network(
+                                  'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/productivity.png'),
                               elevation: 5,
                             ),
                           ),
@@ -98,7 +161,8 @@ class _DashboardState extends State<Dashboard> {
                             },
                             child: Card(
                               clipBehavior: Clip.antiAlias,
-                              child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/projects.jpg'),
+                              child: Image.network(
+                                  'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/projects.jpg'),
                               elevation: 5,
                             ),
                           ),
