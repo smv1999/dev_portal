@@ -1,10 +1,12 @@
 import 'dart:collection';
 import 'dart:io';
+import 'package:dev_portal/services/ProgressBar.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:toast/toast.dart';
 
@@ -35,9 +37,25 @@ class _EditUserProfileState extends State<EditUserProfile> {
   final picker = ImagePicker();
   FirebaseStorage _storage = FirebaseStorage.instance;
   DatabaseReference myRef, userNameRef;
-  String imagePath; 
+  String imagePath, profileImage = "";
   bool imageFlag = false;
-  final TextEditingController controller = TextEditingController(text: '');
+  ProgressBar _sendingMsgProgressBar;
+  final TextEditingController dateController = TextEditingController(text: '');
+  final TextEditingController firstNameController = TextEditingController(text: '');
+  final TextEditingController lastNameController = TextEditingController(text: '');
+  final TextEditingController phoneNumberController = TextEditingController(text: '');
+  final TextEditingController summaryController = TextEditingController(text: '');
+  final TextEditingController emailController = TextEditingController(text: '');
+  final TextEditingController usernameController = TextEditingController(text: '');
+  final TextEditingController websiteController = TextEditingController(text: '');
+  final TextEditingController employeeTitleController = TextEditingController(text: '');
+  final TextEditingController stackoverflowController = TextEditingController(text: '');
+  final TextEditingController youtubeController = TextEditingController(text: '');
+  final TextEditingController skillsController = TextEditingController(text: '');
+  final TextEditingController linkedinController = TextEditingController(text: '');
+  final TextEditingController mediumController = TextEditingController(text: '');
+  final TextEditingController githubController = TextEditingController(text: '');
+  
 
   Future<void> getImage() async {
     final FirebaseUser user = await auth.getCurrentUser();
@@ -72,6 +90,34 @@ class _EditUserProfileState extends State<EditUserProfile> {
       setState(() {
         selectedDate = picked;
       });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _sendingMsgProgressBar = ProgressBar();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Add Your Code here.
+      showSendingProgressBar();
+      setState(() {
+        _setData();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _sendingMsgProgressBar.hide();
+    super.dispose();
+  }
+
+  void showSendingProgressBar() {
+    _sendingMsgProgressBar.show(context);
+  }
+
+  void hideSendingProgressBar() {
+    _sendingMsgProgressBar.hide();
   }
 
   @override
@@ -114,7 +160,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     children: [
-                      (_image != null)
+                      (_image != null || profileImage != "")
                           ? InkWell(
                               onTap: getImage,
                               child: CircleAvatar(
@@ -122,7 +168,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                                 radius: 60.0,
                                 child: CircleAvatar(
                                   radius: 58.0,
-                                  backgroundImage: new FileImage(_image),
+                                  backgroundImage: profileImage == "" ? new FileImage(_image) : new NetworkImage(profileImage),
                                   backgroundColor: Colors.white,
                                 ),
                               ))
@@ -133,8 +179,8 @@ class _EditUserProfileState extends State<EditUserProfile> {
                                 radius: 50.0,
                                 child: CircleAvatar(
                                   radius: 48.0,
-                                  backgroundImage:
-                                      NetworkImage('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/newimage.png'),
+                                  backgroundImage: NetworkImage(
+                                      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/newimage.png'),
                                   backgroundColor: Colors.white,
                                 ),
                               )),
@@ -142,6 +188,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         height: 15.0,
                       ),
                       TextFormField(
+                          controller: firstNameController,
                           maxLines: 1,
                           validator: (val) =>
                               val.isEmpty ? 'Enter your First Name' : null,
@@ -151,7 +198,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'First Name',
+                            hintText: firstNameController.text != "" ? 'First Name' : firstNameController.text,
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
@@ -172,6 +219,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         height: 10.0,
                       ),
                       TextFormField(
+                        controller: lastNameController,
                           maxLines: 1,
                           validator: (val) =>
                               val.isEmpty ? 'Enter your Last Name' : null,
@@ -181,7 +229,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'Last Name',
+                            hintText: lastNameController.text != "" ? 'Last Name' : lastNameController.text ,
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
@@ -202,25 +250,24 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         height: 10.0,
                       ),
                       TextFormField(
-                          controller: controller,
+                          controller: dateController,
                           maxLines: 1,
                           maxLength: 10,
                           validator: (val) =>
                               val.isEmpty ? 'Enter your DOB' : null,
                           onTap: () => {
                                 selectDate(context),
-                                controller.text =
+                                dateController.text =
                                     "${selectedDate.toLocal()}".split(' ')[0],
-                                    dob = "${selectedDate.toLocal()}".split(' ')[0] 
-
+                                dob = "${selectedDate.toLocal()}".split(' ')[0]
                               },
                           onChanged: (text) {
                             setState(() {
-                              dob = "${selectedDate.toLocal()}".split(' ')[0]; 
+                              dob = "${selectedDate.toLocal()}".split(' ')[0];
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'Enter Date of birth',
+                            hintText: dateController.text != "" ? 'Enter Date of birth' : dateController.text,
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
@@ -241,6 +288,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         height: 10.0,
                       ),
                       TextFormField(
+                        controller: summaryController,
                           maxLines: 1,
                           validator: (val) =>
                               val.isEmpty ? 'Enter your Summary' : null,
@@ -250,7 +298,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'Summary',
+                            hintText: summaryController.text != "" ? 'Summary' : summaryController.text,
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
@@ -271,6 +319,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         height: 10.0,
                       ),
                       TextFormField(
+                        controller: emailController,
                           maxLines: 1,
                           validator: (val) =>
                               val.isEmpty ? 'Enter your Email' : null,
@@ -280,7 +329,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'Email',
+                            hintText: emailController.text != "" ? 'Email' : emailController.text,
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
@@ -301,6 +350,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         height: 10.0,
                       ),
                       TextFormField(
+                        controller: usernameController,
                           maxLines: 1,
                           validator: (val) =>
                               val.isEmpty ? 'Enter your Username' : null,
@@ -310,7 +360,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'Username',
+                            hintText: usernameController.text != "" ? 'Username' : usernameController.text,
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
@@ -331,6 +381,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         height: 10.0,
                       ),
                       TextFormField(
+                        controller: websiteController,
                           maxLines: 1,
                           validator: (val) =>
                               val.isEmpty ? 'Enter your Website' : null,
@@ -340,7 +391,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'Website',
+                            hintText: websiteController.text != "" ? 'Website' : websiteController.text,
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
@@ -361,6 +412,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         height: 10.0,
                       ),
                       TextFormField(
+                        controller: phoneNumberController,
                           maxLines: 1,
                           maxLength: 10,
                           validator: (val) =>
@@ -371,7 +423,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'Phone Number',
+                            hintText: phoneNumberController.text != "" ? 'Phone Number' : phoneNumberController.text,
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
@@ -392,6 +444,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         height: 10.0,
                       ),
                       TextFormField(
+                        controller: employeeTitleController,
                           maxLines: 1,
                           validator: (val) => val.isEmpty
                               ? 'Enter your Employment Title'
@@ -402,7 +455,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'Employment Title',
+                            hintText: employeeTitleController.text != "" ? 'Employment Title' : employeeTitleController.text,
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
@@ -423,6 +476,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         height: 10.0,
                       ),
                       TextFormField(
+                        controller: skillsController,
                           maxLines: 1,
                           validator: (val) => val.isEmpty
                               ? 'Enter your Skills/Languages'
@@ -433,7 +487,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'Skills/Languages',
+                            hintText: skillsController.text != "" ? 'Skills/Languages' : skillsController.text,
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
@@ -466,6 +520,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         height: 10.0,
                       ),
                       TextFormField(
+                        controller: youtubeController,
                           maxLines: 1,
                           onChanged: (text) {
                             setState(() {
@@ -473,7 +528,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'YouTube Channel URL',
+                            hintText: youtubeController.text != "" ? 'YouTube Channel URL' : youtubeController.text,
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
@@ -494,6 +549,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         height: 10.0,
                       ),
                       TextFormField(
+                        controller: stackoverflowController,
                           maxLines: 1,
                           onChanged: (text) {
                             setState(() {
@@ -501,7 +557,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'Stack Overflow profile URL',
+                            hintText: stackoverflowController.text != "" ? 'Stack Overflow profile URL' : stackoverflowController.text,
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
@@ -522,6 +578,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         height: 10.0,
                       ),
                       TextFormField(
+                        controller: linkedinController,
                           maxLines: 1,
                           onChanged: (text) {
                             setState(() {
@@ -529,7 +586,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'LinkedIn profile URL',
+                            hintText: linkedinController.text != "" ? 'LinkedIn profile URL' : linkedinController.text,
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
@@ -550,6 +607,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         height: 10.0,
                       ),
                       TextFormField(
+                        controller: mediumController,
                           maxLines: 1,
                           onChanged: (text) {
                             setState(() {
@@ -557,7 +615,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'Medium profile URL',
+                            hintText: mediumController.text != "" ? 'Medium profile URL' : mediumController.text,
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
@@ -578,6 +636,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         height: 10.0,
                       ),
                       TextFormField(
+                        controller: githubController,
                           maxLines: 1,
                           onChanged: (text) {
                             setState(() {
@@ -585,7 +644,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'GitHub profile URL',
+                            hintText: githubController.text != "" ? 'GitHub profile URL' : githubController.text,
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.0),
@@ -609,6 +668,56 @@ class _EditUserProfileState extends State<EditUserProfile> {
             )),
       ),
     );
+  }
+
+  Future<void> _setData() async {
+    // retrieve from Firebase DB and display
+    final FirebaseUser user = await auth.getCurrentUser();
+    final userId = user.uid;
+    myRef =
+        FirebaseDatabase.instance.reference().child('Profile').child(userId);
+    myRef.once().then((DataSnapshot dataSnapshot) {
+      setState(() {
+        if (dataSnapshot.value != null) {
+          firstName = dataSnapshot.value["firstname"];
+          firstNameController.text = firstName;
+          lastName = dataSnapshot.value["lastname"];
+          lastNameController.text = lastName;
+          dob = dataSnapshot.value["dob"];
+          dateController.text = dob;
+          summary = dataSnapshot.value["summary"];
+          summaryController.text = summary;
+          email = dataSnapshot.value["email"];
+          emailController.text = email;
+          username = dataSnapshot.value["username"];
+          usernameController.text = username;
+          website = dataSnapshot.value["website"];
+          websiteController.text = website;
+          phoneNumber = dataSnapshot.value["phonenumber"];
+          phoneNumberController.text = phoneNumber;
+          employmentTitle = dataSnapshot.value["employmenttitle"];
+          employeeTitleController.text = employmentTitle;
+          skills = dataSnapshot.value["skills"];
+          skillsController.text = skills;
+          youtube = dataSnapshot.value["youtube"];
+          youtubeController.text = youtube;
+          stackoverflow = dataSnapshot.value["stackoverflow"];
+          stackoverflowController.text = stackoverflow;
+          linkedin = dataSnapshot.value["linkedin"];
+          linkedinController.text = linkedin;
+          medium = dataSnapshot.value["medium"];
+          mediumController.text = medium;
+          github = dataSnapshot.value["github"];
+          githubController.text = github;
+          profileImage = dataSnapshot.value["imagepath"];
+          hideSendingProgressBar();
+        } else {
+          setState(() {
+            hideSendingProgressBar();
+          });
+        }
+      });
+    });
   }
 
   void _computeResult() async {
