@@ -136,18 +136,19 @@ class _ExploreJobsState extends State<ExploreJobs> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: Container(
         height: 500.0,
-        width: 400.0,
+        width: 450.0,
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(8.0),
           child: ListView(
             shrinkWrap: true,
             children: [
               Padding(
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Html(
                     data: snapshot.data[index].description,
                     style: {
                       "body": Style(
+                        textAlign: TextAlign.justify,
                         fontSize: FontSize(17.0),
                       )
                     },
