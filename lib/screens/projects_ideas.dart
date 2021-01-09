@@ -33,106 +33,114 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: SizedBox.expand(
-          child: FittedBox(fit: BoxFit.contain, child: Icon(Icons.add)),
-        ),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-        onPressed: () {
-          // Respond to button press
-          // show dialog
-          showCustomDialog(context);
-        },
-      ),
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Dev Portal',
-          style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'MyFont',
-              fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.black),
-      ),
-      body: ListView(
-        shrinkWrap: true,
-        children: [
-          SizedBox(
-            height: 20.0,
+    return WillPopScope(
+      onWillPop: () {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/dashboard', (_) => false);
+      },
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          child: SizedBox.expand(
+            child: FittedBox(fit: BoxFit.contain, child: Icon(Icons.add)),
           ),
-          Center(
-            child: Text(
-              'Scribblet - Save your project ideas!',
-              style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.black,
-                  fontFamily: 'MyFont',
-                  fontWeight: FontWeight.bold),
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
+          onPressed: () {
+            // Respond to button press
+            // show dialog
+            showCustomDialog(context);
+          },
+        ),
+        appBar: AppBar(
+          backgroundColor: Colors.blue,
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Dev Portal',
+            style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'MyFont',
+                fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+          iconTheme: IconThemeData(color: Colors.black),
+        ),
+        body: ListView(
+          shrinkWrap: true,
+          children: [
+            SizedBox(
+              height: 20.0,
             ),
-          ),
-          FutureBuilder(
-            future: f,
-            builder: (context, snapshot) {
-              if (snapshot.data != null) {
-                if (snapshot.data.length != 0) {
-                  return ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      return Dismissible(
-                        key: UniqueKey(),
-                        child: Card(
-                          margin: const EdgeInsets.all(8.0),
-                          child: ListTile(
-                            subtitle:
-                                Text(snapshot.data[index].projectDescription),
-                            title: Text(
-                              snapshot.data[index].projectTitle,
-                              style: GoogleFonts.ptSansNarrow(),
+            Center(
+              child: Text(
+                'Scribblet - Save your project ideas!',
+                style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.black,
+                    fontFamily: 'MyFont',
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            FutureBuilder(
+              future: f,
+              builder: (context, snapshot) {
+                if (snapshot.data != null) {
+                  if (snapshot.data.length != 0) {
+                    return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        return Dismissible(
+                          key: UniqueKey(),
+                          child: Card(
+                            margin: const EdgeInsets.all(8.0),
+                            child: ListTile(
+                              subtitle:
+                                  Text(snapshot.data[index].projectDescription),
+                              title: Text(
+                                snapshot.data[index].projectTitle,
+                                style: GoogleFonts.ptSansNarrow(),
+                              ),
                             ),
                           ),
-                        ),
-                        onDismissed: (direction) {
-                          // Remove the item from the data source.
-                          setState(() {
-                            String delTitle = snapshot.data[index].projectTitle;
-                            String delDescription =
-                                snapshot.data[index].projectDescription;
-                            snapshot.data.removeAt(index);
-                            deleteProjectData(
-                                delTitle, context, delDescription);
-                          });
-                        },
-                        // Show a red background as the item is swiped away.
-                        background: Container(
-                          padding: EdgeInsets.all(20.0),
-                          alignment: Alignment.centerRight,
-                          color: Colors.grey,
-                          child: Icon(
-                            Icons.delete,
-                            color: Colors.white,
+                          onDismissed: (direction) {
+                            // Remove the item from the data source.
+                            setState(() {
+                              String delTitle =
+                                  snapshot.data[index].projectTitle;
+                              String delDescription =
+                                  snapshot.data[index].projectDescription;
+                              snapshot.data.removeAt(index);
+                              deleteProjectData(
+                                  delTitle, context, delDescription);
+                            });
+                          },
+                          // Show a red background as the item is swiped away.
+                          background: Container(
+                            padding: EdgeInsets.all(20.0),
+                            alignment: Alignment.centerRight,
+                            color: Colors.grey,
+                            child: Icon(
+                              Icons.delete,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                        );
+                      },
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                    );
+                  }
+                  return Container(
+                    child: Image.network(
+                        'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/data_not_found.png'),
                   );
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
                 }
-                return Container(
-                  child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/data_not_found.png'),
-                );
-              } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
-              return Container();
-            },
-          )
-        ],
+                return Container();
+              },
+            )
+          ],
+        ),
       ),
     );
   }

@@ -30,7 +30,7 @@ class _MyPostsState extends State<MyPosts> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        Navigator.of(context).pushReplacementNamed('/home');
+        Navigator.of(context).pushNamedAndRemoveUntil('/home', (_) => false);
       },
       child: Scaffold(
         appBar: AppBar(
