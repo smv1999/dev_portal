@@ -195,7 +195,7 @@ class _HomePageContentState extends State<HomePageContent> {
               reverse: false,
               autoPlay: true,
               autoPlayInterval: Duration(seconds: 2),
-              autoPlayAnimationDuration: Duration(milliseconds: 800),
+              autoPlayAnimationDuration: Duration(milliseconds: 3000),
               autoPlayCurve: Curves.fastOutSlowIn,
               scrollDirection: Axis.horizontal,
             ),
@@ -221,7 +221,7 @@ class _HomePageContentState extends State<HomePageContent> {
                           Navigator.push(
                               context,
                               PageRouteBuilder(
-                                transitionDuration: Duration(seconds: 3),
+                                transitionDuration: Duration(seconds: 2),
                                 pageBuilder:
                                     (context, animation, secondaryAnimation) =>
                                         CarouselTechContent(i),
