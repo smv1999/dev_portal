@@ -18,6 +18,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Scaffold(
           appBar: AppBar(
+            elevation: 0,
             automaticallyImplyLeading: false,
             title: Text(
               'Forgot Password',

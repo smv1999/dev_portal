@@ -14,6 +14,7 @@ class _CarouselTechContentState extends State<CarouselTechContent> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          elevation: 0,
           backgroundColor: Colors.blue,
           title: Text(
             'Tech Content',

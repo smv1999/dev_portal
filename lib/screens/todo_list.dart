@@ -52,6 +52,7 @@ class _TodoListState extends State<TodoList> {
         },
       ),
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.blue,
         automaticallyImplyLeading: false,
         title: Text(

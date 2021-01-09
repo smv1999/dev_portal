@@ -65,6 +65,7 @@ class _ViewProfileState extends State<ViewProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.blue,
         automaticallyImplyLeading: false,
         title: Text(

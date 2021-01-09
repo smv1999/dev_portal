@@ -51,6 +51,7 @@ class _FindPeopleState extends State<FindPeople> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          elevation: 0,
           backgroundColor: Colors.blue,
           automaticallyImplyLeading: false,
           title: Text(

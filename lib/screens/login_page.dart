@@ -40,6 +40,7 @@ class MyLoginPageState extends State {
           return Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
+              elevation: 0,
               automaticallyImplyLeading: false,
               title: Text(
                 'Login',

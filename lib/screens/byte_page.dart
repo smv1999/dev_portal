@@ -11,6 +11,7 @@ class _BytePageState extends State<BytePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          elevation: 0,
           automaticallyImplyLeading: false,
           title: Text(
             'Mini Bytes',
@@ -56,7 +57,9 @@ class _BytePageState extends State<BytePage> {
                       style: GoogleFonts.ptSansNarrow(),
                     ),
                     leading: Container(
-                        width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/ai.png')),
+                        width: 80,
+                        child: Image.network(
+                            'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/ai.png')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.grey,
@@ -85,7 +88,9 @@ class _BytePageState extends State<BytePage> {
                       style: GoogleFonts.ptSansNarrow(),
                     ),
                     leading: Container(
-                        width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/blockchain.png')),
+                        width: 80,
+                        child: Image.network(
+                            'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/blockchain.png')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.grey,
@@ -114,7 +119,8 @@ class _BytePageState extends State<BytePage> {
                     ),
                     leading: Container(
                         width: 80,
-                        child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/cloudcomputing.png')),
+                        child: Image.network(
+                            'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/cloudcomputing.png')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.grey,
@@ -143,7 +149,9 @@ class _BytePageState extends State<BytePage> {
                       style: GoogleFonts.ptSansNarrow(),
                     ),
                     leading: Container(
-                        width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/bigdata.jpeg')),
+                        width: 80,
+                        child: Image.network(
+                            'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/bigdata.jpeg')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.grey,
@@ -172,7 +180,9 @@ class _BytePageState extends State<BytePage> {
                       style: GoogleFonts.ptSansNarrow(),
                     ),
                     leading: Container(
-                        width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/iot.png')),
+                        width: 80,
+                        child: Image.network(
+                            'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/iot.png')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.grey,
@@ -200,7 +210,9 @@ class _BytePageState extends State<BytePage> {
                       style: GoogleFonts.ptSansNarrow(),
                     ),
                     leading: Container(
-                        width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/vrar.png')),
+                        width: 80,
+                        child: Image.network(
+                            'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/vrar.png')),
                     trailing: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.grey,

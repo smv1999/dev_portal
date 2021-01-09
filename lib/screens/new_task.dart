@@ -38,6 +38,7 @@ class _NewTaskState extends State<NewTask> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.blue,
         title: Text(
           'New Task',

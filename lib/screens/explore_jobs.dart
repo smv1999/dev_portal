@@ -17,6 +17,7 @@ class _ExploreJobsState extends State<ExploreJobs> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          elevation: 0,
           backgroundColor: Colors.blue,
           automaticallyImplyLeading: false,
           title: Text(

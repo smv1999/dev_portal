@@ -1,5 +1,5 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:dev_portal/screens/new_post.dart';
+import 'package:dev_portal/pages/new_post.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -189,6 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.blue,
         title: Text(
           'Dev Portal',

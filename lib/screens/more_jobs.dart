@@ -156,6 +156,7 @@ class _MoreJobsState extends State<MoreJobs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.blue,
         title: Text(
           _title,

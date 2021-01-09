@@ -47,6 +47,7 @@ class _InterviewPageState extends State<InterviewPage> {
         },
       ),
       appBar: AppBar(
+        elevation: 0,
         automaticallyImplyLeading: false,
         title: Text(
           'Interview Preparation Module',

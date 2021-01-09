@@ -94,6 +94,7 @@ class _DashboardState extends State<Dashboard> {
         child: Scaffold(
           // Create a grid layout of the dashboard items
           appBar: AppBar(
+            elevation: 0,
             backgroundColor: Colors.blue,
             automaticallyImplyLeading: false,
             title: Text(

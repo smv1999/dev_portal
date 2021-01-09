@@ -21,6 +21,7 @@ class MyRegisterPageState extends State {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         automaticallyImplyLeading: false,
         title: Text(
           'Sign Up',

@@ -68,6 +68,7 @@ class _UserProfileState extends State<UserProfile> {
       },
     child:Scaffold(
         appBar: AppBar(
+          elevation: 0,
           backgroundColor: Colors.blue,
           iconTheme: IconThemeData(color: Colors.white),
           title: Text(

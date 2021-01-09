@@ -71,6 +71,7 @@ class _PopularState extends State<Popular> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          elevation: 0,
           backgroundColor: Colors.blue,
           title: Text(
             'Dev Portal',
