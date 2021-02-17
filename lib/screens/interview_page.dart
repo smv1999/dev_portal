@@ -185,6 +185,37 @@ class _InterviewPageState extends State<InterviewPage> {
               ),
             ),
           ),
+           Card(
+            margin: const EdgeInsets.all(8.0),
+            child: ListTile(
+              onTap: () => {
+                createFileOfPdfUrl(
+                        "http://smv1999.github.io/JavaInterviewQuestions.pdf")
+                    .then((f) {
+                  setState(() {
+                    pathPDF = f.path;
+                  });
+                }).then((_) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PDFScreen(pathPDF, "Java Interview Questions")),
+                  );
+                })
+              },
+              title: Text(
+                'Java Interview Questions',
+                style: GoogleFonts.ptSansNarrow(),
+              ),
+              leading:
+                  Container(width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/java.png')),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.grey,
+              ),
+            ),
+          ),
         ],
       ),
     );
