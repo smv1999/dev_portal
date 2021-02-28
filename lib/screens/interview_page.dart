@@ -85,8 +85,10 @@ class _InterviewPageState extends State<InterviewPage> {
                 'Subject Wise Topics for Interview',
                 style: GoogleFonts.ptSansNarrow(),
               ),
-              leading:
-                  Container(width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/job3.jpg')),
+              leading: Container(
+                  width: 80,
+                  child: Image.network(
+                      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/job3.jpg')),
               trailing: Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.grey,
@@ -116,8 +118,10 @@ class _InterviewPageState extends State<InterviewPage> {
                 'Non Technical HR Questions',
                 style: GoogleFonts.ptSansNarrow(),
               ),
-              leading:
-                  Container(width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/job1.png')),
+              leading: Container(
+                  width: 80,
+                  child: Image.network(
+                      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/job1.png')),
               trailing: Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.grey,
@@ -147,8 +151,10 @@ class _InterviewPageState extends State<InterviewPage> {
                 'Time Complexity Cheatsheet',
                 style: GoogleFonts.ptSansNarrow(),
               ),
-              leading:
-                  Container(width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/time.jpg')),
+              leading: Container(
+                  width: 80,
+                  child: Image.network(
+                      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/time.jpg')),
               trailing: Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.grey,
@@ -177,15 +183,22 @@ class _InterviewPageState extends State<InterviewPage> {
                 'OOPs Concepts in Java',
                 style: GoogleFonts.ptSansNarrow(),
               ),
-              leading:
-                  Container(width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/java.png')),
+              leading: Container(
+                  width: 80,
+                  child: Image.network(
+                      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/java.png')),
               trailing: Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.grey,
               ),
             ),
           ),
-           Card(
+          Text('From the Author',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.ptSansNarrow(
+                  textStyle:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0))),
+          Card(
             margin: const EdgeInsets.all(8.0),
             child: ListTile(
               onTap: () => {
@@ -208,8 +221,43 @@ class _InterviewPageState extends State<InterviewPage> {
                 'Java Interview Questions',
                 style: GoogleFonts.ptSansNarrow(),
               ),
-              leading:
-                  Container(width: 80, child: Image.network('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/java.png')),
+              leading: Container(
+                  width: 80,
+                  child: Image.network(
+                      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/java.png')),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+          Card(
+            margin: const EdgeInsets.all(8.0),
+            child: ListTile(
+              onTap: () => {
+                createFileOfPdfUrl(
+                        "http://smv1999.github.io/DBMS.pdf")
+                    .then((f) {
+                  setState(() {
+                    pathPDF = f.path;
+                  });
+                }).then((_) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PDFScreen(pathPDF, "DBMS Interview Questions")),
+                  );
+                })
+              },
+              title: Text(
+                'DBMS Interview Questions',
+                style: GoogleFonts.ptSansNarrow(),
+              ),
+              leading: Container(
+                  width: 80,
+                  child: Image.network(
+                      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/dbms.jpg')),
               trailing: Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.grey,
