@@ -10,7 +10,7 @@ import 'pages/coding_tips.dart';
 import 'home_page_content.dart';
 import 'pages/books_page.dart';
 import 'pages/posts_page.dart';
-
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -58,11 +58,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 )),
               ),
               ListTile(
-                title: Text("Dashboard"),
-                leading: Icon(Icons.dashboard),
+                title: Text("Tools"),
+                leading: Icon(MdiIcons.wrench),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).pushNamed('/dashboard');
+                  Navigator.of(context).pushNamed('/tools');
                 },
               ),
               ListTile(

@@ -4,7 +4,7 @@ import 'package:dev_portal/pages/posts_page.dart';
 import 'package:dev_portal/screens/about_page.dart';
 import 'package:dev_portal/screens/byte_page.dart';
 import 'package:dev_portal/pages/connection_error.dart';
-import 'package:dev_portal/screens/dashboard.dart';
+import 'package:dev_portal/screens/tools.dart';
 import 'package:dev_portal/screens/explore_jobs.dart';
 import 'package:dev_portal/screens/find_people.dart';
 import 'package:dev_portal/screens/forgot_password_page.dart';
@@ -63,8 +63,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => BytePage());
       case '/interviewpage':
         return MaterialPageRoute(builder: (_) => InterviewPage());
-      case '/dashboard':
-        return MaterialPageRoute(builder: (_) => Dashboard());
+      case '/tools':
+        return MaterialPageRoute(builder: (_) => Tools());
       case '/connectionerror':
         return MaterialPageRoute(builder: (_) => ConnectionError());
       case '/findpeople':
