@@ -1,14 +1,20 @@
+import 'dart:io';
+
 import 'package:dev_portal/models/github_profile.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flushbar/flushbar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_extend/share_extend.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
+import 'package:path_provider/path_provider.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -23,6 +29,9 @@ class _DashboardState extends State<Dashboard> {
   String githubUsername = "smv1999";
   String githubProfileURL = "https://github.com/harshcasper";
   Future f;
+
+  String pathPDF = "";
+
   void initState() {
     super.initState();
     fetchGitHubUsername();
@@ -83,6 +92,18 @@ class _DashboardState extends State<Dashboard> {
         context: context,
         builder: (BuildContext context) => errorDialog,
         barrierDismissible: true);
+  }
+
+  Future<File> createFileOfPdfUrl(String pdfURL) async {
+    var url = pdfURL;
+    final filename = url.substring(url.lastIndexOf("/") + 1);
+    var request = await HttpClient().getUrl(Uri.parse(url));
+    var response = await request.close();
+    var bytes = await consolidateHttpClientResponseBytes(response);
+    String dir = (await getApplicationDocumentsDirectory()).path;
+    File file = new File('$dir/$filename');
+    await file.writeAsBytes(bytes);
+    return file;
   }
 
   @override
@@ -173,6 +194,34 @@ class _DashboardState extends State<Dashboard> {
                                 clipBehavior: Clip.antiAlias,
                                 child: Image.network(
                                     'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/projects.jpg'),
+                                elevation: 5,
+                              ),
+                            ),
+                            GestureDetector(
+                              onLongPress: () {
+                                showFloatingFlushbar(context, 'ASCII Chart');
+                              },
+                              onTap: () {
+                                // Open PDF
+                                createFileOfPdfUrl(
+                                        "http://smv1999.github.io/ASCII_CHART.pdf")
+                                    .then((f) {
+                                  setState(() {
+                                    pathPDF = f.path;
+                                  });
+                                }).then((_) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PDFScreen(pathPDF,
+                                            "ASCII Chart")),
+                                  );
+                                });
+                              },
+                              child: Card(
+                                clipBehavior: Clip.antiAlias,
+                                child: Image.network(
+                                    'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/chart.jpg'),
                                 elevation: 5,
                               ),
                             ),
@@ -666,5 +715,35 @@ class _DashboardState extends State<Dashboard> {
         forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
         message: text)
       ..show(context);
+  }
+}
+
+class PDFScreen extends StatelessWidget {
+  String pathPDF = "";
+  String docName = "";
+  PDFScreen(this.pathPDF, this.docName);
+
+  @override
+  Widget build(BuildContext context) {
+    return PDFViewerScaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.blue,
+          iconTheme: IconThemeData(color: Colors.white),
+          title: Text(this.docName,
+              style: TextStyle(
+                color: Colors.white,
+              )),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.share),
+              onPressed: () {
+                // Share the PDF via other apps
+                ShareExtend.share(this.pathPDF, "file");
+              },
+            ),
+          ],
+          actionsIconTheme: IconThemeData(color: Colors.white),
+        ),
+        path: pathPDF);
   }
 }
