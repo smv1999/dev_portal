@@ -48,7 +48,7 @@ class _ToolsState extends State<Tools> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: Container(
         height: 200.0,
-        width: 320.0,
+        width: 350.0,
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: ListView(
@@ -69,10 +69,10 @@ class _ToolsState extends State<Tools> {
               Center(
                   child: Text(
                 '(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[!@#\$*])',
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: 16.0),textAlign: TextAlign.justify,
               )),
               SizedBox(
-                height: 20.0,
+                height: 30.0,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -148,7 +148,7 @@ class _ToolsState extends State<Tools> {
                   style: GoogleFonts.ptSansNarrow(
                     textStyle:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
-                  ),
+                  )
                 ),
               ),
               SizedBox(
@@ -157,11 +157,11 @@ class _ToolsState extends State<Tools> {
               Center(
                 child: Text(
                   '^[^@ ]+@[^@ ]+\.[^@ \.]{2,}\$',
-                  style: TextStyle(fontSize: 16.0),
+                  style: TextStyle(fontSize: 16.0),textAlign: TextAlign.justify
                 ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 30.0,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -237,7 +237,7 @@ class _ToolsState extends State<Tools> {
                   style: GoogleFonts.ptSansNarrow(
                     textStyle:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
-                  ),
+                  )
                 ),
               ),
               SizedBox(
@@ -246,11 +246,11 @@ class _ToolsState extends State<Tools> {
               Center(
                 child: Text(
                   '\d{4}-\d{2}-\d{2}',
-                  style: TextStyle(fontSize: 16.0),
+                  style: TextStyle(fontSize: 16.0),textAlign: TextAlign.justify
                 ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 30.0,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -332,12 +332,13 @@ class _ToolsState extends State<Tools> {
               SizedBox(
                 height: 15.0,
               ),
-              Text(
+              Center( 
+              child:Text(
                 '^(?:5[1–5][0–9]{2}|222[1–9]|22[3–9][0–9]|2[3–6][0–9]{2}|27[01][0–9]|2720)[0–9]{12}\$',
-                style: TextStyle(fontSize: 16.0),
-              ),
+                style: TextStyle(fontSize: 16.0),textAlign: TextAlign.justify
+              ),),
               SizedBox(
-                height: 20.0,
+                height: 30.0,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -420,12 +421,14 @@ class _ToolsState extends State<Tools> {
               SizedBox(
                 height: 15.0,
               ),
-              Text(
-                '^4[0–9]{12}(?:[0–9]{3})?\$',
-                style: TextStyle(fontSize: 16.0),
+              Center(
+                child: Text(
+                  '^4[0–9]{12}(?:[0–9]{3})?\$',
+                  style: TextStyle(fontSize: 16.0),textAlign: TextAlign.justify
+                ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 30.0,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -507,12 +510,14 @@ class _ToolsState extends State<Tools> {
               SizedBox(
                 height: 15.0,
               ),
-              Text(
-                '^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\$',
-                style: TextStyle(fontSize: 16.0),
+              Center(
+                child: Text(
+                  '^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\$',
+                  style: TextStyle(fontSize: 16.0),textAlign: TextAlign.justify
+                ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 30.0,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -595,12 +600,14 @@ class _ToolsState extends State<Tools> {
               SizedBox(
                 height: 15.0,
               ),
-              Text(
-                '(?(DEFINE)(?<json>(?>\s*(?&object)\s*|\s*(?&array)\s*))(?<object>(?>\{\s*(?>(?&pair)(?>\s*,\s*(?&pair))*)?\s*\}))(?<pair>(?>(?&STRING)\s*:\s*(?&value)))(?<array>(?>\[\s*(?>(?&value)(?>\s*,\s*(?&value))*)?\s*\]))(?<value>(?>true|false|null|(?&STRING)|(?&NUMBER)|(?&object)|(?&array)))(?<STRING>(?>"(?>\\(?>["\\\/bfnrt]|u[a-fA-F0-9]{4})|[^"\\\0-\x1F\x7F]+)*"))(?<NUMBER>(?>-?(?>0|[1-9][0-9]*)(?>\.[0-9]+)?(?>[eE][+-]?[0-9]+)?)))\A(?&json)\z',
-                style: TextStyle(fontSize: 16.0),
+              Center(
+                child: Text(
+                  '(?(DEFINE)(?<json>(?>\s*(?&object)\s*|\s*(?&array)\s*))(?<object>(?>\{\s*(?>(?&pair)(?>\s*,\s*(?&pair))*)?\s*\}))(?<pair>(?>(?&STRING)\s*:\s*(?&value)))(?<array>(?>\[\s*(?>(?&value)(?>\s*,\s*(?&value))*)?\s*\]))(?<value>(?>true|false|null|(?&STRING)|(?&NUMBER)|(?&object)|(?&array)))(?<STRING>(?>"(?>\\(?>["\\\/bfnrt]|u[a-fA-F0-9]{4})|[^"\\\0-\x1F\x7F]+)*"))(?<NUMBER>(?>-?(?>0|[1-9][0-9]*)(?>\.[0-9]+)?(?>[eE][+-]?[0-9]+)?)))\A(?&json)\z',
+                  style: TextStyle(fontSize: 16.0),textAlign: TextAlign.justify
+                ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 30.0,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -665,7 +672,7 @@ class _ToolsState extends State<Tools> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: Container(
         height: 200.0,
-        width: 320.0,
+        width: 350.0,
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: ListView(
@@ -683,12 +690,14 @@ class _ToolsState extends State<Tools> {
               SizedBox(
                 height: 15.0,
               ),
-              Text(
-                '(?:\s*(?:\"([^\"]*)\"|([^,]+))\s*,?)+?',
-                style: TextStyle(fontSize: 16.0),
+              Center(
+                child: Text(
+                  '(?:\s*(?:\"([^\"]*)\"|([^,]+))\s*,?)+?',
+                  style: TextStyle(fontSize: 16.0),textAlign: TextAlign.justify
+                ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 30.0,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
