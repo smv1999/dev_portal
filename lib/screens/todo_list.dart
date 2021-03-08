@@ -34,7 +34,7 @@ class _TodoListState extends State<TodoList> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        Navigator.of(context).pushNamedAndRemoveUntil('/dashboard', (_) => false);
+        Navigator.of(context).pushNamedAndRemoveUntil('/tools', (_) => false);
       },
     child:Scaffold(
       key: _scaffoldKey,

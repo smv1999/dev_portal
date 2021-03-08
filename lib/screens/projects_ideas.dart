@@ -36,7 +36,7 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
     return WillPopScope(
       onWillPop: () {
         Navigator.of(context)
-            .pushNamedAndRemoveUntil('/dashboard', (_) => false);
+            .pushNamedAndRemoveUntil('/tools', (_) => false);
       },
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
