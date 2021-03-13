@@ -7,6 +7,8 @@ Dev Portal provides you with all sorts of resources and facilities for improving
 
 Install Dev Portal to enhance your software development journey!
 
+App live link is [here](https://play.google.com/store/apps/details?id=com.programmersgateway.sm1999.dev_portal)
+
 ## Features
 * Best coding practices and tips for writing cleaner code
 * Best books for improving coding skills
