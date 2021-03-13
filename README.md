@@ -1,4 +1,4 @@
-## Dev Portal - Communnity Portal for Developers
+## Dev Portal - Community Portal for Developers
 ![dev_portal](https://socialify.git.ci/smv1999/dev_portal/image?font=Source%20Code%20Pro&forks=1&issues=1&language=1&owner=1&pulls=1&stargazers=1&theme=Dark)
 
 ## Introduction
