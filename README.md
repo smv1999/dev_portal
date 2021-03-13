@@ -17,7 +17,7 @@ Install Dev Portal to enhance your software development journey!
 * Share your thoughts with the developer community & much more!
 
 ## Want to Contribute to this repository?
-Head over to [Contributing Guidelines](https://github.com/smv1999/CompetitiveProgrammingQuestionBank/blob/master/CONTRIBUTING.md) to know more!
+Head over to [Contributing Guidelines](https://github.com/smv1999/dev_portal/blob/master/CONTRIBUTING.md) to know more!
 
 ## ❤️ Project Admin
 
