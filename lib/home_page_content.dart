@@ -1,4 +1,5 @@
 import 'package:dev_portal/screens/carousel_tech_content.dart';
+import 'package:dev_portal/screens/profile_image.dart';
 import 'package:dev_portal/services/ProgressBar.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,6 +20,7 @@ class _HomePageContentState extends State<HomePageContent> {
   Auth auth = new Auth();
   String _profile_image, firstName = "Developer";
   ProgressBar progressBar;
+  String defaultImageURL = "https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png";
 
   @override
   void initState() {
@@ -84,6 +86,15 @@ class _HomePageContentState extends State<HomePageContent> {
                 children: [
                   _profile_image != null
                       ? InkWell(
+                        onTap: () {
+                            Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ProfileImage(
+                                        image: _profile_image, name: firstName
+                                      ),
+                                    ));
+                        },
                           child: CircleAvatar(
                           backgroundColor: Colors.white,
                           radius: 50.0,
@@ -100,7 +111,7 @@ class _HomePageContentState extends State<HomePageContent> {
                           child: CircleAvatar(
                             radius: 48.0,
                             backgroundImage: NetworkImage(
-                                'https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png'),
+                                defaultImageURL),
                             backgroundColor: Colors.white,
                           ),
                         )),

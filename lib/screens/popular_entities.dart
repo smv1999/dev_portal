@@ -19,14 +19,14 @@ class _PopularState extends State<Popular> {
     "Java": 25,
     "JavaScript": 15,
     "C#": 10,
-    "PHP": 5,
-    "C/C++": 5
+    "C/C++": 6,
+    "PHP": 4
   };
   Map<String, double> ides = {
     "Visual Studio": 30,
     "Eclipse": 25,
-    "Android Studio": 15,
     "VS Code": 15,
+    "Android Studio": 15,
     "pyCharm": 10,
     "IntelliJ": 5
   };
@@ -36,8 +36,8 @@ class _PopularState extends State<Popular> {
     "MySQL": 20,
     "SQL Server": 15,
     "MS Access": 15,
-    "PostgreSQL": 10,
-    "MongoDB": 10
+    "MongoDB": 10,
+    "PostgreSQL": 10
   };
 
   List<Color> colorList = [

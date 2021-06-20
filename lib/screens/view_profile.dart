@@ -1,3 +1,4 @@
+import 'package:dev_portal/screens/profile_image.dart';
 import 'package:dev_portal/services/ProgressBar.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -67,7 +68,6 @@ class _ViewProfileState extends State<ViewProfile> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.blue,
-        automaticallyImplyLeading: false,
         title: Text(
           'Profile',
           style: TextStyle(
@@ -94,24 +94,33 @@ class _ViewProfileState extends State<ViewProfile> {
                     children: [
                       _profile_image != null
                           ? InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ProfileImage(
+                                          image: _profile_image,
+                                          name: firstName+lastName),
+                                    ));
+                              },
                               child: CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 50.0,
-                              child: CircleAvatar(
-                                radius: 48.0,
-                                backgroundImage:
-                                    new NetworkImage(_profile_image),
                                 backgroundColor: Colors.white,
-                              ),
-                            ))
+                                radius: 50.0,
+                                child: CircleAvatar(
+                                  radius: 48.0,
+                                  backgroundImage:
+                                      new NetworkImage(_profile_image),
+                                  backgroundColor: Colors.white,
+                                ),
+                              ))
                           : InkWell(
                               child: CircleAvatar(
                               backgroundColor: Colors.black,
                               radius: 50.0,
                               child: CircleAvatar(
                                 radius: 48.0,
-                                backgroundImage:
-                                    NetworkImage('https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/newimage.png'),
+                                backgroundImage: NetworkImage(
+                                    'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/newimage.png'),
                                 backgroundColor: Colors.white,
                               ),
                             )),

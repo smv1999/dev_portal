@@ -510,7 +510,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                       ),
                       Center(
                         child: Text(
-                          'Social Links',
+                          'Social Links (Not Mandatory to Fill)',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontFamily: 'MyFont',

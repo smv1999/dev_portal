@@ -1,16 +1,18 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:dev_portal/home_page_content.dart';
+import 'package:dev_portal/pages/books_page.dart';
+import 'package:dev_portal/pages/coding_tips.dart';
 import 'package:dev_portal/pages/new_post.dart';
+import 'package:dev_portal/pages/posts_page.dart';
+import 'package:dev_portal/screens/profile_image.dart';
 import 'package:dev_portal/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'pages/coding_tips.dart';
-import 'home_page_content.dart';
-import 'pages/books_page.dart';
-import 'pages/posts_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -45,17 +47,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 accountEmail: Text(email),
                 currentAccountPicture: InkWell(
                     child: CircleAvatar(
-                  backgroundColor:
-                      Theme.of(context).platform == TargetPlatform.iOS
-                          ? Colors.black
-                          : Colors.white,
-                  radius: 50.0,
-                  child: CircleAvatar(
-                    radius: 48.0,
-                    backgroundImage: new NetworkImage(profileImageUrl),
-                    backgroundColor: Colors.white,
-                  ),
-                )),
+                        backgroundColor:
+                            Theme.of(context).platform == TargetPlatform.iOS
+                                ? Colors.black
+                                : Colors.white,
+                        radius: 50.0,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProfileImage(
+                                      image: profileImageUrl, name: fullName),
+                                ));
+                          },
+                          child: CircleAvatar(
+                            radius: 48.0,
+                            backgroundImage: new NetworkImage(profileImageUrl),
+                            backgroundColor: Colors.white,
+                          ),
+                        ))),
               ),
               ListTile(
                 title: Text("Tools"),
@@ -256,12 +267,19 @@ class _MyHomePageState extends State<MyHomePage> {
       title: Text(
         "Confirmation",
         style: GoogleFonts.ptSansNarrow(
-          textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
+          textStyle: TextStyle(
+              fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
         ),
       ),
       content: ListView(shrinkWrap: true, children: [
-        Icon(Icons.logout, color: Colors.blue,size: 80.0,),
-        SizedBox(height: 15.0,),
+        Icon(
+          Icons.logout,
+          color: Colors.blue,
+          size: 80.0,
+        ),
+        SizedBox(
+          height: 15.0,
+        ),
         Text(
           "Are you sure to Logout?",
           style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 16)),

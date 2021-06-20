@@ -80,6 +80,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Popular());
       case '/myposts':
         return MaterialPageRoute(builder: (_) => MyPosts());
+        
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();
