@@ -100,7 +100,7 @@ class _ViewProfileState extends State<ViewProfile> {
                                     MaterialPageRoute(
                                       builder: (context) => ProfileImage(
                                           image: _profile_image,
-                                          name: firstName+lastName),
+                                          name: firstName + " " + lastName),
                                     ));
                               },
                               child: CircleAvatar(

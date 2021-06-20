@@ -18,9 +18,10 @@ class _HomePageContentState extends State<HomePageContent> {
   FirebaseStorage _storage = FirebaseStorage.instance;
   DatabaseReference myRef;
   Auth auth = new Auth();
-  String _profile_image, firstName = "Developer";
+  String _profile_image, firstName = "Developer", lastName;
   ProgressBar progressBar;
-  String defaultImageURL = "https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png";
+  String defaultImageURL =
+      "https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png";
 
   @override
   void initState() {
@@ -61,6 +62,7 @@ class _HomePageContentState extends State<HomePageContent> {
         if (dataSnapshot.value != null) {
           _profile_image = dataSnapshot.value["imagepath"];
           firstName = dataSnapshot.value["firstname"];
+          lastName = dataSnapshot.value["lastname"];
           hideSendingProgressBar();
         } else {
           setState(() {
@@ -86,32 +88,31 @@ class _HomePageContentState extends State<HomePageContent> {
                 children: [
                   _profile_image != null
                       ? InkWell(
-                        onTap: () {
+                          onTap: () {
                             Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ProfileImage(
-                                        image: _profile_image, name: firstName
-                                      ),
-                                    ));
-                        },
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProfileImage(
+                                      image: _profile_image,
+                                      name: firstName + " " + lastName),
+                                ));
+                          },
                           child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 50.0,
-                          child: CircleAvatar(
-                            radius: 48.0,
-                            backgroundImage: new NetworkImage(_profile_image),
                             backgroundColor: Colors.white,
-                          ),
-                        ))
+                            radius: 50.0,
+                            child: CircleAvatar(
+                              radius: 48.0,
+                              backgroundImage: new NetworkImage(_profile_image),
+                              backgroundColor: Colors.white,
+                            ),
+                          ))
                       : InkWell(
                           child: CircleAvatar(
                           backgroundColor: Colors.white,
                           radius: 50.0,
                           child: CircleAvatar(
                             radius: 48.0,
-                            backgroundImage: NetworkImage(
-                                defaultImageURL),
+                            backgroundImage: NetworkImage(defaultImageURL),
                             backgroundColor: Colors.white,
                           ),
                         )),

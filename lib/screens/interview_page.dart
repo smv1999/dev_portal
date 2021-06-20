@@ -50,7 +50,7 @@ class _InterviewPageState extends State<InterviewPage> {
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Text(
-          'Interview Preparation Module',
+          'Interview Preparation',
           style: TextStyle(
               color: Colors.white,
               fontFamily: 'MyFont',

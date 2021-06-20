@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ListTile(
-                title: Text("Interview Preparation Module"),
+                title: Text("Interview Preparation"),
                 leading: Icon(Icons.corporate_fare),
                 onTap: () {
                   Navigator.of(context).pop();
