@@ -51,7 +51,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 height: 8.0,
               ),
               Text(
-                'Version 1.0.0',
+                'Version 1.0.1',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.ptSansNarrow(
                     textStyle: TextStyle(fontSize: 12.0)),

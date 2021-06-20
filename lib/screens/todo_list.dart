@@ -113,7 +113,7 @@ class _TodoListState extends State<TodoList> {
                                 delDeadline, delCreated);
                           });
                         },
-                        // Show a red background as the item is swiped away.
+                        // Show a grey background as the item is swiped away.
                         background: Container(
                           padding: EdgeInsets.all(20.0),
                           alignment: Alignment.centerRight,

@@ -264,6 +264,39 @@ class _InterviewPageState extends State<InterviewPage> {
               ),
             ),
           ),
+          Card(
+            margin: const EdgeInsets.all(8.0),
+            child: ListTile(
+              onTap: () => {
+                createFileOfPdfUrl(
+                        "https://smv1999.github.io/OperatingSystems.pdf")
+                    .then((f) {
+                  setState(() {
+                    pathPDF = f.path;
+                  });
+                }).then((_) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PDFScreen(pathPDF, "Operating Systems Interview Questions")),
+                  );
+                })
+              },
+              title: Text(
+                'OS Interview Questions',
+                style: GoogleFonts.ptSansNarrow(),
+              ),
+              leading: Container(
+                  width: 80,
+                  child: Image.network(
+                      'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/os.png')),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.grey,
+              ),
+            ),
+          ),
         ],
       ),
     );

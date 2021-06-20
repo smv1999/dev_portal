@@ -1069,7 +1069,7 @@ class _ToolsState extends State<Tools> {
                                                                           'Followers: ',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              12.0,
+                                                                              11.0,
                                                                           color: Colors
                                                                               .black,
                                                                           fontWeight:
@@ -1082,7 +1082,7 @@ class _ToolsState extends State<Tools> {
                                                                     style:
                                                                         new TextStyle(
                                                                       fontSize:
-                                                                          12.0,
+                                                                          11.0,
                                                                       color: Colors
                                                                           .black,
                                                                     ),
@@ -1106,7 +1106,7 @@ class _ToolsState extends State<Tools> {
                                                                           'Following: ',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              12.0,
+                                                                              11.0,
                                                                           color: Colors
                                                                               .black,
                                                                           fontWeight:
@@ -1119,7 +1119,7 @@ class _ToolsState extends State<Tools> {
                                                                     style:
                                                                         new TextStyle(
                                                                       fontSize:
-                                                                          12.0,
+                                                                          11.0,
                                                                       color: Colors
                                                                           .black,
                                                                     ),
@@ -1147,7 +1147,7 @@ class _ToolsState extends State<Tools> {
                                                                           'Public Repos: ',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              12.0,
+                                                                              11.0,
                                                                           color: Colors
                                                                               .black,
                                                                           fontWeight:
@@ -1160,7 +1160,7 @@ class _ToolsState extends State<Tools> {
                                                                     style:
                                                                         new TextStyle(
                                                                       fontSize:
-                                                                          12.0,
+                                                                          11.0,
                                                                       color: Colors
                                                                           .black,
                                                                     ),
@@ -1184,7 +1184,7 @@ class _ToolsState extends State<Tools> {
                                                                           'Blog: ',
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              12.0,
+                                                                              11.0,
                                                                           color: Colors
                                                                               .black,
                                                                           fontWeight:
@@ -1196,7 +1196,7 @@ class _ToolsState extends State<Tools> {
                                                                     style:
                                                                         new TextStyle(
                                                                       fontSize:
-                                                                          12.0,
+                                                                          11.0,
                                                                       color: Colors
                                                                           .black,
                                                                     ),

@@ -20,6 +20,7 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
   DatabaseReference myProjRef;
   Auth auth = new Auth();
   Future f;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   SharedPreferences prefs;
   bool _seen;
 
@@ -35,10 +36,10 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('/tools', (_) => false);
+        Navigator.of(context).pushNamedAndRemoveUntil('/tools', (_) => false);
       },
       child: Scaffold(
+        key: _scaffoldKey,
         floatingActionButton: FloatingActionButton(
           child: SizedBox.expand(
             child: FittedBox(fit: BoxFit.contain, child: Icon(Icons.add)),
@@ -56,7 +57,7 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
           backgroundColor: Colors.blue,
           automaticallyImplyLeading: false,
           title: Text(
-            'Dev Portal',
+            'Project List',
             style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'MyFont',
@@ -65,82 +66,85 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
           centerTitle: true,
           iconTheme: IconThemeData(color: Colors.black),
         ),
-        body: ListView(
-          shrinkWrap: true,
-          children: [
-            SizedBox(
-              height: 20.0,
-            ),
-            Center(
-              child: Text(
-                'Scribblet - Save your project ideas!',
-                style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.black,
-                    fontFamily: 'MyFont',
-                    fontWeight: FontWeight.bold),
+        body: Container(
+          color: Colors.white60,
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              SizedBox(
+                height: 20.0,
               ),
-            ),
-            FutureBuilder(
-              future: f,
-              builder: (context, snapshot) {
-                if (snapshot.data != null) {
-                  if (snapshot.data.length != 0) {
-                    return ListView.builder(
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        return Dismissible(
-                          key: UniqueKey(),
-                          child: Card(
-                            margin: const EdgeInsets.all(8.0),
-                            child: ListTile(
-                              subtitle:
-                                  Text(snapshot.data[index].projectDescription),
-                              title: Text(
-                                snapshot.data[index].projectTitle,
-                                style: GoogleFonts.ptSansNarrow(),
+              Center(
+                child: Text(
+                  'Save your project ideas!',
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.black,
+                      fontFamily: 'MyFont',
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              FutureBuilder(
+                future: f,
+                builder: (context, snapshot) {
+                  if (snapshot.data != null) {
+                    if (snapshot.data.length != 0) {
+                      return ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          return Dismissible(
+                            key: UniqueKey(),
+                            child: Card(
+                              margin: const EdgeInsets.all(8.0),
+                              child: ListTile(
+                                subtitle: Text(
+                                    snapshot.data[index].projectDescription),
+                                title: Text(
+                                  snapshot.data[index].projectTitle,
+                                  style: GoogleFonts.ptSansNarrow(),
+                                ),
                               ),
                             ),
-                          ),
-                          onDismissed: (direction) {
-                            // Remove the item from the data source.
-                            setState(() {
-                              String delTitle =
-                                  snapshot.data[index].projectTitle;
-                              String delDescription =
-                                  snapshot.data[index].projectDescription;
-                              snapshot.data.removeAt(index);
-                              deleteProjectData(
-                                  delTitle, context, delDescription);
-                            });
-                          },
-                          // Show a red background as the item is swiped away.
-                          background: Container(
-                            padding: EdgeInsets.all(20.0),
-                            alignment: Alignment.centerRight,
-                            color: Colors.grey,
-                            child: Icon(
-                              Icons.delete,
-                              color: Colors.white,
+                            onDismissed: (direction) {
+                              // Remove the item from the data source.
+                              setState(() {
+                                String delTitle =
+                                    snapshot.data[index].projectTitle;
+                                String delDescription =
+                                    snapshot.data[index].projectDescription;
+                                snapshot.data.removeAt(index);
+                                deleteProjectData(
+                                    delTitle, context, delDescription);
+                              });
+                            },
+                            // Show a grey background as the item is swiped away.
+                            background: Container(
+                              padding: EdgeInsets.all(20.0),
+                              alignment: Alignment.centerRight,
+                              color: Colors.grey,
+                              child: Icon(
+                                Icons.delete,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                          );
+                        },
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                      );
+                    }
+                    return Container(
+                      child: Image.network(
+                          'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/data_not_found.png'),
                     );
+                  } else if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
                   }
-                  return Container(
-                    child: Image.network(
-                        'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/data_not_found.png'),
-                  );
-                } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
-                }
-                return Container();
-              },
-            )
-          ],
+                  return Container();
+                },
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -372,7 +376,7 @@ class _ProjectIdeasState extends State<ProjectIdeas> {
         .then((DataSnapshot dataSnapshot) {
       for (var snapshot in dataSnapshot.value.values) {
         if (snapshot["title"] == delTitle) {
-          Scaffold.of(context).showSnackBar(SnackBar(
+          _scaffoldKey.currentState.showSnackBar(SnackBar(
             content: Text(snapshot["title"] + " deleted"),
             action: SnackBarAction(
                 label: "UNDO",

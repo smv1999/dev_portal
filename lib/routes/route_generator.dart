@@ -9,7 +9,6 @@ import 'package:dev_portal/screens/explore_jobs.dart';
 import 'package:dev_portal/screens/find_people.dart';
 import 'package:dev_portal/screens/forgot_password_page.dart';
 import 'package:dev_portal/screens/interview_page.dart';
-import 'package:dev_portal/screens/more_jobs.dart';
 import 'package:dev_portal/screens/my_posts.dart';
 import 'package:dev_portal/pages/new_post.dart';
 import 'package:dev_portal/screens/new_task.dart';
@@ -70,19 +69,17 @@ class RouteGenerator {
       case '/findpeople':
         return MaterialPageRoute(builder: (_) => FindPeople());
       case '/jobs':
-        return MaterialPageRoute(builder: (_) => ExploreJobs());  
+        return MaterialPageRoute(builder: (_) => ExploreJobs());
       case '/todolist':
-        return MaterialPageRoute(builder: (_) => TodoList());    
+        return MaterialPageRoute(builder: (_) => TodoList());
       case '/projects':
-        return MaterialPageRoute(builder: (_) => ProjectIdeas());    
+        return MaterialPageRoute(builder: (_) => ProjectIdeas());
       case '/newtask':
-        return MaterialPageRoute(builder: (_) => NewTask());    
-      case '/morejobs':
-        return MaterialPageRoute(builder: (_) => MoreJobs());    
+        return MaterialPageRoute(builder: (_) => NewTask());
       case '/popular':
-        return MaterialPageRoute(builder: (_) => Popular());    
+        return MaterialPageRoute(builder: (_) => Popular());
       case '/myposts':
-        return MaterialPageRoute(builder: (_) => MyPosts());    
+        return MaterialPageRoute(builder: (_) => MyPosts());
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();
