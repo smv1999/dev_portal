@@ -4,6 +4,8 @@ import 'package:dev_portal/pages/posts_page.dart';
 import 'package:dev_portal/screens/about_page.dart';
 import 'package:dev_portal/screens/byte_page.dart';
 import 'package:dev_portal/pages/connection_error.dart';
+import 'package:dev_portal/screens/github_activity.dart';
+import 'package:dev_portal/screens/jargons_dictionary.dart';
 import 'package:dev_portal/screens/tools.dart';
 import 'package:dev_portal/screens/explore_jobs.dart';
 import 'package:dev_portal/screens/find_people.dart';
@@ -80,7 +82,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Popular());
       case '/myposts':
         return MaterialPageRoute(builder: (_) => MyPosts());
-        
+      case '/jargonsdictionary':
+        return MaterialPageRoute(builder: (_) => JargonDictionary());
+      case '/githubactivity':
+        return MaterialPageRoute(builder: (_) => GitHubActivity());
+
+
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();

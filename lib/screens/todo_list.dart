@@ -35,6 +35,7 @@ class _TodoListState extends State<TodoList> {
     return WillPopScope(
       onWillPop: () {
         Navigator.of(context).pushNamedAndRemoveUntil('/tools', (_) => false);
+        return;
       },
     child:Scaffold(
       key: _scaffoldKey,
