@@ -14,6 +14,7 @@ class FindPeople extends StatefulWidget {
 }
 
 class _FindPeopleState extends State<FindPeople> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   Auth auth = new Auth();
   DatabaseReference myPeopleRef, myfollowingRef, myfollowersRef, myProfileRef;
   List<String> following = [], followers = [];
@@ -83,6 +84,7 @@ class _FindPeopleState extends State<FindPeople> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.blue,
