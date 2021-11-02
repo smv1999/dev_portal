@@ -20,11 +20,44 @@ class _FindPeopleState extends State<FindPeople> {
   Future f;
   String currentUserName = "";
   ProgressBar progressBar;
+  Icon searchIcon = new Icon(
+    Icons.search,
+    color: Colors.white,
+  );
+  final TextEditingController _searchQuery = new TextEditingController();
+  List<String> dictionaryList = [];
+  bool _isSearching;
+  String _searchText = "";
+  Widget appBarTitle = new Text(
+    'Find People',
+    style: TextStyle(
+        color: Colors.white,
+        fontFamily: 'MyFont',
+        fontWeight: FontWeight.bold),
+  );
+
+
+  _FindPeopleState() {
+    _searchQuery.addListener(() {
+      if (_searchQuery.text.isEmpty) {
+        setState(() {
+          _isSearching = false;
+          _searchText = "";
+        });
+      } else {
+        setState(() {
+          _isSearching = true;
+          _searchText = _searchQuery.text;
+        });
+      }
+    });
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _isSearching = false;
     progressBar = ProgressBar();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Add Your Code here.
@@ -54,17 +87,46 @@ class _FindPeopleState extends State<FindPeople> {
           elevation: 0,
           backgroundColor: Colors.blue,
           automaticallyImplyLeading: false,
-          title: Text(
-            'Find People',
-            style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'MyFont',
-                fontWeight: FontWeight.bold),
-          ),
+          title: appBarTitle,
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white,
           ),
+          actions: [
+            new IconButton(
+              icon: searchIcon,
+              onPressed: () {
+                setState(() {
+                  if (this.searchIcon.icon == Icons.search) {
+                    this.searchIcon =
+                    new Icon(Icons.close, color: Colors.white);
+                    this.appBarTitle = new TextField(
+                      controller: _searchQuery,
+                      style: new TextStyle(
+                        color: Colors.white,
+                      ),
+                      decoration: new InputDecoration(
+                          prefixIcon:
+                          new Icon(Icons.search, color: Colors.white),
+                          hintText: "Search...",
+                          hintStyle: new TextStyle(color: Colors.white)),
+                    );
+                  } else {
+                    this._searchQuery.clear();
+                    this.searchIcon =
+                    new Icon(Icons.search, color: Colors.white);
+                    this.appBarTitle = new Text(
+                      'Find People',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'MyFont',
+                          fontWeight: FontWeight.bold),
+                    );
+                  }
+                });
+              },
+            )
+          ],
         ),
         body: ListView(
           shrinkWrap: true,
@@ -77,7 +139,74 @@ class _FindPeopleState extends State<FindPeople> {
               builder: (context, snapshot) {
                 if (snapshot.data != null) {
                   if (snapshot.data.length != 0) {
-                    return ListView.builder(
+                    return _isSearching ? ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        return snapshot.data[index].userName.toLowerCase().contains(_searchText) || (snapshot.data[index].firstName + " " + snapshot.data[index].lastName).toLowerCase().contains(_searchText) ? Card(
+                            margin: const EdgeInsets.all(8.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ViewProfile(
+                                        text: snapshot.data[index].userName,
+                                      ),
+                                    ));
+                              },
+                              child: ListTile(
+                                subtitle:
+                                Text(snapshot.data[index].employmentTitle),
+                                title: Text(
+                                  snapshot.data[index].firstName +
+                                      " " +
+                                      snapshot.data[index].lastName,
+                                  style: GoogleFonts.ptSansNarrow(),
+                                ),
+                                leading: CircleAvatar(
+                                    backgroundColor:
+                                    Theme.of(context).platform ==
+                                        TargetPlatform.iOS
+                                        ? Colors.black
+                                        : Colors.white,
+                                    child: Image.network(
+                                        snapshot.data[index].imagePath)
+
+                                  // Later to be changed as profile image
+                                ),
+                                trailing: Container(
+                                  height: 50,
+                                  child: RaisedButton(
+                                      child: following.contains(
+                                          snapshot.data[index].userName)
+                                          ? Text(
+                                        'Following',
+                                        style: GoogleFonts.ptSansNarrow(
+                                            textStyle:
+                                            TextStyle(fontSize: 14)),
+                                      )
+                                          : Text(
+                                        'Follow',
+                                        style: GoogleFonts.ptSansNarrow(
+                                            textStyle:
+                                            TextStyle(fontSize: 14)),
+                                      ),
+                                      onPressed: () => followPeople(
+                                          snapshot.data[index].userName),
+                                      color: Colors.blue,
+                                      splashColor: Colors.blueAccent,
+                                      textColor: Colors.white,
+                                      elevation: 5.0,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                          new BorderRadius.circular(10.0))),
+                                ),
+                              ),
+                            )) : new Container();
+                      },
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                    ) : ListView.builder(
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
                         return Card(

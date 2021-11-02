@@ -17,16 +17,44 @@ class _JargonDictionaryState extends State<JargonDictionary> {
   SharedPreferences prefs;
   bool _seen;
   ProgressBar progressBar;
+  Icon searchIcon = new Icon(
+    Icons.search,
+    color: Colors.white,
+  );
+  final TextEditingController _searchQuery = new TextEditingController();
+  bool _isSearching;
+  String _searchText = "";
+  Widget appBarTitle = new Text(
+    'Jargon Dictionary',
+    style: TextStyle(
+        color: Colors.white, fontFamily: 'MyFont', fontWeight: FontWeight.bold),
+  );
+
+  _JargonDictionaryState() {
+    _searchQuery.addListener(() {
+      if (_searchQuery.text.isEmpty) {
+        setState(() {
+          _isSearching = false;
+          _searchText = "";
+        });
+      } else {
+        setState(() {
+          _isSearching = true;
+          _searchText = _searchQuery.text;
+        });
+      }
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _isSearching = false;
     progressBar = ProgressBar();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       showSendingProgressBar();
-      setState(() {
-        checkTipSeen();
-      });
+      checkTipSeen();
     });
     f = retrieveJargonsData();
   }
@@ -44,15 +72,44 @@ class _JargonDictionaryState extends State<JargonDictionary> {
             elevation: 0,
             backgroundColor: Colors.blue,
             automaticallyImplyLeading: false,
-            title: Text(
-              'Jargon Dictionary',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'MyFont',
-                  fontWeight: FontWeight.bold),
-            ),
+            title: appBarTitle,
             centerTitle: true,
             iconTheme: IconThemeData(color: Colors.black),
+            actions: [
+              new IconButton(
+                icon: searchIcon,
+                onPressed: () {
+                  setState(() {
+                    if (this.searchIcon.icon == Icons.search) {
+                      this.searchIcon =
+                          new Icon(Icons.close, color: Colors.white);
+                      this.appBarTitle = new TextField(
+                        controller: _searchQuery,
+                        style: new TextStyle(
+                          color: Colors.white,
+                        ),
+                        decoration: new InputDecoration(
+                            prefixIcon:
+                                new Icon(Icons.search, color: Colors.white),
+                            hintText: "Search...",
+                            hintStyle: new TextStyle(color: Colors.white)),
+                      );
+                    } else {
+                      this._searchQuery.clear();
+                      this.searchIcon =
+                          new Icon(Icons.search, color: Colors.white);
+                      this.appBarTitle = new Text(
+                        'Jargon Dictionary',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'MyFont',
+                            fontWeight: FontWeight.bold),
+                      );
+                    }
+                  });
+                },
+              )
+            ],
           ),
           body: Container(
             color: Colors.white60,
@@ -68,18 +125,45 @@ class _JargonDictionaryState extends State<JargonDictionary> {
                     if (snapshot.data != null) {
                       if (snapshot.data.length != 0) {
                         hideSendingProgressBar();
-                        return ListView.builder(
+                        return _isSearching ? ListView.builder(
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (context, index) {
+                            return snapshot.data[index].term.toLowerCase().contains(_searchText.toLowerCase()) ? Card(
+                              margin: const EdgeInsets.all(8.0),
+                              child: ListTile(
+                                subtitle: Text(
+                                  snapshot.data[index].definition,
+                                  style: GoogleFonts.ptSansNarrow(
+                                      textStyle: TextStyle(fontSize: 18)),
+                                  textAlign: TextAlign.justify,
+                                ),
+                                title: Text(
+                                  snapshot.data[index].term,
+                                  style: GoogleFonts.ptSansNarrow(
+                                      textStyle: TextStyle(fontSize: 22)),
+                                ),
+                              ),
+                              elevation: 3,
+                            ) : new Container();
+                          },
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                        ) : ListView.builder(
                           itemCount: snapshot.data.length,
                           itemBuilder: (context, index) {
                             return Card(
                               margin: const EdgeInsets.all(8.0),
                               child: ListTile(
-                                subtitle: Text(snapshot.data[index].definition,
-                                  style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 18)),
-                                textAlign: TextAlign.justify,),
+                                subtitle: Text(
+                                  snapshot.data[index].definition,
+                                  style: GoogleFonts.ptSansNarrow(
+                                      textStyle: TextStyle(fontSize: 18)),
+                                  textAlign: TextAlign.justify,
+                                ),
                                 title: Text(
                                   snapshot.data[index].term,
-                                  style: GoogleFonts.ptSansNarrow(textStyle: TextStyle(fontSize: 22)),
+                                  style: GoogleFonts.ptSansNarrow(
+                                      textStyle: TextStyle(fontSize: 22)),
                                 ),
                               ),
                               elevation: 3,
@@ -94,9 +178,7 @@ class _JargonDictionaryState extends State<JargonDictionary> {
                             'https://raw.githubusercontent.com/smv1999/FlutterNetworkImagesDP/master/data_not_found.png'),
                       );
                     } else if (snapshot.hasError) {
-                      setState(() {
-                        hideSendingProgressBar();
-                      });
+                      hideSendingProgressBar();
                       return Text("${snapshot.error}");
                     }
                     return Container();
@@ -188,7 +270,7 @@ class _JargonDictionaryState extends State<JargonDictionary> {
   Future<List<JargonData>> retrieveJargonsData() async {
     final response =
         await http.get('https://programmingjargons.deta.dev/get-jargons');
-    List<JargonData> jargonDataList = new List<JargonData>();
+    List<JargonData> jargonDataList = [];
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
